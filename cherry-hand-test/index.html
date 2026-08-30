@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MARGIN. Material Reveal Hand Test</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  
+  <div class="interactive-container" id="interactive-container">
+    <!-- The canvas for the halftone dots -->
+    <canvas id="dots-canvas"></canvas>
+
+    <!-- The masked real image -->
+    <img src="/media/margin-hand-sculpt.png" class="real-hand-image" id="real-hand" alt="Real Hand" crossorigin="anonymous">
+
+    <!-- The hotspot pulse element -->
+    <div class="hotspot" id="hotspot"></div>
+  </div>
+
+  <div id="debug-overlay" class="debug-overlay" style="display: none;">
+    <div id="debug-fps">FPS: 0</div>
+    <div id="debug-info"></div>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

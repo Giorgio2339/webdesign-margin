@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MARGIN. | Webdesign & Development Studio</title>
+  <meta name="description" content="Websites, die Unternehmen online so zeigen, wie sie wirklich sind — individuell konzipiert, kein Template. Webdesign & Development von MARGIN." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Inter+Tight:wght@900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/src/style.css" />
+
+  <!-- Motion is opt-in: without JS (or with reduced motion) every element
+       stays visible instead of being stuck in its hidden "from" state. -->
+  <script>
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('js-motion')
+    }
+  </script>
+</head>
+<body>
+
+  <!-- LOADER -->
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <div class="loader-brand">
+        <div class="loader-brand-title">MARGIN<span class="dot">.</span></div>
+        <div class="loader-brand-subtitle">WEB DESIGN & DEVELOPMENT</div>
+      </div>
+    </div>
+    <div class="loader-progress-rail">
+      <div class="loader-progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- Sticky Minimal Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="#home" class="logo-group">
+        <span class="logo-title">MARGIN<span class="dot">.</span></span>
+        <span class="logo-subtitle">WEB DESIGN & DEVELOPMENT</span>
+      </a>
+      <nav class="nav">
+        <a href="#work">PROJEKTE</a>
+        <a href="#capabilities">LEISTUNGEN</a>
+        <a href="#process">ABLAUF</a>
+        <a href="#pricing">PREISE</a>
+        <a href="#contact" class="action">PROJEKT STARTEN ↗</a>
+      </nav>
+      <button class="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Fullscreen Menu -->
+  <div class="mobile-menu" aria-hidden="true">
+    <nav class="mobile-nav">
+      <a href="#work">PROJEKTE</a>
+      <a href="#capabilities">LEISTUNGEN</a>
+      <a href="#process">ABLAUF</a>
+      <a href="#pricing">PREISE</a>
+      <a href="#contact" class="action">PROJEKT STARTEN ↗</a>
+    </nav>
+  </div>
+
+  <main class="main" id="smooth-wrapper">
+    <div id="smooth-content">
+
+      <!-- SECTION 01 — HERO (The Instrument) -->
+      <section class="section section-hero" id="home">
+        
+        <!-- Thin architectural lines -->
+        <div class="hero-grid-lines">
+          <div class="grid-line line-v-1"></div>
+          <div class="grid-line line-h-1"></div>
+          <div class="grid-line line-v-2"></div>
+        </div>
+
+        <div class="hero-stage">
+          <div class="hero-zoom-content grid-12">
+            <div class="hero-subtext span-5">
+              <span class="hero-eyebrow">
+                <i class="hero-eyebrow-dot"></i>
+                <span class="hero-eyebrow-text">WEB DESIGN & DEVELOPMENT STUDIO</span>
+              </span>
+
+              <h1 class="headline-hero hero-headline">
+                <span class="hl-line"><span class="hl-inner">Websites,</span></span>
+                <span class="hl-line"><span class="hl-inner">die man</span></span>
+                <span class="hl-line"><span class="hl-inner">nicht vergisst<i class="hl-dot">.</i></span></span>
+              </h1>
+
+              <p class="hero-copy">
+                Dein Unternehmen überzeugt — deine Website sollte das auch. Wir konzipieren und entwickeln digitale Auftritte, die Vertrauen schaffen und Kunden gewinnen. Kein Template. Kein Kompromiss.
+              </p>
+            </div>
+
+            <div class="hero-signature-col span-7">
+              <div class="hero-signature-wrapper" id="hero-instrument">
+                <svg viewBox="0 0 1000 1000" class="hero-signature-svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <defs>
+                    <!-- Populated by JS with the raster cells -->
+                    <mask id="raster-mask"></mask>
+                  </defs>
+
+                  <g class="bp-root">
+                    <!-- FAR PLANE — fine measurement grid -->
+                    <g class="bp-layer bp-far" data-depth="0.22">
+                      <g class="bp-grid"></g>
+                    </g>
+
+                    <!-- MID PLANE — dial ticks, rings, axes -->
+                    <g class="bp-layer bp-mid" data-depth="0.55">
+                      <g class="bp-dial"></g>
+                      <g class="bp-rings">
+                        <circle class="bp-ring bp-ring-1" cx="500" cy="500" r="250" stroke-dasharray="4 8" />
+                        <circle class="bp-ring bp-ring-2" cx="500" cy="500" r="350" />
+                        <circle class="bp-ring bp-ring-3" cx="500" cy="500" r="150" stroke-dasharray="1 4" />
+                      </g>
+                      <line class="bp-axis bp-axis-v" x1="500" y1="0" x2="500" y2="1000" />
+                      <line class="bp-axis bp-axis-h" x1="0" y1="500" x2="1000" y2="500" />
+                    </g>
+
+                    <!-- Drifting measurement points, displaced by the cursor -->
+                    <g class="bp-layer bp-dotfield" data-depth="0.4">
+                      <g class="bp-dots"></g>
+                      <g class="bp-links"></g>
+                    </g>
+
+                    <!-- NEAR PLANE — registration marks + corner frame -->
+                    <g class="bp-layer bp-near" data-depth="1">
+                      <g class="bp-reg-marks">
+                        <g class="bp-mark" transform="translate(250, 250)">
+                          <line x1="-20" y1="0" x2="20" y2="0" />
+                          <line x1="0" y1="-20" x2="0" y2="20" />
+                          <circle cx="0" cy="0" r="3.5" class="bp-pulse" />
+                        </g>
+                        <g class="bp-mark" transform="translate(750, 250)">
+                          <line x1="-20" y1="0" x2="20" y2="0" />
+                          <line x1="0" y1="-20" x2="0" y2="20" />
+                          <circle cx="0" cy="0" r="3.5" class="bp-pulse" />
+                        </g>
+                        <g class="bp-mark" transform="translate(250, 750)">
+                          <line x1="-20" y1="0" x2="20" y2="0" />
+                          <line x1="0" y1="-20" x2="0" y2="20" />
+                          <circle cx="0" cy="0" r="3.5" class="bp-pulse" />
+                        </g>
+                        <g class="bp-mark" transform="translate(750, 750)">
+                          <line x1="-20" y1="0" x2="20" y2="0" />
+                          <line x1="0" y1="-20" x2="0" y2="20" />
+                          <circle cx="0" cy="0" r="3.5" class="bp-pulse" />
+                        </g>
+                        <g class="bp-mark bp-mark-center" transform="translate(500, 500)">
+                          <line x1="-30" y1="0" x2="30" y2="0" />
+                          <line x1="0" y1="-30" x2="0" y2="30" />
+                        </g>
+                      </g>
+
+                      <g class="bp-frame">
+                        <path d="M 60 130 L 60 60 L 130 60" />
+                        <path d="M 870 60 L 940 60 L 940 130" />
+                        <path d="M 940 870 L 940 940 L 870 940" />
+                        <path d="M 130 940 L 60 940 L 60 870" />
+                      </g>
+                    </g>
+                  </g>
+
+                  <!-- RASTER-MASKED TYPOGRAPHY -->
+                  <g class="bp-typo-container" mask="url(#raster-mask)" text-anchor="middle" dominant-baseline="central">
+                    <text x="500" y="500" class="bp-word">MARGIN.</text>
+                    <text x="500" y="500" class="bp-word" opacity="0">DESIGN</text>
+                    <text x="500" y="500" class="bp-word" opacity="0">BRANDING</text>
+                    <text x="500" y="500" class="bp-word" opacity="0">DIGITAL</text>
+                    <text x="500" y="500" class="bp-word" opacity="0">IDENTITY</text>
+                  </g>
+
+                  <!-- CHERRY SCAN SWEEP -->
+                  <line class="bp-scanline" x1="0" y1="0" x2="1000" y2="0" />
+
+                  <!-- Reticle: locks onto the nearest grid intersection -->
+                  <g class="bp-reticle" opacity="0">
+                    <line class="bp-ret-h" x1="-26" y1="0" x2="26" y2="0" />
+                    <line class="bp-ret-v" x1="0" y1="-26" x2="0" y2="26" />
+                    <rect class="bp-ret-box" x="-11" y="-11" width="22" height="22" />
+                    <text class="bp-ret-label" x="20" y="-20">000 · 000</text>
+                  </g>
+                </svg>
+
+                <!-- TECHNICAL HUD READOUT -->
+                <div class="hero-hud" aria-hidden="true">
+                  <span class="hud-item hud-tl">MARGIN / INSTRUMENT</span>
+                  <span class="hud-item hud-tr" data-hud="mode">IDLE</span>
+                  <span class="hud-item hud-bl" data-hud="coords">X 0.000 · Y 0.000</span>
+                  <span class="hud-item hud-br" data-hud="scale">SCALE 1.000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Anchored to the section, not the content stage, so it always sits
+             at the bottom of the viewport instead of under the copy. -->
+        <div class="hero-scroll-cue" aria-hidden="true">
+          <span class="cue-label">SCROLL</span>
+          <span class="cue-rail"><span class="cue-fill"></span></span>
+        </div>
+
+        <!-- Signature interaction: a liquid-glass square that trails the
+             cursor and inverts whatever it passes over. Pure JS/CSS enhancement
+             — inert and invisible until initHeroLens() arms it (desktop only).
+             Deliberately two flat siblings, not a wrapped group: the invert
+             plate's mix-blend-mode only reaches back to its nearest positioned
+             ancestor's stacking context, so a positioned wrapper around it
+             would trap the blend against nothing instead of the hero content. -->
+        <div class="hero-lens-invert" id="hero-lens-invert" aria-hidden="true"></div>
+        <div class="hero-lens-glass" id="hero-lens-glass" aria-hidden="true"></div>
+      </section>
+
+      <!-- SECTION 02 — SELECTED WORK (Warm Ivory) -->
+      <section class="section section-work" id="work">
+        <div class="margin-line">
+          <div class="margin-line-inner"></div>
+          <span class="margin-meta">MARGIN / SELECTED WORK</span>
+        </div>
+        
+        <div class="container">
+          <div class="section-header">
+            <span class="label">SELECTED WORK</span>
+            <h2 class="headline-section headline-mask">
+              <div class="mask-wrap"><span>Ausgewählte Projekte.</span></div>
+            </h2>
+          </div>
+
+          <div class="work-list">
+            <!-- Project 1: JT Smash Burger -->
+            <article class="project project-centered">
+              <div class="project-info">
+                <div class="project-title-group">
+                  <h3 class="project-title">JT Smash Burger</h3>
+                  <span class="project-category">WEB DESIGN / DEVELOPMENT</span>
+                </div>
+                <div class="project-meta-group">
+                  <a href="#contact" class="project-link">PROJEKT ANSEHEN ↗</a>
+                </div>
+              </div>
+              <div class="project-visual-wrapper">
+                <div class="project-visual">
+                  <img src="/media/Smash Burger.png" alt="JT Smash Burger — Web Design & Development" loading="lazy" />
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 2: Tamagutchi Sushi Wok -->
+            <article class="project project-asymmetric grid-12">
+              <div class="project-text-col span-4">
+                <div class="project-sticky-content">
+                  <span class="project-tag">GASTRONOMIE & ERLEBNIS</span>
+                  <h3 class="project-title">Tamagutchi</h3>
+                  <p class="project-desc">
+                    Authentisch, einladend, unverwechselbar. Digitale Identität für ein Sushi & Wok Restaurant mit Charakter.
+                  </p>
+                  <div class="project-asym-meta">
+                    <span class="project-category">WEB DESIGN / DEVELOPMENT</span>
+                  </div>
+                  <a href="#contact" class="project-link">PROJEKT ANSEHEN ↗</a>
+                </div>
+              </div>
+              <div class="project-visual-col span-8">
+                <div class="project-visual-wrapper">
+                  <div class="project-visual">
+                    <img src="/media/Tamagutchi.png" alt="Tamagutchi Sushi Wok — Web Design & Development" loading="lazy" />
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 3: Bloom Boom -->
+            <article class="project project-cinematic">
+              <div class="project-visual-wrapper">
+                <div class="project-visual">
+                  <img src="/media/Bloom Boom.png" alt="Bloom Boom — Web Design" loading="lazy" />
+                </div>
+              </div>
+              <div class="project-info cinematic-info">
+                <div class="project-title-group">
+                  <h3 class="project-title">Bloom Boom</h3>
+                  <span class="project-category">WEB DESIGN</span>
+                </div>
+                <div class="project-meta-group">
+                  <a href="#contact" class="project-link">PROJEKT ANSEHEN ↗</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 03 — MANIFESTO (Dark Cherry) -->
+      <section class="section section-manifesto" id="manifesto">
+        <div class="manifesto-sticky">
+          <div class="container manifesto-container grid-12">
+            <!-- Left Text Column -->
+            <div class="manifesto-text-col span-5">
+              <span class="label text-ivory-label manifesto-label">OUR POINT OF VIEW</span>
+              <h2 class="headline-manifesto">
+                <div class="manifesto-line line-1">Gute Unternehmen</div>
+                <div class="manifesto-line line-2">sollten online nicht</div>
+                <div class="manifesto-line line-3">durchschnittlich</div>
+                <div class="manifesto-line line-4">wirken.</div>
+              </h2>
+              <div class="manifesto-footer">
+                <p class="manifesto-copy">
+                  Zu viele Unternehmen, die offline überzeugen, verlieren online Kunden an schwächere Konkurrenz — nur weil deren Website besser aussieht. Das ändern wir.
+                </p>
+              </div>
+            </div>
+            
+            <!-- Right Visual Column -->
+            <div class="manifesto-visual-col span-7">
+              <div class="manifesto-hand-interaction" id="manifesto-hand-interaction">
+                <canvas id="manifesto-dots-canvas"></canvas>
+                <img src="/media/cherry/margin-hand-sculpt.png" class="manifesto-real-hand" id="manifesto-real-hand" alt="MARGIN. Sculptural Hand">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 04 — CAPABILITIES (Warm Ivory) -->
+      <section class="section section-capabilities" id="capabilities">
+        <div class="margin-line right">
+          <div class="margin-line-inner"></div>
+          <span class="margin-meta">MARGIN / CAPABILITIES</span>
+        </div>
+
+        <div class="container">
+          <div class="section-header">
+            <span class="label">CAPABILITIES</span>
+            <h2 class="headline-section headline-mask">
+              <div class="mask-wrap"><span>Design bis Development.</span></div>
+            </h2>
+          </div>
+
+          <div class="capabilities-grid grid-12">
+            <div class="services-list span-7">
+              <div class="service-row" data-service="design" data-essence="FORM" data-tool="compass">
+                <div class="service-title-wrap">
+                  <h3 class="service-title">WEB DESIGN</h3>
+                </div>
+                <div class="service-desc-wrap">
+                  <p class="service-desc">Eine Website, die aussieht und sich anfühlt wie deine Marke — und Besucher in Kunden verwandelt.</p>
+                </div>
+              </div>
+
+              <div class="service-row" data-service="dev" data-essence="STRUCTURE" data-tool="rail">
+                <div class="service-title-wrap">
+                  <h3 class="service-title">DEVELOPMENT</h3>
+                </div>
+                <div class="service-desc-wrap">
+                  <p class="service-desc">Schnell, responsiv, sauber gebaut. Performance, die Google belohnt und Besucher auf der Seite hält.</p>
+                </div>
+              </div>
+
+              <div class="service-row" data-service="direction" data-essence="CLARITY" data-tool="lock">
+                <div class="service-title-wrap">
+                  <h3 class="service-title">DIGITAL DIRECTION</h3>
+                </div>
+                <div class="service-desc-wrap">
+                  <p class="service-desc">Ein Auftritt, der überall nach dir aussieht — von der Website bis zum Social-Media-Profil. Konsistent und wiedererkennbar.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="capabilities-visual-col span-5">
+              <!-- Same instrument language as the hero and process — inked on
+                   paper instead of glowing on glass, since this section runs
+                   on warm ivory. A blank drafting sheet at rest; each service
+                   drafts its own construction on hover. -->
+              <div class="capabilities-instrument" id="capabilities-instrument">
+                <svg viewBox="0 0 600 600" class="cap-sig-svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <defs><mask id="cap-raster-mask"></mask></defs>
+
+                  <g class="cap-layer" data-depth="0.25">
+                    <g class="cap-grid"></g>
+                  </g>
+
+                  <g class="cap-layer" data-depth="0.55">
+                    <g class="cap-dial"></g>
+                    <circle class="cap-ring" cx="300" cy="300" r="184" />
+                    <line class="cap-axis" x1="300" y1="70" x2="300" y2="530" />
+                    <line class="cap-axis" x1="70" y1="300" x2="530" y2="300" />
+                  </g>
+
+                  <g class="cap-layer" data-depth="1">
+                    <g class="cap-brackets">
+                      <path d="M 44 96 L 44 44 L 96 44" />
+                      <path d="M 504 44 L 556 44 L 556 96" />
+                      <path d="M 556 504 L 556 556 L 504 556" />
+                      <path d="M 96 556 L 44 556 L 44 504" />
+                    </g>
+                    <g class="cap-dots"></g>
+                  </g>
+
+                  <!-- Construction tool per service: compass arc, module rail,
+                       locking crosshair — drafted only while its row is hovered -->
+                  <g class="cap-tools"></g>
+
+                  <!-- Draughting lines struck from the essence word's own metrics -->
+                  <g class="cap-construction"></g>
+
+                  <!-- Outlined, then printed through the raster mask -->
+                  <g class="cap-outline" text-anchor="middle" dominant-baseline="central"></g>
+                  <g class="cap-typo" mask="url(#cap-raster-mask)" text-anchor="middle" dominant-baseline="central"></g>
+                </svg>
+
+                <div class="cap-hud" aria-hidden="true">
+                  <span class="cap-hud-label" data-hud="state">DRAFTING TABLE</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 05 — PROCESS (Near Black) -->
+      <section class="section section-process" id="process">
+        <!-- Pinned Scroll Track for Desktop -->
+        <div class="process-track">
+          <div class="process-sticky">
+            
+            <!-- Subtle Architectural Background Guidelines -->
+            <div class="process-bg-grid" aria-hidden="true">
+              <div class="container process-bg-inner">
+                <span class="process-guide-line process-guide-left"></span>
+                <span class="process-guide-line process-guide-center"></span>
+                <span class="process-guide-line process-guide-right"></span>
+              </div>
+            </div>
+
+            <!-- Sticky Top Header & Minimal Progress Indicator -->
+            <div class="container process-top-bar">
+              <div class="process-header">
+                <div class="process-header-left">
+                  <span class="label">PROCESS</span>
+                  <h2 class="headline-section headline-mask">
+                    <div class="mask-wrap"><span>Von der ersten Idee bis zum Launch.</span></div>
+                  </h2>
+                </div>
+                <!-- Editorial Progress: 01 ───────────── 05 -->
+                <div class="process-progress-wrapper" aria-label="Prozess Fortschritt">
+                  <span class="process-progress-num current" data-progress-curr>01</span>
+                  <div class="process-progress-rail">
+                    <div class="process-progress-fill"></div>
+                  </div>
+                  <span class="process-progress-num total">05</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stage Container: Houses all 5 alternating steps -->
+            <div class="container process-stage-container">
+              
+              <!-- STEP 01: DISCOVER (Text Left · Board Right) -->
+              <div class="process-step-item step-01 active" data-step="0">
+                <div class="process-step-grid align-right">
+                  <div class="process-step-text">
+                    <span class="process-step-num">01 / DISCOVER</span>
+                    <h3 class="process-step-title headline-mask">
+                      <div class="mask-wrap"><span>Recherche &amp;</span></div>
+                      <div class="mask-wrap"><span>Positionierung</span></div>
+                    </h3>
+                    <p class="process-step-desc">
+                      Wir verstehen erst dein Business, bevor wir anfangen zu gestalten. Wer sind deine Kunden? Was macht dich anders? Das Fundament für alles, was kommt.
+                    </p>
+                    <div class="process-step-tags">
+                      <span>Analyse</span>
+                      <span>Zielgruppe</span>
+                      <span>Positionierung</span>
+                    </div>
+                  </div>
+                  <div class="process-board-wrap">
+                    <div class="process-board" data-board="01">
+                      <div class="board-frame">
+                        <div class="board-inner">
+                          <img src="/process/01-discover.jpg" alt="MARGIN. Process — 01 Discover" class="board-img" loading="eager" decoding="async" />
+                        </div>
+                        <span class="board-cross board-cross-tl">+</span>
+                        <span class="board-cross board-cross-tr">+</span>
+                        <span class="board-cross board-cross-bl">+</span>
+                        <span class="board-cross board-cross-br">+</span>
+                        <span class="board-caption">FIG. 01 — RESEARCH &amp; POSITIONING</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- STEP 02: DIRECTION (Board Left · Text Right) -->
+              <div class="process-step-item step-02" data-step="1">
+                <div class="process-step-grid align-left">
+                  <div class="process-board-wrap">
+                    <div class="process-board" data-board="02">
+                      <div class="board-frame">
+                        <div class="board-inner">
+                          <img src="/process/02-direction.jpg" alt="MARGIN. Process — 02 Direction" class="board-img" loading="eager" decoding="async" />
+                        </div>
+                        <span class="board-cross board-cross-tl">+</span>
+                        <span class="board-cross board-cross-tr">+</span>
+                        <span class="board-cross board-cross-bl">+</span>
+                        <span class="board-cross board-cross-br">+</span>
+                        <span class="board-caption">FIG. 02 — ART DIRECTION &amp; SYSTEM</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="process-step-text">
+                    <span class="process-step-num">02 / DIRECTION</span>
+                    <h3 class="process-step-title headline-mask">
+                      <div class="mask-wrap"><span>Art Direction &amp;</span></div>
+                      <div class="mask-wrap"><span>Tonalität</span></div>
+                    </h3>
+                    <p class="process-step-desc">
+                      Farben, Typografie, Bildsprache — alles wird auf deine Marke zugeschnitten. Hier entsteht der Look, der dich sofort von der Konkurrenz abhebt.
+                    </p>
+                    <div class="process-step-tags">
+                      <span>Art Direction</span>
+                      <span>Tonalität</span>
+                      <span>Design-DNA</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- STEP 03: DESIGN (Text Left · Board Right) -->
+              <div class="process-step-item step-03" data-step="2">
+                <div class="process-step-grid align-right">
+                  <div class="process-step-text">
+                    <span class="process-step-num">03 / DESIGN</span>
+                    <h3 class="process-step-title headline-mask">
+                      <div class="mask-wrap"><span>Layout &amp;</span></div>
+                      <div class="mask-wrap"><span>Nutzerführung</span></div>
+                    </h3>
+                    <p class="process-step-desc">
+                      Struktur, Aufbau und Nutzerführung — so, dass Besucher genau dort landen, wo du sie haben willst. Kein Raten, keine Sackgassen.
+                    </p>
+                    <div class="process-step-tags">
+                      <span>Layout</span>
+                      <span>Nutzerführung</span>
+                      <span>Interface</span>
+                    </div>
+                  </div>
+                  <div class="process-board-wrap">
+                    <div class="process-board" data-board="03">
+                      <div class="board-frame">
+                        <div class="board-inner">
+                          <img src="/process/03-design.jpg" alt="MARGIN. Process — 03 Design" class="board-img" loading="eager" decoding="async" />
+                        </div>
+                        <!-- Slices for subtle layer shift transition into BUILD -->
+                        <div class="board-layer-deconstruct" aria-hidden="true">
+                          <span class="deconstruct-line line-h"></span>
+                          <span class="deconstruct-line line-v"></span>
+                        </div>
+                        <span class="board-cross board-cross-tl">+</span>
+                        <span class="board-cross board-cross-tr">+</span>
+                        <span class="board-cross board-cross-bl">+</span>
+                        <span class="board-cross board-cross-br">+</span>
+                        <span class="board-caption">FIG. 03 — INTERFACE &amp; STRUCTURE</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- STEP 04: BUILD (Board Left · Text Right) -->
+              <div class="process-step-item step-04" data-step="3">
+                <div class="process-step-grid align-left">
+                  <div class="process-board-wrap">
+                    <div class="process-board" data-board="04">
+                      <div class="board-frame">
+                        <div class="board-inner">
+                          <img src="/process/04-build.jpg" alt="MARGIN. Process — 04 Build" class="board-img" loading="eager" decoding="async" />
+                        </div>
+                        <span class="board-cross board-cross-tl">+</span>
+                        <span class="board-cross board-cross-tr">+</span>
+                        <span class="board-cross board-cross-bl">+</span>
+                        <span class="board-cross board-cross-br">+</span>
+                        <span class="board-caption">FIG. 04 — MOTION &amp; CODE ARCHITECTURE</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="process-step-text">
+                    <span class="process-step-num">04 / BUILD</span>
+                    <h3 class="process-step-title headline-mask">
+                      <div class="mask-wrap"><span>Entwicklung &amp;</span></div>
+                      <div class="mask-wrap"><span>Interaktion</span></div>
+                    </h3>
+                    <p class="process-step-desc">
+                      Sauberer Code, flüssige Animationen, perfekt auf jedem Gerät. Deine Website lädt schnell, fühlt sich hochwertig an und funktioniert überall.
+                    </p>
+                    <div class="process-step-tags">
+                      <span>Entwicklung</span>
+                      <span>Motion</span>
+                      <span>Responsive</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- STEP 05: LAUNCH (Heroic Finale · Larger · Focused) -->
+              <div class="process-step-item step-05" data-step="4">
+                <div class="process-step-finale">
+                  <div class="process-finale-text">
+                    <span class="process-step-num">05 / LAUNCH</span>
+                    <h3 class="process-step-title headline-mask">
+                      <div class="mask-wrap"><span>Livegang &amp;</span></div>
+                      <div class="mask-wrap"><span>Übergabe</span></div>
+                    </h3>
+                    <p class="process-step-desc">
+                      Testing, Performance-Optimierung und ein reibungsloser Launch. Du bekommst alles übergeben — und eine Website, die ab Tag eins Wirkung zeigt.
+                    </p>
+                  </div>
+                  <div class="process-board-wrap finale-board-wrap">
+                    <div class="process-board board-finale" data-board="05">
+                      <div class="board-frame">
+                        <div class="board-inner">
+                          <img src="/process/05-launch.jpg" alt="MARGIN. Process — 05 Launch" class="board-img" loading="eager" decoding="async" />
+                        </div>
+                        <span class="board-cross board-cross-tl">+</span>
+                        <span class="board-cross board-cross-tr">+</span>
+                        <span class="board-cross board-cross-bl">+</span>
+                        <span class="board-cross board-cross-br">+</span>
+                        <span class="board-caption">FIG. 05 — THE FINAL ARTIFACT · DEPLOYED</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="process-finale-cta">
+                    <a href="#contact" class="process-cta-btn">PROJEKT STARTEN ↗</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 06 — PRICING / ENGAGEMENT (Warm Ivory) -->
+      <section class="section section-pricing" id="pricing" style="display: none;">
+        <div class="container">
+          <div class="section-header">
+            <span class="label">ENGAGEMENT</span>
+            <h2 class="headline-section headline-mask">
+              <div class="mask-wrap"><span>Jedes Projekt beginnt</span></div>
+              <div class="mask-wrap"><span>mit dem richtigen Umfang.</span></div>
+            </h2>
+            <p class="pricing-lead">Umfang, Funktion und visuelle Richtung werden individuell auf das Unternehmen abgestimmt.</p>
+          </div>
+          
+          <div class="pricing-list" id="pricing-list-container">
+            <!-- Rows injected by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 07 — FINAL CTA / FORM (Near Black) -->
+      <section class="section section-contact" id="contact">
+        <div class="container grid-12 contact-grid">
+
+          <!-- Left Column: Editorial Headline & Subcopy -->
+          <div class="span-5 contact-intro">
+            <span class="label text-ivory-label contact-label">PROJEKT STARTEN</span>
+            <h2 class="headline-medium contact-headline">Erzähl uns, was<br>du vorhast.</h2>
+            <p class="contact-desc">Vier kurze Fragen — fertig in unter 60 Sekunden. Kostenlos und unverbindlich. Wir melden uns persönlich innerhalb von 24 Stunden.</p>
+            <div class="contact-direct">
+              <a href="tel:+4915679681426" class="contact-direct-link">
+                <span class="contact-direct-icon">&#9743;</span>
+                <span>+49 156 79681426</span>
+              </a>
+              <a href="https://wa.me/4915679681426" target="_blank" rel="noopener" class="contact-direct-link">
+                <span class="contact-direct-icon">&#10148;</span>
+                <span>WhatsApp schreiben</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Column: Step-Formular -->
+          <div class="span-6 offset-1 form-container">
+            
+            <!-- Progress Bar: oben rechts, 01 / 04 + feine Dark-Cherry-Linie -->
+            <div class="form-progress-header" aria-label="Formular-Fortschritt">
+              <div class="form-progress-text">
+                <span class="form-progress-num" data-progress-curr>01</span>
+                <span class="form-progress-sep">/</span>
+                <span class="form-progress-total">04</span>
+              </div>
+              <div class="form-progress-track">
+                <div class="form-progress-bar" id="form-progress-fill"></div>
+              </div>
+            </div>
+
+            <form id="project-form" class="project-form conversational-form" novalidate>
+              <input type="hidden" name="access_key" id="web3forms-key" value="">
+              <input type="hidden" name="subject" value="Neue Projektanfrage über MARGIN. Website">
+
+              <div class="form-steps-container">
+                
+                <!-- SCHRITT 01 / 04: UNTERNEHMEN -->
+                <div class="form-step active" id="step-1" data-step-index="1">
+                  <div class="form-step-content">
+                    <span class="form-step-badge">SCHRITT 01 / 04</span>
+                    <h3 class="form-step-question">Wie heißt dein Unternehmen?</h3>
+                    <div class="form-field-group">
+                      <label for="company" class="sr-only">Name deines Unternehmens</label>
+                      <input type="text" id="company" name="company" class="form-input-line" placeholder="z. B. Studio Nord, Acme AG..." required autocomplete="organization">
+                      <span class="field-line-highlight"></span>
+                    </div>
+                  </div>
+                  
+                  <div class="form-step-footer">
+                    <div class="form-btn-cluster">
+                      <button type="button" class="form-btn-next" data-next="step-2">
+                        <span class="btn-text">Weiter</span>
+                        <span class="btn-arrow" aria-hidden="true">→</span>
+                      </button>
+                      <span class="form-microcopy">Kostenlos & unverbindlich</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SCHRITT 02 / 04: PROJEKT -->
+                <div class="form-step" id="step-2" data-step-index="2" style="display:none;">
+                  <div class="form-step-content">
+                    <span class="form-step-badge">SCHRITT 02 / 04</span>
+                    <h3 class="form-step-question">Was möchtest du realisieren?</h3>
+                    <div class="text-choice-group" data-input-id="project-type-input">
+                      <button type="button" class="text-choice-item" data-value="Neue Website">
+                        <span class="choice-dot"></span>
+                        <span class="choice-title">Neue Website</span>
+                      </button>
+                      <button type="button" class="text-choice-item" data-value="Relaunch & Redesign">
+                        <span class="choice-dot"></span>
+                        <span class="choice-title">Relaunch & Neupositionierung</span>
+                      </button>
+                      <button type="button" class="text-choice-item" data-value="Design & Branding">
+                        <span class="choice-dot"></span>
+                        <span class="choice-title">Design & Corporate Branding</span>
+                      </button>
+                      <button type="button" class="text-choice-item" data-value="E-Commerce / Shop">
+                        <span class="choice-dot"></span>
+                        <span class="choice-title">E-Commerce & Online-Shop</span>
+                      </button>
+                    </div>
+                    <input type="hidden" name="project-type" id="project-type-input" required>
+                  </div>
+
+                  <div class="form-step-footer">
+                    <div class="form-nav-row">
+                      <button type="button" class="form-btn-back" data-prev="step-1">
+                        <span class="btn-arrow-back" aria-hidden="true">←</span>
+                        <span>Zurück</span>
+                      </button>
+                      <button type="button" class="form-btn-next" data-next="step-3" disabled>
+                        <span class="btn-text">Weiter</span>
+                        <span class="btn-arrow" aria-hidden="true">→</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SCHRITT 03 / 04: BUDGET -->
+                <div class="form-step" id="step-3" data-step-index="3" style="display:none;">
+                  <div class="form-step-content">
+                    <span class="form-step-badge">SCHRITT 03 / 04</span>
+                    <h3 class="form-step-question">Welcher Rahmen ist realistisch?</h3>
+                    <div class="text-choice-group" data-input-id="budget-input">
+                      <button type="button" class="text-choice-item" data-value="Unter 3.000 €">
+                        <span class="choice-dot"></span>
+                        <span class="choice-title">Unter 3.000 €</span>
+                      </button>
+                      <button type="button" class="text-choice-item" data-value="3.000–6.000 €">
+                        <span class="choice-dot"></span>
+                        <span class="choice-title">3.000 – 6.000 €</span>
+                      </button>
+                      <button type="button" class="text-choice-item" data-value="6.000–12.000 €">
+                        <span class="choice-dot"></span>
+                        <span class="choice-title">6.000 – 12.000 €</span>
+                      </button>
+                      <button type="button" class="text-choice-item" data-value="12.000 €+">
+                        <span class="choice-dot"></span>
+                        <span class="choice-title">12.000 €+</span>
+                      </button>
+                      <button type="button" class="text-choice-item" data-value="Noch offen">
+                        <span class="choice-dot"></span>
+                        <span class="choice-title">Noch offen / Beratung gewünscht</span>
+                      </button>
+                    </div>
+                    <input type="hidden" name="budget" id="budget-input" required>
+                  </div>
+
+                  <div class="form-step-footer">
+                    <div class="form-nav-row">
+                      <button type="button" class="form-btn-back" data-prev="step-2">
+                        <span class="btn-arrow-back" aria-hidden="true">←</span>
+                        <span>Zurück</span>
+                      </button>
+                      <button type="button" class="form-btn-next" data-next="step-4" disabled>
+                        <span class="btn-text">Weiter</span>
+                        <span class="btn-arrow" aria-hidden="true">→</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SCHRITT 04 / 04: KONTAKT -->
+                <div class="form-step" id="step-4" data-step-index="4" style="display:none;">
+                  <div class="form-step-content">
+                    <span class="form-step-badge">SCHRITT 04 / 04</span>
+                    <h3 class="form-step-question">Wie können wir dich erreichen?</h3>
+                    
+                    <div class="form-fields-stack">
+                      <div class="form-field-group">
+                        <label for="name" class="field-sublabel">DEIN NAME</label>
+                        <input type="text" id="name" name="name" class="form-input-line" placeholder="Vor- und Nachname" required autocomplete="name">
+                        <span class="field-line-highlight"></span>
+                      </div>
+                      
+                      <div class="form-field-group">
+                        <label for="email" class="field-sublabel">DEINE E-MAIL</label>
+                        <input type="email" id="email" name="email" class="form-input-line" placeholder="hallo@unternehmen.de" required autocomplete="email">
+                        <span class="field-line-highlight"></span>
+                      </div>
+
+                      <div class="form-field-group">
+                        <label for="goal" class="field-sublabel">PROJEKT-NOTIZ <span class="label-optional">(optional)</span></label>
+                        <input type="text" id="goal" name="goal" class="form-input-line" placeholder="Worum geht es kurz?">
+                        <span class="field-line-highlight"></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-step-footer">
+                    <div class="form-nav-row">
+                      <button type="button" class="form-btn-back" data-prev="step-3">
+                        <span class="btn-arrow-back" aria-hidden="true">←</span>
+                        <span>Zurück</span>
+                      </button>
+                      <button type="submit" class="form-btn-submit">
+                        <span class="btn-text">Projekt anfragen</span>
+                        <span class="btn-arrow" aria-hidden="true">→</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </form>
+
+            <div class="form-success" id="form-success" style="display: none;">
+              <div class="success-dot"></div>
+              <h3 class="headline-medium">Anfrage erhalten.</h3>
+              <p class="success-desc">Wir melden uns innerhalb von 24 Stunden persönlich bei dir — mit einer ehrlichen Einschätzung zu deinem Projekt.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER (Near Black) -->
+      <footer class="footer section-footer">
+        <div class="container grid-12 footer-grid">
+          
+          <div class="span-6 footer-cta-col">
+            <h2 class="footer-cta-title font-impact">Dein nächster Schritt.</h2>
+            <a href="#contact" class="footer-cta-link text-btn">PROJEKT BESPRECHEN ↗</a>
+          </div>
+          
+          <div class="span-6 footer-nav-col">
+            <div class="footer-nav-grid">
+              <div class="footer-list">
+                <span class="footer-label">NAVIGATION</span>
+                <a href="#work">Projekte</a>
+                <a href="#capabilities">Leistungen</a>
+                <a href="#process">Ablauf</a>
+                <a href="#pricing">Preise</a>
+              </div>
+              <div class="footer-list">
+                <span class="footer-label">KONTAKT</span>
+                <a href="#contact">Projekt anfragen ↗</a>
+                <a href="https://wa.me/4915679681426" target="_blank" rel="noopener">WhatsApp ↗</a>
+                <a href="tel:+4915679681426">+49 156 79681426</a>
+              </div>
+              <div class="footer-list">
+                <span class="footer-label">LEGAL</span>
+                <a href="#">Impressum</a>
+                <a href="#">Datenschutz</a>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <div class="footer-bottom">
+          <div class="footer-huge-logo-wrapper">
+            <div class="footer-huge-logo">
+              <div class="footer-huge-logo-title">MARGIN<span class="dot">.</span></div>
+              <div class="footer-huge-logo-subtitle">WEB DESIGN & DEVELOPMENT</div>
+            </div>
+          </div>
+          <div class="footer-meta-line container">
+            <span>© 2026 MARGIN.</span>
+            <span>WEB DESIGN & DEVELOPMENT STUDIO</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

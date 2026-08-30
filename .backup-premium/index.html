@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MARGIN. | Web Design & Development</title>
+  <meta name="description" content="Individuelles Webdesign für Unternehmen, die digital genauso hochwertig auftreten wollen wie in der Realität." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Inter+Tight:wght@900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+
+  <!-- LOADER -->
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <div class="loader-brand">MARGIN<span class="dot">.</span></div>
+    </div>
+    <div class="loader-progress-rail">
+      <div class="loader-progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- Sticky Minimal Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="#home" class="logo">MARGIN<span class="dot">.</span></a>
+      <nav class="nav">
+        <a href="#work">PROJEKTE</a>
+        <a href="#capabilities">LEISTUNGEN</a>
+        <a href="#process">ABLAUF</a>
+        <a href="#pricing">PREISE</a>
+        <a href="#contact" class="action">PROJEKT STARTEN ↗</a>
+      </nav>
+      <button class="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Fullscreen Menu -->
+  <div class="mobile-menu" aria-hidden="true">
+    <nav class="mobile-nav">
+      <a href="#work">PROJEKTE</a>
+      <a href="#capabilities">LEISTUNGEN</a>
+      <a href="#process">ABLAUF</a>
+      <a href="#pricing">PREISE</a>
+      <a href="#contact" class="action">PROJEKT STARTEN ↗</a>
+    </nav>
+  </div>
+
+  <main class="main" id="smooth-wrapper">
+    <div id="smooth-content">
+
+      <!-- SECTION 01 — HERO (Cinematic Zoom) -->
+      <section class="section section-hero" id="home">
+        <!-- Thin architectural lines on the left and above headline -->
+        <div class="hero-grid-lines">
+          <div class="grid-line line-v-1"></div>
+          <div class="grid-line line-h-1"></div>
+        </div>
+
+        <div class="hero-zoom-sticky">
+          <!-- The massive scalable wordmark -->
+          <div class="hero-zoom-wordmark">
+            <span class="letter">M</span><span class="letter">A</span><span class="letter">R</span><span class="letter letter-g">G</span><span class="letter">I</span><span class="letter">N</span><span class="dot">.</span>
+          </div>
+          
+          <!-- Fading subtext overlay & Signature Visual -->
+          <div class="hero-zoom-content grid-12">
+            <div class="hero-subtext span-5">
+              <h1 class="headline-hero">
+                Websites,<br>die man<br>nicht vergisst.
+              </h1>
+              <p class="hero-copy" style="margin-top: 1.5rem; max-width: 400px; color: rgba(255,255,255,0.7);">
+                Wir gestalten und entwickeln maßgeschneiderte digitale Erlebnisse für Unternehmen mit Anspruch. Präzise, schnell und unverwechselbar.
+              </p>
+            </div>
+            <div class="hero-signature-col span-7">
+              <div class="hero-signature-wrapper">
+                <svg viewBox="0 0 1000 1000" class="hero-signature-svg" preserveAspectRatio="xMidYMid meet">
+                  <defs>
+                    <!-- Mask will be populated by JS with hundreds of tiny rects -->
+                    <mask id="raster-mask">
+                      <!-- Base solid white (optional if we only want dots, but JS will fill this with white rects) -->
+                    </mask>
+                  </defs>
+                  
+                  <!-- DENSE BLUEPRINT BACKGROUND -->
+                  <g class="blueprint-bg" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.1">
+                    <!-- Vertical Micro Grid -->
+                    <g class="bp-v-lines">
+                      <line x1="100" y1="0" x2="100" y2="1000" />
+                      <line x1="200" y1="0" x2="200" y2="1000" />
+                      <line x1="300" y1="0" x2="300" y2="1000" />
+                      <line x1="400" y1="0" x2="400" y2="1000" />
+                      <line x1="600" y1="0" x2="600" y2="1000" />
+                      <line x1="700" y1="0" x2="700" y2="1000" />
+                      <line x1="800" y1="0" x2="800" y2="1000" />
+                      <line x1="900" y1="0" x2="900" y2="1000" />
+                    </g>
+                    <!-- Horizontal Micro Grid -->
+                    <g class="bp-h-lines">
+                      <line x1="0" y1="100" x2="1000" y2="100" />
+                      <line x1="0" y1="200" x2="1000" y2="200" />
+                      <line x1="0" y1="300" x2="1000" y2="300" />
+                      <line x1="0" y1="400" x2="1000" y2="400" />
+                      <line x1="0" y1="600" x2="1000" y2="600" />
+                      <line x1="0" y1="700" x2="1000" y2="700" />
+                      <line x1="0" y1="800" x2="1000" y2="800" />
+                      <line x1="0" y1="900" x2="1000" y2="900" />
+                    </g>
+                    <!-- Primary Axes -->
+                    <line x1="500" y1="0" x2="500" y2="1000" stroke-width="1" stroke-opacity="0.2" class="bp-axis-v" />
+                    <line x1="0" y1="500" x2="1000" y2="500" stroke-width="1" stroke-opacity="0.2" class="bp-axis-h" />
+                  </g>
+
+                  <!-- DYNAMIC ARCHITECTURAL ELEMENTS -->
+                  <g class="blueprint-dynamic" fill="none" stroke="#ffffff" stroke-width="0.75" stroke-opacity="0.3">
+                    <circle cx="500" cy="500" r="250" class="bp-circle-1" stroke-dasharray="4 8" />
+                    <circle cx="500" cy="500" r="350" class="bp-circle-2" stroke-opacity="0.1" />
+                    <circle cx="500" cy="500" r="150" class="bp-circle-3" stroke-dasharray="1 4" />
+                    
+                    <!-- Drifting Registration Marks -->
+                    <g class="bp-reg-marks">
+                      <g class="bp-mark bp-mark-1" transform="translate(250, 250)">
+                        <line x1="-20" y1="0" x2="20" y2="0" />
+                        <line x1="0" y1="-20" x2="0" y2="20" />
+                        <circle cx="0" cy="0" r="4" fill="var(--dark-cherry)" stroke="none" class="bp-pulse" />
+                      </g>
+                      <g class="bp-mark bp-mark-2" transform="translate(750, 250)">
+                        <line x1="-20" y1="0" x2="20" y2="0" />
+                        <line x1="0" y1="-20" x2="0" y2="20" />
+                        <circle cx="0" cy="0" r="4" fill="var(--dark-cherry)" stroke="none" class="bp-pulse" />
+                      </g>
+                      <g class="bp-mark bp-mark-3" transform="translate(250, 750)">
+                        <line x1="-20" y1="0" x2="20" y2="0" />
+                        <line x1="0" y1="-20" x2="0" y2="20" />
+                        <circle cx="0" cy="0" r="4" fill="var(--dark-cherry)" stroke="none" class="bp-pulse" />
+                      </g>
+                      <g class="bp-mark bp-mark-4" transform="translate(750, 750)">
+                        <line x1="-20" y1="0" x2="20" y2="0" />
+                        <line x1="0" y1="-20" x2="0" y2="20" />
+                        <circle cx="0" cy="0" r="4" fill="var(--dark-cherry)" stroke="none" class="bp-pulse" />
+                      </g>
+                      <!-- Center crosshair -->
+                      <g class="bp-mark bp-mark-center" transform="translate(500, 500)">
+                        <line x1="-30" y1="0" x2="30" y2="0" stroke-opacity="0.5" />
+                        <line x1="0" y1="-30" x2="0" y2="30" stroke-opacity="0.5" />
+                      </g>
+                    </g>
+                  </g>
+
+                  <!-- RASTER MASKED TYPOGRAPHY -->
+                  <g class="bp-typo-container" mask="url(#raster-mask)" fill="#ffffff" font-family="'Inter', sans-serif" font-weight="400" font-size="140" letter-spacing="0.1em" text-anchor="middle" dominant-baseline="central">
+                    <text x="500" y="500" class="bp-word bp-word-0">MARGIN.</text>
+                    <text x="500" y="500" class="bp-word bp-word-1" opacity="0">DESIGN</text>
+                    <text x="500" y="500" class="bp-word bp-word-2" opacity="0">BRANDING</text>
+                    <text x="500" y="500" class="bp-word bp-word-3" opacity="0">DIGITAL</text>
+                    <text x="500" y="500" class="bp-word bp-word-4" opacity="0">IDENTITY</text>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 02 — SELECTED WORK (Warm Ivory) -->
+      <section class="section section-work" id="work">
+        <div class="margin-line">
+          <div class="margin-line-inner"></div>
+          <span class="margin-meta">MARGIN / SELECTED WORK — CHEMNITZ, DE</span>
+        </div>
+        
+        <div class="container">
+          <div class="section-header">
+            <span class="label">SELECTED WORK</span>
+            <h2 class="headline-section headline-mask">
+              <div class="mask-wrap"><span>Ausgewählte Projekte.</span></div>
+            </h2>
+          </div>
+
+          <div class="work-list">
+            <!-- Project 1: Large Centered Composition -->
+            <article class="project project-centered">
+              <div class="project-info">
+                <div class="project-title-group">
+                  <h3 class="project-title">Atelier K.</h3>
+                  <span class="project-category">WEB DESIGN / DEVELOPMENT</span>
+                </div>
+                <div class="project-meta-group">
+                  <span class="project-year">2026</span>
+                  <a href="#contact" class="project-link">VIEW PROJECT ↗</a>
+                </div>
+              </div>
+              <div class="project-visual-wrapper">
+                <div class="project-visual">
+                  <img src="/work/project-01.jpg" alt="Atelier K. Project" loading="lazy" />
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 2: Asymmetric Layout -->
+            <article class="project project-asymmetric grid-12">
+              <div class="project-text-col span-4">
+                <div class="project-sticky-content">
+                  <span class="project-tag">ARCHITEKTUR & RAUM</span>
+                  <h3 class="project-title">Studio Nōrd</h3>
+                  <p class="project-desc">
+                    Reduktion auf das Wesentliche. Eine maßgeschneiderte digitale Plattform für ein minimalistisches Architekturbüro.
+                  </p>
+                  <div class="project-asym-meta">
+                    <span class="project-category">WEB DESIGN / DEVELOPMENT</span>
+                    <span class="project-year">2025</span>
+                  </div>
+                  <a href="#contact" class="project-link">VIEW PROJECT ↗</a>
+                </div>
+              </div>
+              <div class="project-visual-col span-8">
+                <div class="project-visual-wrapper">
+                  <div class="project-visual">
+                    <img src="/work/project-02.jpg" alt="Studio Nōrd Project" loading="lazy" />
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 3: Wide Cinematic Composition -->
+            <article class="project project-cinematic">
+              <div class="project-visual-wrapper">
+                <div class="project-visual">
+                  <img src="/work/project-03.jpg" alt="OAK & Co. Project" loading="lazy" />
+                </div>
+              </div>
+              <div class="project-info cinematic-info">
+                <div class="project-title-group">
+                  <h3 class="project-title">OAK & Co.</h3>
+                  <span class="project-category">DIGITAL DIRECTION / E-COMMERCE</span>
+                </div>
+                <div class="project-meta-group">
+                  <span class="project-year">2025</span>
+                  <a href="#contact" class="project-link">VIEW PROJECT ↗</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 03 — MANIFESTO (Dark Cherry) -->
+      <section class="section section-manifesto" id="manifesto">
+        <div class="manifesto-sticky">
+          <div class="container manifesto-container grid-12">
+            <!-- Left Text Column -->
+            <div class="manifesto-text-col span-5">
+              <span class="label text-ivory-label manifesto-label">OUR POINT OF VIEW</span>
+              <h2 class="headline-manifesto">
+                <div class="manifesto-line line-1">Gute Unternehmen</div>
+                <div class="manifesto-line line-2">sollten online nicht</div>
+                <div class="manifesto-line line-3">durchschnittlich</div>
+                <div class="manifesto-line line-4">wirken.</div>
+              </h2>
+              <div class="manifesto-footer">
+                <p class="manifesto-copy">
+                  Wir glauben an eigenständige digitale Identitäten, präzises Handwerk und Gestaltung mit Haltung.
+                </p>
+              </div>
+            </div>
+            
+            <!-- Right Visual Column -->
+            <div class="manifesto-visual-col span-7">
+              <div class="manifesto-hand-interaction" id="manifesto-hand-interaction">
+                <canvas id="manifesto-dots-canvas"></canvas>
+                <img src="/media/cherry/margin-hand-sculpt.png" class="manifesto-real-hand" id="manifesto-real-hand" alt="MARGIN. Sculptural Hand">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 04 — CAPABILITIES (Warm Ivory) -->
+      <section class="section section-capabilities" id="capabilities">
+        <div class="margin-line right">
+          <div class="margin-line-inner"></div>
+          <span class="margin-meta">MARGIN / CAPABILITIES</span>
+        </div>
+
+        <div class="container">
+          <div class="section-header">
+            <span class="label">CAPABILITIES</span>
+            <h2 class="headline-section headline-mask">
+              <div class="mask-wrap"><span>Was wir machen.</span></div>
+            </h2>
+          </div>
+
+          <div class="capabilities-grid grid-12">
+            <div class="services-list span-7">
+              <div class="service-row" data-service="design">
+                <div class="service-title-wrap">
+                  <h3 class="service-title">WEB DESIGN</h3>
+                </div>
+                <div class="service-desc-wrap">
+                  <p class="service-desc">Strategie, Struktur und visuelle Richtung passend zum Unternehmen.</p>
+                </div>
+              </div>
+
+              <div class="service-row" data-service="dev">
+                <div class="service-title-wrap">
+                  <h3 class="service-title">DEVELOPMENT</h3>
+                </div>
+                <div class="service-desc-wrap">
+                  <p class="service-desc">Schnell, responsiv und sauber entwickelte digitale Erlebnisse.</p>
+                </div>
+              </div>
+
+              <div class="service-row" data-service="direction">
+                <div class="service-title-wrap">
+                  <h3 class="service-title">DIGITAL DIRECTION</h3>
+                </div>
+                <div class="service-desc-wrap">
+                  <p class="service-desc">Ein konsistenter digitaler Auftritt bis ins letzte Detail.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="capabilities-visual-col span-5">
+              <div class="capabilities-visual" id="cap-visual">
+                <div class="cap-shape cap-rect-main"></div>
+                <div class="cap-shape cap-rect-side"></div>
+                <div class="cap-shape cap-line-1"></div>
+                <div class="cap-shape cap-line-2"></div>
+                <div class="cap-shape cap-dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 05 — PROCESS (Near Black) -->
+      <section class="section section-process" id="process">
+        <div class="container">
+          <div class="section-header">
+            <span class="label">PROCESS</span>
+            <h2 class="headline-section headline-mask">
+              <div class="mask-wrap"><span>Von der ersten Idee bis zum Launch.</span></div>
+            </h2>
+          </div>
+        </div>
+
+        <div class="process-wrapper">
+          <div class="process-sticky">
+            <div class="container grid-12 process-grid">
+              <div class="process-left span-5">
+                <div class="process-rail">
+                  <div class="process-rail-fill"></div>
+                </div>
+                <div class="process-content-wrapper">
+                  <!-- Stages injected by JS -->
+                </div>
+              </div>
+              <div class="process-right span-7">
+                <div class="process-3d-scene">
+                  <div class="process-layer layer-base"></div>
+                  <div class="process-layer layer-grid">
+                    <div class="p-col"></div><div class="p-col"></div><div class="p-col"></div><div class="p-col"></div>
+                  </div>
+                  <div class="process-layer layer-content">
+                    <div class="p-block-1"></div>
+                    <div class="p-block-2"></div>
+                    <div class="p-block-3"></div>
+                  </div>
+                  <div class="process-layer layer-cherry"></div>
+                </div>
+                <div class="process-words-wrapper">
+                  <!-- Words injected by JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 06 — PRICING / ENGAGEMENT (Warm Ivory) -->
+      <section class="section section-pricing" id="pricing" style="display: none;">
+        <div class="container">
+          <div class="section-header">
+            <span class="label">ENGAGEMENT</span>
+            <h2 class="headline-section headline-mask">
+              <div class="mask-wrap"><span>Jedes Projekt beginnt</span></div>
+              <div class="mask-wrap"><span>mit dem richtigen Umfang.</span></div>
+            </h2>
+            <p class="pricing-lead">Umfang, Funktion und visuelle Richtung werden individuell auf das Unternehmen abgestimmt.</p>
+          </div>
+          
+          <div class="pricing-list" id="pricing-list-container">
+            <!-- Rows injected by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 07 — FINAL CTA / FORM (Near Black) -->
+      <section class="section section-cta" id="contact">
+        <div class="cta-monumental-bg">MARGIN.</div>
+        <div class="container cta-container">
+          <div class="cta-header">
+      <section class="section section-contact" id="contact">
+        <div class="container grid-12">
+          
+          <div class="span-5 contact-intro">
+            <h2 class="headline-medium">Erzähl uns, was<br>du vorhast.</h2>
+            <p class="contact-desc">Wir gestalten und entwickeln maßgeschneiderte digitale Erlebnisse. Präzise, schnell und unverwechselbar.</p>
+          </div>
+
+          <div class="span-6 offset-1 form-container">
+            <form id="project-form" class="project-form conversational-form">
+              <input type="hidden" name="access_key" id="web3forms-key" value="">
+              <input type="hidden" name="subject" value="Neue Projektanfrage über MARGIN. Website">
+              
+              <div class="form-steps-container">
+                <!-- STEP 1 -->
+                <div class="form-step active" id="step-1">
+                  <div class="form-group-line">
+                    <label for="company">01 / UNTERNEHMEN</label>
+                    <div class="input-row">
+                      <input type="text" id="company" name="company" placeholder="Wie heißt dein Unternehmen?" required>
+                      <button type="button" class="next-btn inline-btn" data-next="step-2">WEITER ↘</button>
+                    </div>
+                  </div>
+                  <div class="form-group-line" style="margin-top: 3rem;">
+                    <label for="name">02 / NAME</label>
+                    <div class="input-row">
+                      <input type="text" id="name" name="name" placeholder="Wie dürfen wir dich ansprechen?" required>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- STEP 2 -->
+                <div class="form-step" id="step-2" style="display:none;">
+                  <div class="form-group-line">
+                    <label>03 / PROJEKT</label>
+                    <h3 class="form-question-clean">Was möchtest du bauen?</h3>
+                    <div class="text-choice-group" data-input-id="project-type-input">
+                      <button type="button" class="text-choice" data-value="Neue Website">Neue Website</button>
+                      <button type="button" class="text-choice" data-value="Relaunch">Relaunch</button>
+                      <button type="button" class="text-choice" data-value="Landingpage">Landingpage</button>
+                    </div>
+                    <input type="hidden" name="project-type" id="project-type-input" required>
+                    <div class="input-row" style="margin-top: 2rem; justify-content: flex-end;">
+                      <button type="button" class="next-btn inline-btn" data-next="step-3">WEITER ↘</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- STEP 3 -->
+                <div class="form-step" id="step-3" style="display:none;">
+                  <div class="form-group-line">
+                    <label for="goal">04 / ZIEL</label>
+                    <div class="input-row">
+                      <input type="text" id="goal" name="goal" placeholder="Was soll sich durch die neue Website verändern?" required>
+                      <button type="button" class="next-btn inline-btn" data-next="step-4">WEITER ↘</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- STEP 4 -->
+                <div class="form-step" id="step-4" style="display:none;">
+                  <div class="form-group-line">
+                    <label for="email">05 / KONTAKT</label>
+                    <div class="input-row">
+                      <input type="email" id="email" name="email" placeholder="hallo@unternehmen.de" required>
+                    </div>
+                  </div>
+                  <div class="form-group-line" style="margin-top: 3rem; border-bottom: none;">
+                    <button type="submit" class="submit-btn text-btn">PROJEKT ANFRAGEN ↗</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <div class="form-success" id="form-success" style="display: none;">
+              <div class="success-dot"></div>
+              <h3 class="headline-medium">Anfrage erhalten.</h3>
+              <p class="success-desc">Wir haben deine Nachricht bekommen und melden uns zeitnah persönlich bei dir.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER (Near Black) -->
+      <footer class="footer section-footer">
+        <div class="container grid-12 footer-grid">
+          
+          <div class="span-6 footer-cta-col">
+            <h2 class="footer-cta-title font-impact">Bereit für den<br>nächsten Schritt?</h2>
+            <a href="#contact" class="footer-cta-link text-btn">LASS UNS SPRECHEN ↗</a>
+          </div>
+          
+          <div class="span-6 footer-nav-col">
+            <div class="footer-nav-grid">
+              <div class="footer-list">
+                <span class="footer-label">NAVIGATION</span>
+                <a href="#work">Projekte</a>
+                <a href="#capabilities">Leistungen</a>
+                <a href="#process">Ablauf</a>
+                <a href="#pricing">Preise</a>
+              </div>
+              <div class="footer-list">
+                <span class="footer-label">SOCIALS</span>
+                <a href="#">Instagram</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Awwwards</a>
+              </div>
+              <div class="footer-list">
+                <span class="footer-label">LEGAL</span>
+                <a href="#">Impressum</a>
+                <a href="#">Datenschutz</a>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <div class="footer-bottom">
+          <div class="footer-huge-logo-wrapper">
+            <div class="footer-huge-logo">MARGIN.</div>
+          </div>
+          <div class="footer-meta-line container">
+            <span>© 2026 MARGIN. DIGITAL STUDIO</span>
+            <span>CHEMNITZ — GERMANY</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
