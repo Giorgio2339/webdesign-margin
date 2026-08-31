@@ -1,3 +1,103 @@
+/* Self-hosted fonts — no external font requests, which keeps the
+   privacy policy's "lokal bereitgestellt" statement accurate and removes
+   two render-blocking third-party origins from the critical path. */
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/instrument-serif-400-italic-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/instrument-serif-400-italic-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/instrument-serif-400-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/instrument-serif-400-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/inter-400-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/inter-400-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/inter-500-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/inter-500-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/inter-600-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/inter-600-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter Tight';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(/fonts/inter-tight-900-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter Tight';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(/fonts/inter-tight-900-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   /* Core Colors */
   --near-black: #0D0D0C;
@@ -123,9 +223,16 @@ img {
 .offset-1 { grid-column-start: 2; }
 
 @media (max-width: 960px) {
+  /* grid-column: span 12 alone is correct — a stray grid-column-start: auto
+     on the next line used to immediately cancel it (grid-column's
+     one-value form sets -start; the following declaration overwrote that
+     back to auto), collapsing every stacked column to its own min-content
+     width instead of the intended full-width single-column stack. That
+     broke layouts on every mobile page: the clearest case is the second
+     Work-section image landing in a track with nothing else to give it
+     width, rendering at 0×0. */
   .span-8, .span-7, .span-6, .span-5, .span-4, .offset-1 {
     grid-column: span 12;
-    grid-column-start: auto;
   }
 }
 
@@ -260,7 +367,9 @@ img {
 
 .logo-subtitle {
   font-family: var(--font-ui);
-  font-size: 7px;
+  /* 7px lag unter jeder Lesbarkeitsschwelle — bei diesem Tracking traegt
+     8.5px denselben Look und bleibt tatsaechlich lesbar. */
+  font-size: 8.5px;
   font-weight: 500;
   letter-spacing: 0.24em;
   color: rgba(255, 255, 255, 0.7);
@@ -282,6 +391,7 @@ img {
   text-transform: uppercase;
   color: #fff;
   padding: 8px 0 4px;
+  white-space: nowrap;
   transition: opacity 0.2s ease;
 }
 
@@ -309,6 +419,63 @@ img {
 
 .nav .action::after {
   background-color: #fff;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 32px);
+}
+
+/* Call link — deliberately outside .nav so it survives the hamburger
+   collapse and stays reachable at every breakpoint. */
+.header-call {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  padding: 8px 0 4px;
+}
+
+.header-call-icon {
+  width: 14px;
+  height: 14px;
+  fill: #fff;
+  flex-shrink: 0;
+}
+
+.header-call-text {
+  font-size: var(--type-nav);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.header-call::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #fff;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header-call:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Below the hamburger breakpoint this is already icon-only by definition
+   (nav is gone, so there's room) — this second, higher breakpoint covers
+   the tablet zone where the full nav plus the number both competing for
+   .header-inner's width would overflow it. */
+@media (max-width: 1024px) {
+  .header-call-text { display: none; }
 }
 
 /* Mobile Toggle */
@@ -742,11 +909,11 @@ img {
 
 /* --- Living measurement field ---------------------------------------- */
 .bp-dot {
-  fill: rgba(243, 240, 232, 0.62);
+  fill: rgba(243, 240, 232, 0.92);
 }
 
 .bp-link {
-  stroke: rgba(243, 240, 232, 0.55);
+  stroke: rgba(243, 240, 232, 0.85);
   stroke-width: 0.7;
 }
 
@@ -1271,19 +1438,36 @@ img {
 }
 
 @media (max-width: 1024px) {
+  /* Desktop pins .manifesto-sticky for a fixed 100vh while the section's own
+     160vh height scrolls past behind it. On mobile that math doesn't hold:
+     the stacked text column plus a 55vh hand visual add up to more than
+     100vh on most phones (measured ~68px over on a 390×844 viewport), and
+     with .manifesto-sticky's own overflow:hidden the excess was silently
+     clipped off the bottom of the hand — same fix as the Process section's
+     desktop-only pin, so content just flows and nothing gets cut. */
+  .section-manifesto {
+    height: auto;
+  }
+  .manifesto-sticky {
+    position: static;
+    height: auto;
+    overflow: visible;
+    padding: clamp(3.5rem, 8vw, 5rem) 0;
+  }
   .manifesto-text-col, .manifesto-visual-col {
     grid-column: span 12;
   }
   .manifesto-text-col {
     order: 1;
     height: auto;
-    padding-top: 3.5rem;
     position: relative;
     z-index: 10;
   }
   .manifesto-visual-col {
     order: 2;
-    height: 55vh;
+    height: 60vh;
+    max-height: 460px;
+    margin-top: 2.5rem;
     justify-content: center;
     align-items: center;
   }
@@ -1406,6 +1590,20 @@ img {
   inset: 0;
   pointer-events: none;
   z-index: 0;
+}
+
+/* Spawned by main.js on tag click, one per click, removed after it fades. */
+.process-tag-ping {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  margin-left: -110px;
+  margin-top: -110px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(circle, rgba(138, 48, 64, 0.5) 0%, rgba(138, 48, 64, 0.16) 40%, transparent 72%);
+  opacity: 0;
 }
 
 .process-bg-inner {
@@ -1550,14 +1748,17 @@ img {
 .process-step-grid.align-right .process-board-wrap {
   grid-column: 6 / 13;
   display: flex;
-  justify-content: flex-end;
+  /* Centered rather than pinned to the far edge — the wrap's column span
+     is wider than the board's own max-width, and edge-alignment left a
+     lopsided slab of bare black beside the card instead of framing it. */
+  justify-content: center;
 }
 
 /* When board is on left: Board spans 1-7, Text spans 8-13 */
 .process-step-grid.align-left .process-board-wrap {
   grid-column: 1 / 8;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
 }
 .process-step-grid.align-left .process-step-text {
   grid-column: 8 / 13;
@@ -1592,7 +1793,10 @@ img {
 
 .process-step-desc {
   font-family: var(--font-ui);
-  font-size: clamp(14px, 1.05vw, 16px);
+  /* Untergrenze war 14px und damit deutlich kleiner als jeder andere
+     Fliesstext der Seite (17-18px) — auf Mobile las sich das wie eine
+     Fussnote statt wie Prosa. */
+  font-size: clamp(16px, 1.05vw, 16px);
   line-height: 1.65;
   color: var(--muted-grey);
   max-width: 42ch;
@@ -1605,7 +1809,7 @@ img {
   gap: 8px;
 }
 
-.process-step-tags span {
+.process-tag {
   font-family: var(--font-ui);
   font-size: 10px;
   letter-spacing: 0.12em;
@@ -1614,6 +1818,23 @@ img {
   border: 1px solid rgba(243, 240, 232, 0.12);
   padding: 4px 10px;
   background: rgba(12, 11, 10, 0.4);
+  cursor: pointer;
+  transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+}
+
+.process-tag:hover {
+  color: var(--warm-ivory);
+  border-color: rgba(243, 240, 232, 0.3);
+}
+
+.process-tag:active {
+  transform: scale(0.94);
+}
+
+.process-tag.is-selected {
+  color: var(--warm-ivory);
+  border-color: var(--dark-cherry-bright);
+  background: rgba(138, 48, 64, 0.22);
 }
 
 /* Design Board Card Framing (Editorial Print) */
@@ -1710,7 +1931,7 @@ img {
   display: block;
   margin-top: 10px;
   font-family: var(--font-ui);
-  font-size: 8.5px;
+  font-size: 9.5px;
   letter-spacing: 0.18em;
   color: rgba(243, 240, 232, 0.4);
   text-transform: uppercase;
@@ -1920,76 +2141,212 @@ img {
   color: var(--near-black);
 }
 
+/* Two deliberate headline lines, as drawn — the shared .mask-wrap is
+   inline-block, which would otherwise reflow them onto one line here. */
+.section-pricing .headline-section .mask-wrap {
+  display: block;
+}
+
 .pricing-lead {
   font-size: var(--type-body-large);
   color: var(--dark-body);
-  max-width: 48ch;
-  line-height: 1.5;
+  max-width: 52ch;
+  line-height: 1.55;
   margin-top: -0.5rem;
 }
 
+.pricing-info-line {
+  display: block;
+  margin-top: clamp(2rem, 3.4vw, 3rem);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dark-cherry);
+}
+
 .pricing-list {
+  position: relative;
   display: flex;
   flex-direction: column;
-  margin-top: clamp(4rem, 6vw, 6rem);
-}
-
-.pricing-row {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr auto;
-  align-items: center;
-  gap: 2rem;
-  padding: clamp(2.5rem, 4vw, 3.5rem) 0;
-  border-bottom: 1px solid var(--border-light);
-  position: relative;
-  overflow: hidden;
-}
-
-.pricing-row:first-child {
+  margin-top: clamp(3.5rem, 5.5vw, 5.5rem);
   border-top: 1px solid var(--border-light);
+}
+
+/* One hairline ruling down the page, set at the column the titles start on.
+   Replaces an earlier full checkerboard grid: that read as graph paper and
+   fought the type. A single vertical rule gives the list an editorial spine
+   without competing with anything. */
+.pricing-list::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(56px + clamp(1.5rem, 3.5vw, 4rem) / 2);
+  width: 1px;
+  background-color: var(--border-light);
+  pointer-events: none;
+}
+
+@media (max-width: 1100px) {
+  .pricing-list::before { display: none; }
+}
+
+/* Editorial row: number · title · description · capabilities.
+   The divider is its own element rather than a border so the cherry
+   rule can be drawn over its full width on hover. */
+.pricing-row {
+  position: relative;
+  display: grid;
+  /* Every row is its own grid, so the tracks must be content-independent —
+     an auto last column would let each tag list shift that row's columns. */
+  grid-template-columns: 56px minmax(180px, 1.4fr) minmax(0, 2fr) minmax(260px, 0.9fr);
+  align-items: center;
+  gap: clamp(1.5rem, 3.5vw, 4rem);
+  padding: clamp(2.4rem, 3.6vw, 3.4rem) 0;
+  color: inherit;
+}
+
+.pricing-row-rule {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--border-light);
+}
+
+.pricing-row-rule::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--dark-cherry);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pricing-row:hover .pricing-row-rule::after {
+  transform: scaleX(1);
+}
+
+.pricing-row-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--ink-line-strong);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--muted-dark);
+  font-variant-numeric: tabular-nums;
+  transition: color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pricing-row:hover .pricing-row-num {
+  border-color: var(--dark-cherry-bright);
 }
 
 .pricing-row-title {
   font-family: var(--font-display);
-  font-size: clamp(24px, 2.5vw, 36px);
+  font-weight: 400;
+  font-size: clamp(28px, 2.8vw, 42px);
+  line-height: 1;
+  letter-spacing: -0.01em;
   color: var(--near-black);
+  transition: color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pricing-row:hover .pricing-row-num,
+.pricing-row:hover .pricing-row-title {
+  color: var(--dark-cherry);
+}
+
+.pricing-row:hover .pricing-row-title {
+  transform: translateX(5px);
 }
 
 .pricing-row-desc {
   font-size: var(--type-body);
   color: var(--dark-body);
-  max-width: 42ch;
-  line-height: 1.5;
+  max-width: 44ch;
+  line-height: 1.6;
 }
 
-.pricing-row-price {
-  font-size: 13px;
-  letter-spacing: 0.08em;
+.pricing-row-tags,
+.pricing-row-cta {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  justify-self: end;
+  font-size: 11px;
   font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-dark);
+  white-space: nowrap;
+  transition: color 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pricing-tag-sep {
+  font-style: normal;
+  color: var(--border-light);
+}
+
+.pricing-row:hover .pricing-row-tags,
+.pricing-row:hover .pricing-row-cta {
   color: var(--near-black);
 }
 
-.pricing-row-hover {
-  position: absolute;
-  left: 0;
-  width: 3px;
-  height: 0;
-  background-color: var(--dark-cherry);
-  top: 50%;
-  transform: translateY(-50%);
-  transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+.pricing-row-cta {
+  color: var(--near-black);
 }
 
-.pricing-row:hover .pricing-row-hover {
-  height: 60%;
+.pricing-cta-arrow {
+  font-style: normal;
+  display: inline-block;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (max-width: 900px) {
+.pricing-row:hover .pricing-cta-arrow {
+  transform: translate(3px, -3px);
+}
+
+@media (max-width: 1100px) {
+  .pricing-row {
+    grid-template-columns: minmax(40px, auto) minmax(180px, 1.2fr) minmax(0, 1.8fr);
+    row-gap: 1.4rem;
+  }
+  .pricing-row-tags,
+  .pricing-row-cta {
+    grid-column: 2 / -1;
+    justify-self: start;
+    white-space: normal;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 760px) {
   .pricing-row {
     grid-template-columns: 1fr;
     gap: 1rem;
-    padding: 2rem 0;
-    align-items: flex-start;
+    padding: clamp(2.2rem, 7vw, 2.8rem) 0;
+  }
+  .pricing-row-num {
+    margin-bottom: -0.4rem;
+  }
+  .pricing-row-tags,
+  .pricing-row-cta {
+    grid-column: 1;
+    margin-top: 0.4rem;
+  }
+  .pricing-row:hover .pricing-row-title {
+    transform: none;
   }
 }
 
@@ -2005,6 +2362,10 @@ img {
   border-radius: 8px;
   padding: clamp(2.5rem, 4vw, 4rem);
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  /* Without this, an absolutely positioned full-bleed child (the success
+     state) shows its own square corners poking out past this card's
+     rounded border instead of being clipped to match it. */
+  overflow: hidden;
 }
 
 .submit-btn {
@@ -2015,34 +2376,74 @@ img {
   text-align: left;
 }
 
+/* Fills the same card rather than stacking a visually separate box on top
+   of it: same radius, same translucent/blurred fill as .form-container. */
 .form-success {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: var(--near-black);
+  padding: clamp(2.5rem, 4vw, 4rem);
+  background: rgba(12, 11, 10, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 8px;
   z-index: 10;
 }
 
-.success-dot {
-  width: 16px;
-  height: 16px;
-  background-color: var(--dark-cherry);
-  border-radius: 50%;
-  margin-bottom: 2.5rem;
+/* Inline submit error — sits under the button in the form's own language
+   instead of an alert() popup. Hidden via the [hidden] attribute. */
+.form-error-note {
+  margin-top: 1rem;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--dark-cherry-bright);
+}
+
+.form-error-note[hidden] {
+  display: none;
+}
+
+.success-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dark-cherry-bright);
+  margin-bottom: 1.8rem;
+}
+
+.success-headline {
+  margin-bottom: 1.3rem;
+}
+
+.success-headline .mask-wrap {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: top;
+  padding-bottom: 0.1em;
+}
+
+.success-headline .mask-wrap span {
+  display: inline-block;
+  will-change: transform;
 }
 
 .success-desc {
   color: var(--muted-grey);
   font-size: var(--type-body);
-  max-width: 40ch;
-  margin-top: 1.2rem;
+  max-width: 38ch;
+  line-height: 1.6;
+}
+
+.success-note {
+  margin-top: 2.2rem;
+  font-size: 12px;
+  color: var(--muted-dark);
+  letter-spacing: 0.02em;
 }
 
 /* LOADER */
@@ -2393,8 +2794,16 @@ img {
   pointer-events: none;
 }
 
-@media (max-width: 768px) {
-  .capabilities-visual-col { display: none; }
+/* On touch the instrument can't be hovered into life, so main.js auto-cycles
+   it through each service instead — visible everywhere rather than hidden,
+   with room above it once it stacks under the service list. */
+@media (max-width: 960px) {
+  .capabilities-visual-col {
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+  }
+  .capabilities-instrument {
+    max-width: 380px;
+  }
 }
 
 
@@ -2456,14 +2865,19 @@ img {
 }
 
 .contact-grid .form-container {
-  grid-column: span 6;
-  grid-column-start: 7;
+  /* Explicit start/end lines. The previous "grid-column: span 6" followed
+     by "grid-column-start: 7" was self-defeating: the -start declaration
+     replaced the span, leaving start:7/end:auto — a single 1-track-wide
+     column. That was the crushed word-per-line form card. */
+  grid-column: 7 / 13;
 }
 
 @media (max-width: 960px) {
+  /* Same footgun as the global .span-N reset: the trailing
+     grid-column-start: auto used to cancel the span 12 that precedes it,
+     leaving the form column 1-track wide instead of full-width. */
   .contact-grid .form-container {
     grid-column: span 12 !important;
-    grid-column-start: auto !important;
   }
 }
 
@@ -2980,7 +3394,11 @@ img {
 }
 
 .footer-grid {
-  padding: clamp(6rem, 10vw, 10rem) 0;
+  /* Vertical-only spacing — .container already supplies the horizontal
+     padding, and a "Y 0" shorthand here would zero it back out. That
+     bug had the footer CTA sitting flush against the viewport edge. */
+  padding-top: clamp(6rem, 10vw, 10rem);
+  padding-bottom: clamp(6rem, 10vw, 10rem);
 }
 
 .footer-cta-title {
@@ -3136,8 +3554,197 @@ img {
   .cue-fill { animation: none !important; }
 }
 
+/* Skip link — off-screen until focused, so it never touches the layout
+   but still lets keyboard users jump the nav. */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  transform: translateY(-120%);
+  background-color: var(--near-black);
+  color: var(--warm-ivory);
+  border: 1px solid var(--warm-ivory);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 14px 20px;
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Honeypot — off-screen rather than display:none, so bots that skip
+   hidden fields still fill it in. Never focusable. */
+.form-botcheck {
+  position: absolute !important;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* Final CTA / contact — monumental wordmark needs a positioning context */
 .section-contact {
   position: relative;
   overflow: hidden;
+}
+
+/* ==========================================================
+   LEGAL PAGES — Impressum & Datenschutz
+========================================================== */
+.legal-hero {
+  padding: clamp(140px, 20vw, 220px) 0 clamp(3rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.legal-hero .label {
+  color: var(--muted-grey);
+}
+
+.legal-hero .headline-section {
+  margin-bottom: 1rem;
+}
+
+.legal-hero-meta {
+  font-size: 13px;
+  color: var(--muted-grey);
+  letter-spacing: 0.02em;
+}
+
+.legal-content {
+  padding: clamp(3rem, 6vw, 6rem) 0 clamp(5rem, 9vw, 8rem);
+}
+
+.legal-content-inner {
+  max-width: 760px;
+}
+
+.legal-block {
+  padding: clamp(2.4rem, 4vw, 3.4rem) 0;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.legal-block:first-child {
+  padding-top: 0;
+}
+
+.legal-block:last-child {
+  border-bottom: none;
+}
+
+.legal-block-num {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--dark-cherry-bright);
+  margin-bottom: 0.9rem;
+}
+
+.legal-block h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(24px, 2.6vw, 34px);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--warm-ivory);
+  margin-bottom: 1.4rem;
+}
+
+.legal-block h3 {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  color: var(--warm-ivory);
+  margin: 1.6rem 0 0.6rem;
+}
+
+.legal-block p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--muted-grey);
+  margin-bottom: 1.1rem;
+  max-width: 62ch;
+}
+
+.legal-block p:last-child {
+  margin-bottom: 0;
+}
+
+.legal-block p strong,
+.legal-block strong {
+  color: var(--warm-ivory);
+  font-weight: 600;
+}
+
+.legal-block ul {
+  margin: 0.4rem 0 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.legal-block ul:last-child {
+  margin-bottom: 0;
+}
+
+.legal-block li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted-grey);
+  max-width: 60ch;
+}
+
+.legal-block li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 5px;
+  height: 5px;
+  background-color: var(--dark-cherry-bright);
+}
+
+.legal-address {
+  font-style: normal;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--warm-ivory);
+  margin-bottom: 1.1rem;
+}
+
+.legal-address a {
+  color: var(--warm-ivory);
+  border-bottom: 1px solid var(--border-dark);
+  transition: border-color 0.25s ease;
+}
+
+.legal-address a:hover {
+  border-color: var(--dark-cherry-bright);
+}
+
+.legal-block a.legal-link {
+  color: var(--warm-ivory);
+  border-bottom: 1px solid var(--border-dark);
+  transition: border-color 0.25s ease;
+}
+
+.legal-block a.legal-link:hover {
+  border-color: var(--dark-cherry-bright);
+}
+
+/* Standalone legal pages don't run the scroll-reveal GSAP timeline that
+   normally lifts this element into view, so it must render already visible. */
+.legal-page .footer-huge-logo {
+  transform: none;
 }

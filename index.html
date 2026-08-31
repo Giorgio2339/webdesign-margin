@@ -2,14 +2,34 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MARGIN. | Webdesign & Development Studio</title>
-  <meta name="description" content="Websites, die Unternehmen online so zeigen, wie sie wirklich sind — individuell konzipiert, kein Template. Webdesign & Development von MARGIN." />
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Inter+Tight:wght@900&display=swap" rel="stylesheet">
+  <title>Webdesign &amp; Development für Unternehmen | MARGIN.</title>
+  <meta name="description" content="Individuelles Webdesign und Development für Unternehmen: Websites, die Vertrauen schaffen und Kunden gewinnen. Kein Template. Projekte ab 690 €." />
+  <link rel="canonical" href="https://margin.studio/" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="theme-color" content="#0D0D0C" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="MARGIN." />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:url" content="https://margin.studio/" />
+  <meta property="og:title" content="Webdesign &amp; Development für Unternehmen | MARGIN." />
+  <meta property="og:description" content="Individuelles Webdesign und Development für Unternehmen: Websites, die Vertrauen schaffen und Kunden gewinnen. Kein Template." />
+  <meta property="og:image" content="https://margin.studio/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="MARGIN. — Web Design &amp; Development Studio" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Webdesign &amp; Development für Unternehmen | MARGIN." />
+  <meta name="twitter:description" content="Individuelles Webdesign und Development für Unternehmen: Websites, die Vertrauen schaffen und Kunden gewinnen." />
+  <meta name="twitter:image" content="https://margin.studio/og-image.png" />
+
+  <!-- Fonts are self-hosted (see src/style.css); only the two faces that paint
+       above the fold are preloaded so the hero never swaps late. -->
+  <link rel="preload" href="/fonts/instrument-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   
   <link rel="stylesheet" href="/src/style.css" />
 
@@ -20,8 +40,57 @@
       document.documentElement.classList.add('js-motion')
     }
   </script>
+
+  <!-- Structured data. Every field here is verifiable from the Impressum —
+       no invented reviews, ratings, clients, staff, awards or opening hours. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://margin.studio/#studio",
+        "name": "MARGIN.",
+        "description": "Studio für individuelles Webdesign und Development. Konzeption, Gestaltung und Entwicklung von Websites für Unternehmen.",
+        "url": "https://margin.studio/",
+        "logo": "https://margin.studio/favicon.png",
+        "image": "https://margin.studio/og-image.png",
+        "telephone": "+4915679681426",
+        "founder": { "@type": "Person", "name": "Giorgi Bantsadze" },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Zschopauer Str. 142",
+          "postalCode": "09126",
+          "addressLocality": "Chemnitz",
+          "addressCountry": "DE"
+        },
+        "areaServed": { "@type": "Country", "name": "Deutschland" },
+        "priceRange": "ab 690 €",
+        "knowsLanguage": ["de", "en"],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Leistungen",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Design", "description": "Eine Website, die aussieht und sich anfühlt wie deine Marke — und Besucher in Kunden verwandelt." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Development", "description": "Schnell, responsiv, sauber gebaut. Performance, die Google belohnt und Besucher auf der Seite hält." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital Direction", "description": "Ein Auftritt, der überall nach dir aussieht — von der Website bis zum Social-Media-Profil." } }
+          ]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://margin.studio/#website",
+        "url": "https://margin.studio/",
+        "name": "MARGIN.",
+        "inLanguage": "de-DE",
+        "publisher": { "@id": "https://margin.studio/#studio" }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#smooth-wrapper">Zum Inhalt springen</a>
 
   <!-- LOADER -->
   <div class="loader" id="loader">
@@ -43,17 +112,31 @@
         <span class="logo-title">MARGIN<span class="dot">.</span></span>
         <span class="logo-subtitle">WEB DESIGN & DEVELOPMENT</span>
       </a>
-      <nav class="nav">
-        <a href="#work">PROJEKTE</a>
-        <a href="#capabilities">LEISTUNGEN</a>
-        <a href="#process">ABLAUF</a>
-        <a href="#pricing">PREISE</a>
-        <a href="#contact" class="action">PROJEKT STARTEN ↗</a>
-      </nav>
-      <button class="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false">
-        <span></span>
-        <span></span>
-      </button>
+      <!-- Grouped so justify-content: space-between on .header-inner only
+           ever balances two things (logo vs. this cluster) regardless of
+           which of nav / call / toggle happens to be visible at a given
+           breakpoint. -->
+      <div class="header-right">
+        <nav class="nav">
+          <a href="#work">PROJEKTE</a>
+          <a href="#capabilities">LEISTUNGEN</a>
+          <a href="#process">ABLAUF</a>
+          <a href="#pricing">PREISE</a>
+          <a href="#contact" class="action">PROJEKT STARTEN ↗</a>
+        </nav>
+        <!-- Outside .nav on purpose: stays reachable even when the mobile
+             menu is collapsed behind the hamburger. -->
+        <a href="tel:+4915679681426" class="header-call" aria-label="MARGIN. anrufen: +49 156 79681426">
+          <svg class="header-call-icon" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M3.5 2.5h2.2l1 2.6-1.4 1.3c.6 1.5 1.8 2.7 3.3 3.3l1.3-1.4 2.6 1v2.2c0 .6-.5 1-1 1-5 0-9-4-9-9 0-.5.4-1 1-1z"/>
+          </svg>
+          <span class="header-call-text">+49 156 79681426</span>
+        </a>
+        <button class="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -245,13 +328,10 @@
                   <h3 class="project-title">JT Smash Burger</h3>
                   <span class="project-category">WEB DESIGN / DEVELOPMENT</span>
                 </div>
-                <div class="project-meta-group">
-                  <a href="#contact" class="project-link">PROJEKT ANSEHEN ↗</a>
-                </div>
               </div>
               <div class="project-visual-wrapper">
                 <div class="project-visual">
-                  <img src="/media/Smash Burger.png" alt="JT Smash Burger — Web Design & Development" loading="lazy" />
+                  <img src="/media/jt-smash-burger.webp" width="1711" height="919" alt="Startseite der von MARGIN. gestalteten Website für JT Smash Burger" loading="lazy" decoding="async" />
                 </div>
               </div>
             </article>
@@ -268,13 +348,12 @@
                   <div class="project-asym-meta">
                     <span class="project-category">WEB DESIGN / DEVELOPMENT</span>
                   </div>
-                  <a href="#contact" class="project-link">PROJEKT ANSEHEN ↗</a>
                 </div>
               </div>
               <div class="project-visual-col span-8">
                 <div class="project-visual-wrapper">
                   <div class="project-visual">
-                    <img src="/media/Tamagutchi.png" alt="Tamagutchi Sushi Wok — Web Design & Development" loading="lazy" />
+                    <img src="/media/tamagutchi.webp" width="1800" height="1255" alt="Website des Sushi- und Wok-Restaurants Tamagutchi, gestaltet von MARGIN." loading="lazy" decoding="async" />
                   </div>
                 </div>
               </div>
@@ -284,16 +363,13 @@
             <article class="project project-cinematic">
               <div class="project-visual-wrapper">
                 <div class="project-visual">
-                  <img src="/media/Bloom Boom.png" alt="Bloom Boom — Web Design" loading="lazy" />
+                  <img src="/media/bloom-boom.webp" width="2000" height="911" alt="Website des Getränke-Cafés Bloom Boom, gestaltet von MARGIN." loading="lazy" decoding="async" />
                 </div>
               </div>
               <div class="project-info cinematic-info">
                 <div class="project-title-group">
                   <h3 class="project-title">Bloom Boom</h3>
                   <span class="project-category">WEB DESIGN</span>
-                </div>
-                <div class="project-meta-group">
-                  <a href="#contact" class="project-link">PROJEKT ANSEHEN ↗</a>
                 </div>
               </div>
             </article>
@@ -325,7 +401,7 @@
             <div class="manifesto-visual-col span-7">
               <div class="manifesto-hand-interaction" id="manifesto-hand-interaction">
                 <canvas id="manifesto-dots-canvas"></canvas>
-                <img src="/media/cherry/margin-hand-sculpt.png" class="manifesto-real-hand" id="manifesto-real-hand" alt="MARGIN. Sculptural Hand">
+                <img src="/media/cherry/margin-hand-sculpt.webp" class="manifesto-real-hand" id="manifesto-real-hand" width="1295" height="1214" alt="" aria-hidden="true">
               </div>
             </div>
           </div>
@@ -479,16 +555,16 @@
                       Wir verstehen erst dein Business, bevor wir anfangen zu gestalten. Wer sind deine Kunden? Was macht dich anders? Das Fundament für alles, was kommt.
                     </p>
                     <div class="process-step-tags">
-                      <span>Analyse</span>
-                      <span>Zielgruppe</span>
-                      <span>Positionierung</span>
+                      <button type="button" class="process-tag">Analyse</button>
+                      <button type="button" class="process-tag">Zielgruppe</button>
+                      <button type="button" class="process-tag">Positionierung</button>
                     </div>
                   </div>
                   <div class="process-board-wrap">
                     <div class="process-board" data-board="01">
                       <div class="board-frame">
                         <div class="board-inner">
-                          <img src="/process/01-discover.jpg" alt="MARGIN. Process — 01 Discover" class="board-img" loading="eager" decoding="async" />
+                          <img src="/process/01-discover.webp" width="1122" height="1402" alt="Recherche- und Positionierungsphase eines MARGIN.-Projekts" class="board-img" loading="eager" decoding="async" />
                         </div>
                         <span class="board-cross board-cross-tl">+</span>
                         <span class="board-cross board-cross-tr">+</span>
@@ -508,7 +584,7 @@
                     <div class="process-board" data-board="02">
                       <div class="board-frame">
                         <div class="board-inner">
-                          <img src="/process/02-direction.jpg" alt="MARGIN. Process — 02 Direction" class="board-img" loading="eager" decoding="async" />
+                          <img src="/process/02-direction.webp" width="1122" height="1402" alt="Art Direction mit Farbwelten und Typografie eines MARGIN.-Projekts" class="board-img" loading="lazy" decoding="async" />
                         </div>
                         <span class="board-cross board-cross-tl">+</span>
                         <span class="board-cross board-cross-tr">+</span>
@@ -528,9 +604,9 @@
                       Farben, Typografie, Bildsprache — alles wird auf deine Marke zugeschnitten. Hier entsteht der Look, der dich sofort von der Konkurrenz abhebt.
                     </p>
                     <div class="process-step-tags">
-                      <span>Art Direction</span>
-                      <span>Tonalität</span>
-                      <span>Design-DNA</span>
+                      <button type="button" class="process-tag">Art Direction</button>
+                      <button type="button" class="process-tag">Tonalität</button>
+                      <button type="button" class="process-tag">Design-DNA</button>
                     </div>
                   </div>
                 </div>
@@ -549,16 +625,16 @@
                       Struktur, Aufbau und Nutzerführung — so, dass Besucher genau dort landen, wo du sie haben willst. Kein Raten, keine Sackgassen.
                     </p>
                     <div class="process-step-tags">
-                      <span>Layout</span>
-                      <span>Nutzerführung</span>
-                      <span>Interface</span>
+                      <button type="button" class="process-tag">Layout</button>
+                      <button type="button" class="process-tag">Nutzerführung</button>
+                      <button type="button" class="process-tag">Interface</button>
                     </div>
                   </div>
                   <div class="process-board-wrap">
                     <div class="process-board" data-board="03">
                       <div class="board-frame">
                         <div class="board-inner">
-                          <img src="/process/03-design.jpg" alt="MARGIN. Process — 03 Design" class="board-img" loading="eager" decoding="async" />
+                          <img src="/process/03-design.webp" width="1122" height="1402" alt="Layout- und Interface-Entwürfe eines MARGIN.-Projekts" class="board-img" loading="lazy" decoding="async" />
                         </div>
                         <!-- Slices for subtle layer shift transition into BUILD -->
                         <div class="board-layer-deconstruct" aria-hidden="true">
@@ -583,7 +659,7 @@
                     <div class="process-board" data-board="04">
                       <div class="board-frame">
                         <div class="board-inner">
-                          <img src="/process/04-build.jpg" alt="MARGIN. Process — 04 Build" class="board-img" loading="eager" decoding="async" />
+                          <img src="/process/04-build.webp" width="1122" height="1402" alt="Entwicklung und Code-Architektur eines MARGIN.-Projekts" class="board-img" loading="lazy" decoding="async" />
                         </div>
                         <span class="board-cross board-cross-tl">+</span>
                         <span class="board-cross board-cross-tr">+</span>
@@ -603,9 +679,9 @@
                       Sauberer Code, flüssige Animationen, perfekt auf jedem Gerät. Deine Website lädt schnell, fühlt sich hochwertig an und funktioniert überall.
                     </p>
                     <div class="process-step-tags">
-                      <span>Entwicklung</span>
-                      <span>Motion</span>
-                      <span>Responsive</span>
+                      <button type="button" class="process-tag">Entwicklung</button>
+                      <button type="button" class="process-tag">Motion</button>
+                      <button type="button" class="process-tag">Responsive</button>
                     </div>
                   </div>
                 </div>
@@ -628,7 +704,7 @@
                     <div class="process-board board-finale" data-board="05">
                       <div class="board-frame">
                         <div class="board-inner">
-                          <img src="/process/05-launch.jpg" alt="MARGIN. Process — 05 Launch" class="board-img" loading="eager" decoding="async" />
+                          <img src="/process/05-launch.webp" width="1122" height="1402" alt="Fertige Website kurz vor dem Go-Live" class="board-img" loading="lazy" decoding="async" />
                         </div>
                         <span class="board-cross board-cross-tl">+</span>
                         <span class="board-cross board-cross-tr">+</span>
@@ -650,7 +726,7 @@
       </section>
 
       <!-- SECTION 06 — PRICING / ENGAGEMENT (Warm Ivory) -->
-      <section class="section section-pricing" id="pricing" style="display: none;">
+      <section class="section section-pricing" id="pricing">
         <div class="container">
           <div class="section-header">
             <span class="label">ENGAGEMENT</span>
@@ -658,9 +734,10 @@
               <div class="mask-wrap"><span>Jedes Projekt beginnt</span></div>
               <div class="mask-wrap"><span>mit dem richtigen Umfang.</span></div>
             </h2>
-            <p class="pricing-lead">Umfang, Funktion und visuelle Richtung werden individuell auf das Unternehmen abgestimmt.</p>
+            <p class="pricing-lead">Wir definieren Umfang, Funktion und visuelle Richtung individuell auf dein Unternehmen abgestimmt — für Ergebnisse mit Wirkung.</p>
+            <span class="pricing-info-line">— PROJEKTE STARTEN AB 690 € · UMFANG UND PREIS WERDEN INDIVIDUELL KALKULIERT.</span>
           </div>
-          
+
           <div class="pricing-list" id="pricing-list-container">
             <!-- Rows injected by JS -->
           </div>
@@ -705,7 +782,11 @@
 
             <form id="project-form" class="project-form conversational-form" novalidate>
               <input type="hidden" name="access_key" id="web3forms-key" value="">
-              <input type="hidden" name="subject" value="Neue Projektanfrage über MARGIN. Website">
+              <input type="hidden" name="subject" value="Neue Website-Anfrage über MARGIN.">
+              <input type="hidden" name="from_name" value="MARGIN. Website">
+              <!-- Honeypot: Web3Forms discards any submission where this is filled.
+                   Hidden from sight and from assistive tech, never tab-reachable. -->
+              <input type="checkbox" name="botcheck" class="form-botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
 
               <div class="form-steps-container">
                 
@@ -716,7 +797,7 @@
                     <h3 class="form-step-question">Wie heißt dein Unternehmen?</h3>
                     <div class="form-field-group">
                       <label for="company" class="sr-only">Name deines Unternehmens</label>
-                      <input type="text" id="company" name="company" class="form-input-line" placeholder="z. B. Studio Nord, Acme AG..." required autocomplete="organization">
+                      <input type="text" id="company" name="company" class="form-input-line" placeholder="z. B. Studio Nord, Acme AG..." required autocomplete="organization" maxlength="120">
                       <span class="field-line-highlight"></span>
                     </div>
                   </div>
@@ -742,17 +823,21 @@
                         <span class="choice-dot"></span>
                         <span class="choice-title">Neue Website</span>
                       </button>
-                      <button type="button" class="text-choice-item" data-value="Relaunch & Redesign">
+                      <button type="button" class="text-choice-item" data-value="Website-Redesign">
                         <span class="choice-dot"></span>
-                        <span class="choice-title">Relaunch & Neupositionierung</span>
+                        <span class="choice-title">Website-Redesign</span>
                       </button>
-                      <button type="button" class="text-choice-item" data-value="Design & Branding">
+                      <button type="button" class="text-choice-item" data-value="Website & Branding">
                         <span class="choice-dot"></span>
-                        <span class="choice-title">Design & Corporate Branding</span>
+                        <span class="choice-title">Website & Branding</span>
                       </button>
-                      <button type="button" class="text-choice-item" data-value="E-Commerce / Shop">
+                      <button type="button" class="text-choice-item" data-value="Landingpage / Kampagnenseite">
                         <span class="choice-dot"></span>
-                        <span class="choice-title">E-Commerce & Online-Shop</span>
+                        <span class="choice-title">Landingpage / Kampagnenseite</span>
+                      </button>
+                      <button type="button" class="text-choice-item" data-value="Etwas anderes">
+                        <span class="choice-dot"></span>
+                        <span class="choice-title">Etwas anderes</span>
                       </button>
                     </div>
                     <input type="hidden" name="project-type" id="project-type-input" required>
@@ -776,23 +861,23 @@
                 <div class="form-step" id="step-3" data-step-index="3" style="display:none;">
                   <div class="form-step-content">
                     <span class="form-step-badge">SCHRITT 03 / 04</span>
-                    <h3 class="form-step-question">Welcher Rahmen ist realistisch?</h3>
+                    <h3 class="form-step-question">Welcher Rahmen passt zu deinem Projekt?</h3>
                     <div class="text-choice-group" data-input-id="budget-input">
-                      <button type="button" class="text-choice-item" data-value="Unter 3.000 €">
+                      <button type="button" class="text-choice-item" data-value="Bis 1.000 €">
                         <span class="choice-dot"></span>
-                        <span class="choice-title">Unter 3.000 €</span>
+                        <span class="choice-title">Bis 1.000 €</span>
                       </button>
-                      <button type="button" class="text-choice-item" data-value="3.000–6.000 €">
+                      <button type="button" class="text-choice-item" data-value="1.000–2.000 €">
                         <span class="choice-dot"></span>
-                        <span class="choice-title">3.000 – 6.000 €</span>
+                        <span class="choice-title">1.000 – 2.000 €</span>
                       </button>
-                      <button type="button" class="text-choice-item" data-value="6.000–12.000 €">
+                      <button type="button" class="text-choice-item" data-value="2.000–4.000 €">
                         <span class="choice-dot"></span>
-                        <span class="choice-title">6.000 – 12.000 €</span>
+                        <span class="choice-title">2.000 – 4.000 €</span>
                       </button>
-                      <button type="button" class="text-choice-item" data-value="12.000 €+">
+                      <button type="button" class="text-choice-item" data-value="Ab 4.000 €">
                         <span class="choice-dot"></span>
-                        <span class="choice-title">12.000 €+</span>
+                        <span class="choice-title">Ab 4.000 €</span>
                       </button>
                       <button type="button" class="text-choice-item" data-value="Noch offen">
                         <span class="choice-dot"></span>
@@ -825,19 +910,19 @@
                     <div class="form-fields-stack">
                       <div class="form-field-group">
                         <label for="name" class="field-sublabel">DEIN NAME</label>
-                        <input type="text" id="name" name="name" class="form-input-line" placeholder="Vor- und Nachname" required autocomplete="name">
+                        <input type="text" id="name" name="name" class="form-input-line" placeholder="Vor- und Nachname" required autocomplete="name" maxlength="80">
                         <span class="field-line-highlight"></span>
                       </div>
                       
                       <div class="form-field-group">
                         <label for="email" class="field-sublabel">DEINE E-MAIL</label>
-                        <input type="email" id="email" name="email" class="form-input-line" placeholder="hallo@unternehmen.de" required autocomplete="email">
+                        <input type="email" id="email" name="email" class="form-input-line" placeholder="hallo@unternehmen.de" required autocomplete="email" maxlength="160">
                         <span class="field-line-highlight"></span>
                       </div>
 
                       <div class="form-field-group">
                         <label for="goal" class="field-sublabel">PROJEKT-NOTIZ <span class="label-optional">(optional)</span></label>
-                        <input type="text" id="goal" name="goal" class="form-input-line" placeholder="Worum geht es kurz?">
+                        <input type="text" id="goal" name="message" class="form-input-line" placeholder="Worum geht es kurz?" maxlength="300">
                         <span class="field-line-highlight"></span>
                       </div>
                     </div>
@@ -854,6 +939,7 @@
                         <span class="btn-arrow" aria-hidden="true">→</span>
                       </button>
                     </div>
+                    <p class="form-error-note" id="form-error-note" role="alert" hidden>Beim Senden ist etwas schiefgelaufen. Bitte versuche es erneut.</p>
                   </div>
                 </div>
 
@@ -861,9 +947,12 @@
             </form>
 
             <div class="form-success" id="form-success" style="display: none;">
-              <div class="success-dot"></div>
-              <h3 class="headline-medium">Anfrage erhalten.</h3>
-              <p class="success-desc">Wir melden uns innerhalb von 24 Stunden persönlich bei dir — mit einer ehrlichen Einschätzung zu deinem Projekt.</p>
+              <span class="success-tag">✓ ANFRAGE GESENDET</span>
+              <h3 class="headline-medium success-headline">
+                <span class="mask-wrap"><span>Anfrage erhalten.</span></span>
+              </h3>
+              <p class="success-desc">Danke für deine Anfrage. Wir schauen uns dein Projekt persönlich an und melden uns innerhalb von 24 Stunden bei dir.</p>
+              <span class="success-note">Du kannst diese Seite jetzt schließen.</span>
             </div>
           </div>
         </div>
@@ -895,8 +984,8 @@
               </div>
               <div class="footer-list">
                 <span class="footer-label">LEGAL</span>
-                <a href="#">Impressum</a>
-                <a href="#">Datenschutz</a>
+                <a href="/impressum.html">Impressum</a>
+                <a href="/datenschutz.html">Datenschutz</a>
               </div>
             </div>
           </div>

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Legal pages carry a noindex meta tag; they stay crawlable so the
+# links inside them are still followed.
+
+Sitemap: https://margin.studio/sitemap.xml

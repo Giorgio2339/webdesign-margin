@@ -23,26 +23,38 @@ if (import.meta.env.DEV) window.__margin = { gsap, ScrollTrigger }
 
 const CONFIG = {
   showPricing: true,
-  WEB3FORMS_ACCESS_KEY: '', // Add key here for live form
+  // Web3Forms access keys are public by design — they only identify the
+  // receiving inbox, the same as a mailto: address would.
+  WEB3FORMS_ACCESS_KEY: '2fc7beef-eef3-4b7b-9788-3adb35170929',
   
   pricing: [
     {
       id: 'essential',
+      num: '01',
       title: 'ESSENTIAL',
       desc: 'Ein fokussierter Webauftritt mit klarer Struktur und starkem Design. Ohne unnötigen Overhead.',
-      price: 'AB 690 €'
+      tags: ['ONEPAGE', 'RESPONSIVE', 'MOTION']
     },
     {
       id: 'business',
+      num: '02',
       title: 'BUSINESS',
       desc: 'Mehr Umfang, mehr Seiten — eine spürbar stärkere digitale Positionierung.',
-      price: 'AB 1.290 €'
+      tags: ['MEHRSEITIG', 'STRATEGIE', 'INTERAKTION']
     },
     {
       id: 'signature',
+      num: '03',
       title: 'SIGNATURE',
       desc: 'Individuelle Art Direction, ausgefeilte Interaktionen und ein digitaler Auftritt, der niemandem sonst gehört.',
-      price: 'AB 2.490 €'
+      tags: ['ART DIRECTION', 'MOTION', 'CUSTOM']
+    },
+    {
+      id: 'custom',
+      num: '04',
+      title: 'CUSTOM',
+      desc: 'Maßgeschneiderte Lösungen für besondere Anforderungen und individuelle Ziele.',
+      cta: 'INDIVIDUELL ANFRAGEN'
     }
   ],
 
@@ -223,36 +235,38 @@ function buildGrid(group, { width, height, step, className = '' }) {
 ========================================= */
 
 function hydrateDOM() {
-  // 1. Preload Process Editorial Board Images
-  const processImages = [
-    '/process/01-discover.jpg',
-    '/process/02-direction.jpg',
-    '/process/03-design.jpg',
-    '/process/04-build.jpg',
-    '/process/05-launch.jpg'
-  ]
-  processImages.forEach(src => {
-    const img = new Image()
-    img.src = src
-  })
+  /* The process boards used to be force-fetched here on every load. The
+     markup now carries loading/decoding hints instead, so the browser
+     fetches the first board up front and the rest as the pinned section
+     approaches — no duplicate requests competing with first paint. */
 
-  // 2. Hydrate Pricing
+  // Hydrate Pricing
   const pricingSection = document.getElementById('pricing')
   const pricingContainer = document.getElementById('pricing-list-container')
   
   if (pricingSection && pricingContainer) {
+    // The section is visible in the markup; JS only ever hides it. Starting
+    // hidden would mean no pricing without JS, plus a shift once JS lands.
     if (!CONFIG.showPricing) {
       pricingSection.style.display = 'none'
     } else {
-      pricingSection.style.display = 'block'
       CONFIG.pricing.forEach(pkg => {
-        const row = document.createElement('div')
+        const row = document.createElement(pkg.cta ? 'a' : 'div')
         row.className = 'pricing-row'
+        if (pkg.cta) row.href = '#contact'
+
+        const aside = pkg.cta
+          ? `<span class="pricing-row-cta">${pkg.cta}<i class="pricing-cta-arrow" aria-hidden="true">↗</i></span>`
+          : `<span class="pricing-row-tags">${pkg.tags
+              .map(t => `<span class="pricing-tag">${t}</span>`)
+              .join('<i class="pricing-tag-sep" aria-hidden="true">·</i>')}</span>`
+
         row.innerHTML = `
-          <div class="pricing-row-hover"></div>
+          <span class="pricing-row-num">${pkg.num}</span>
           <h3 class="pricing-row-title">${pkg.title}</h3>
           <p class="pricing-row-desc">${pkg.desc}</p>
-          <span class="pricing-row-price">${pkg.price}</span>
+          ${aside}
+          <span class="pricing-row-rule" aria-hidden="true"></span>
         `
         pricingContainer.appendChild(row)
       })
@@ -421,34 +435,85 @@ const setupForm = () => {
   })
 
   // Submit Handler
+  let submitting = false
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault()
+    if (submitting) return
+
     const submitBtn = form.querySelector('.form-btn-submit')
     const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null
-    
+    const errorNote = document.getElementById('form-error-note')
+    const IDLE_LABEL = 'Projekt anfragen'
+
+    // Errors surface in the note under the button; the button itself always
+    // returns to its normal label so it never becomes an error display.
+    const fail = (msg) => {
+      submitting = false
+      if (btnText) btnText.textContent = IDLE_LABEL
+      if (submitBtn) submitBtn.disabled = false
+      if (errorNote) {
+        errorNote.textContent = msg
+        errorNote.hidden = false
+      }
+    }
+    if (errorNote) errorNote.hidden = true
+
+    // A bot that filled the honeypot gets the success screen and nothing else.
+    if (form.querySelector('.form-botcheck')?.checked) {
+      showFormSuccess()
+      return
+    }
+
+    // The form is novalidate (the browser bubbles would fight the step UI),
+    // so the final step is validated here before anything leaves the page.
+    const name = form.querySelector('#name')
+    const email = form.querySelector('#email')
+    const flag = (field) => {
+      field.focus()
+      field.classList.add('field-invalid')
+      setTimeout(() => field.classList.remove('field-invalid'), 1200)
+    }
+    if (!name.value.trim()) return flag(name)
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())) return flag(email)
+
+    submitting = true
     if (btnText) btnText.textContent = 'Wird gesendet...'
     if (submitBtn) submitBtn.disabled = true
 
-    if (CONFIG.WEB3FORMS_ACCESS_KEY) {
-      try {
-        const formData = new FormData(form)
-        const response = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          body: formData
-        })
-        if (response.ok) {
-          showFormSuccess()
-        } else {
-          throw new Error('Submit failed')
-        }
-      } catch (err) {
-        console.error(err)
-        if (btnText) btnText.textContent = 'Fehler — erneut versuchen'
-        if (submitBtn) submitBtn.disabled = false
-      }
-    } else {
-      // Presentation fallback
-      setTimeout(showFormSuccess, 800)
+    if (!CONFIG.WEB3FORMS_ACCESS_KEY) {
+      // No key configured — nothing is delivered, so say so rather than
+      // showing a success screen for a message that was never sent.
+      fail('Formular ist noch nicht konfiguriert.')
+      return
+    }
+
+    // Without a deadline a hung request leaves the button stuck on "Wird gesendet".
+    const abort = new AbortController()
+    const timer = setTimeout(() => abort.abort(), 15000)
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(form),
+        signal: abort.signal
+      })
+      // Web3Forms answers 200 with { success: false } for a rejected key or
+      // a caught honeypot, so the body decides — not the status code alone.
+      const data = await response.json().catch(() => null)
+      if (!response.ok || !data?.success) throw new Error(data?.message || `HTTP ${response.status}`)
+
+      showFormSuccess()
+      // Reset only after a confirmed delivery, so a retry keeps the answers.
+      form.reset()
+      form.querySelectorAll('.text-choice-item.selected').forEach(c => c.classList.remove('selected'))
+      submitting = false
+      if (btnText) btnText.textContent = IDLE_LABEL
+    } catch (err) {
+      fail(err.name === 'AbortError'
+        ? 'Zeitüberschreitung — bitte versuche es erneut.'
+        : 'Beim Senden ist etwas schiefgelaufen. Bitte versuche es erneut.')
+    } finally {
+      clearTimeout(timer)
     }
   })
 }
@@ -456,7 +521,7 @@ const setupForm = () => {
 const showFormSuccess = () => {
   const form = document.getElementById('project-form')
   const successBox = document.getElementById('form-success')
-  
+
   gsap.to(form, {
     opacity: 0,
     y: -20,
@@ -465,10 +530,20 @@ const showFormSuccess = () => {
     onComplete: () => {
       form.style.display = 'none'
       successBox.style.display = 'flex'
-      gsap.fromTo(successBox, 
-        { opacity: 0, scale: 0.95 },
-        { opacity: 1, scale: 1, duration: 0.8, ease: 'power3.out' }
-      )
+
+      const tag = successBox.querySelector('.success-tag')
+      const maskSpan = successBox.querySelector('.success-headline .mask-wrap span')
+      const desc = successBox.querySelector('.success-desc')
+      const note = successBox.querySelector('.success-note')
+
+      gsap.set([tag, desc, note], { opacity: 0, y: 10 })
+      gsap.set(maskSpan, { yPercent: 115 })
+
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+      tl.to(tag, { opacity: 1, y: 0, duration: 0.5 })
+        .to(maskSpan, { yPercent: 0, duration: 0.8, ease: 'power4.out' }, '-=0.25')
+        .to(desc, { opacity: 1, y: 0, duration: 0.6 }, '-=0.35')
+        .to(note, { opacity: 1, y: 0, duration: 0.6 }, '-=0.35')
     }
   })
 }
@@ -508,6 +583,11 @@ if (mobileToggle && mobileMenu) {
   const toggleMenu = () => {
     const isActive = mobileMenu.classList.toggle('active')
     mobileToggle.setAttribute('aria-expanded', isActive)
+    // The panel keeps focusable links, so aria-hidden has to track the open
+    // state — leaving it on would hide them from screen readers while they
+    // stay tabbable, and inert keeps them out of the tab order when closed.
+    mobileMenu.setAttribute('aria-hidden', String(!isActive))
+    mobileMenu.inert = !isActive
     const spans = mobileToggle.querySelectorAll('span')
     if (isActive) {
       spans[0].style.transform = 'translateY(3.5px) rotate(45deg)'
@@ -516,10 +596,18 @@ if (mobileToggle && mobileMenu) {
       spans.forEach(s => s.style.transform = 'none')
     }
   }
+  mobileMenu.inert = true
   mobileToggle.addEventListener('click', toggleMenu)
   document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
     if(mobileMenu.classList.contains('active')) toggleMenu()
   }))
+  // Escape closes it, as a dialog-like overlay should.
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+      toggleMenu()
+      mobileToggle.focus()
+    }
+  })
 }
 
 // Capabilities row hover — dims siblings, nudges the title. The instrument
@@ -862,7 +950,7 @@ function initMotion() {
             l.setAttribute('y1', ret.y.toFixed(1))
             l.setAttribute('x2', nearP[i].x.toFixed(1))
             l.setAttribute('y2', nearP[i].y.toFixed(1))
-            l.setAttribute('opacity', (0.5 * (1 - nearD[i] / 230)).toFixed(3))
+            l.setAttribute('opacity', (0.85 * (1 - nearD[i] / 230)).toFixed(3))
           }
         } else if (linksVisible) {
           // Only clear once on the transition, not on every idle frame
@@ -1218,6 +1306,45 @@ function initMotion() {
 
     words.forEach(entry => entry.row.addEventListener('mouseenter', () => activate(entry)))
     section.querySelector('.services-list')?.addEventListener('mouseleave', deactivate)
+
+    /* Touch has nothing equivalent to mouseenter to drive this, so on
+       devices that can't hover the instrument steps through each service
+       on its own — same activate() the hover path uses, just on a timer.
+       Paused off-screen so it isn't animating SVG text somewhere no one
+       can see it. */
+    if (!window.matchMedia('(hover: hover)').matches && !prefersReducedMotion) {
+      let cycleIndex = 0
+      let cycleTimer = null
+
+      const setActiveRow = (activeRow) => {
+        rows.forEach(r => {
+          const isActive = r === activeRow
+          r.style.opacity = isActive ? '1' : '0.4'
+          const title = r.querySelector('.service-title')
+          if (title) title.style.transform = isActive ? 'translateX(8px)' : 'none'
+        })
+      }
+
+      const stepCycle = () => {
+        const entry = words[cycleIndex]
+        activate(entry)
+        setActiveRow(entry.row)
+        cycleIndex = (cycleIndex + 1) % words.length
+      }
+
+      const startCycle = () => {
+        if (cycleTimer) return
+        stepCycle()
+        cycleTimer = setInterval(stepCycle, 3600)
+      }
+      const stopCycle = () => {
+        if (cycleTimer) { clearInterval(cycleTimer); cycleTimer = null }
+      }
+
+      new IntersectionObserver((entries) => {
+        entries.forEach(e => { e.isIntersecting ? startCycle() : stopCycle() })
+      }, { threshold: 0.4 }).observe(section)
+    }
 
     if (import.meta.env.DEV) {
       window.__margin.cap = { words, activate, deactivate }
@@ -1653,6 +1780,44 @@ function initMotion() {
         }
       })
     })
+
+    // Process tags: a subtle click affordance rather than dead labels — the
+    // tapped tag marks itself selected and pings the drafting-paper grid
+    // behind it, echoing the construction-line language used elsewhere in
+    // the instrument system.
+    document.querySelectorAll('.process-tag').forEach(tag => {
+      tag.addEventListener('click', () => {
+        const group = tag.closest('.process-step-tags')
+        group?.querySelectorAll('.process-tag').forEach(t => t.classList.toggle('is-selected', t === tag))
+
+        if (prefersReducedMotion) return
+
+        const bgGrid = document.querySelector('.process-bg-grid')
+        if (!bgGrid) return
+
+        const tagRect = tag.getBoundingClientRect()
+        const gridRect = bgGrid.getBoundingClientRect()
+
+        const ping = document.createElement('div')
+        ping.className = 'process-tag-ping'
+        ping.style.left = `${tagRect.left + tagRect.width / 2 - gridRect.left}px`
+        ping.style.top = `${tagRect.top + tagRect.height / 2 - gridRect.top}px`
+        bgGrid.appendChild(ping)
+
+        gsap.fromTo(ping,
+          { opacity: 0, scale: 0.3 },
+          {
+            opacity: 1, scale: 1, duration: 0.5, ease: 'power2.out',
+            onComplete: () => {
+              gsap.to(ping, {
+                opacity: 0, duration: 0.6, ease: 'power2.in', delay: 0.15,
+                onComplete: () => ping.remove()
+              })
+            }
+          }
+        )
+      })
+    })
   }
 
   // 6. Manifesto Kinetic Typography & Hand Interaction
@@ -1736,15 +1901,29 @@ function initMotion() {
   }
 
   // 7. Pricing Editorial Entrance
-  document.querySelectorAll('.pricing-row').forEach((row, i) => {
-    gsap.fromTo(row,
-      { opacity: 0, x: -15 },
+  const pricingRows = document.querySelectorAll('.pricing-row')
+  if (pricingRows.length) {
+    gsap.fromTo(pricingRows,
+      { opacity: 0, y: 32 },
       {
-        opacity: 1, x: 0,
-        duration: 0.8,
-        delay: i * 0.15,
+        opacity: 1, y: 0,
+        duration: 0.9,
+        stagger: 0.09,
         ease: 'power3.out',
-        scrollTrigger: { trigger: '#pricing', start: 'top 75%', once: true }
+        scrollTrigger: { trigger: '.pricing-list', start: 'top 82%', once: true }
+      }
+    )
+  }
+
+  document.querySelectorAll('.section-pricing .pricing-lead, .section-pricing .pricing-info-line').forEach((el, i) => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 14 },
+      {
+        opacity: 1, y: 0,
+        duration: 0.8,
+        delay: 0.12 + i * 0.12,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: '.section-pricing .section-header', start: 'top 82%', once: true }
       }
     )
   })
