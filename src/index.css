@@ -1,0 +1,57 @@
+@font-face { font-family: Inter; src: url('/fonts/inter-latin-variable.woff2') format('woff2'); font-style: normal; font-weight: 300 600; font-display: swap; }
+@font-face { font-family: Newsreader; src: url('/fonts/newsreader-latin-variable.woff2') format('woff2'); font-style: normal; font-weight: 300 600; font-display: swap; }
+@font-face { font-family: Newsreader; src: url('/fonts/newsreader-latin-italic-variable.woff2') format('woff2'); font-style: italic; font-weight: 300 600; font-display: swap; }
+/* MARGIN foundation — existing palette, editorial serif and functional sans.
+   Content is visible without the motion engine; signature enhancements are opt-in. */
+:root {
+  --surface-primary: #F7F6F2;
+  --surface-secondary: #EFECE6;
+  --surface-tertiary: #E5E1D8;
+  --surface-dark: #0C0D10;
+  --ink-primary: #121316;
+  --ink-secondary: #585956;
+  --ink-tertiary: #656561;
+  --ink-border: rgba(18,19,22,.18);
+  --ink-inverted-primary: #F7F6F2;
+  --ink-inverted-secondary: #B9BAB6;
+  --surface-dark-border: rgba(247,246,242,.2);
+  --color-accent: #D15827;
+  --font-serif: 'Newsreader', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --page-margin: 8.333vw;
+  --gutter: 2.222vw;
+  --section-pad: clamp(80px, 8.333vw, 150px);
+}
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+html { background: var(--scrollbar-surface, var(--surface-primary)); color: var(--ink-primary); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scrollbar-gutter: stable; }
+body { background: var(--surface-primary); min-width: 320px; font-size: 16px; line-height: 1.6; }
+::selection { background: var(--color-accent); color: var(--surface-primary); }
+h1, h2, h3 { font-weight: 400; line-height: 1.05; }
+a { color: inherit; text-decoration: none; }
+button { border: 0; border-radius: 0; background: none; color: inherit; font: inherit; cursor: pointer; }
+button:disabled { cursor: default; }
+input, textarea { font: inherit; border-radius: 0; }
+img, video { display: block; max-width: 100%; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 5px; }
+ul, ol { list-style: none; }
+em { font-weight: inherit; }
+.page-container { width: 100%; max-width: 2160px; margin-inline: auto; padding-inline: var(--page-margin); }
+.section-pad { padding-block: var(--section-pad); }
+section { scroll-margin-top: 110px; }
+.eyebrow { font-family: var(--font-sans); font-size: 13px; font-weight: 500; letter-spacing: .08em; line-height: 1.5; text-transform: uppercase; }
+.section-label { margin-bottom: clamp(28px, 3vw, 48px); color: var(--ink-tertiary); }
+[data-theme="dark"] { background: var(--surface-dark); color: var(--ink-inverted-primary); }
+[data-theme="dark"] .section-label { color: var(--ink-inverted-secondary); }
+.text-action { min-width: 48px; min-height: 48px; display: inline-flex; align-items: center; justify-content: space-between; gap: 18px; font-size: 13px; font-weight: 500; line-height: 1.5; letter-spacing: .055em; text-transform: uppercase; position: relative; }
+.text-action::after { content: ''; position: absolute; left: 0; right: 0; bottom: 8px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; }
+.text-action:hover::after, .text-action:focus-visible::after { transform: scaleX(1); }
+.text-action > span { font-size: 20px; line-height: 1; }
+.split-line-mask, .split-line-inner { display: block; }
+/* Masks are deliberately open at rest so serif descenders remain intact. */
+.split-line-mask { overflow: visible; }
+.skip-link { position: fixed; top: -100px; left: 12px; z-index: 200; padding: 12px 20px; background: var(--surface-primary); opacity: 0; pointer-events: none; transition: opacity .2s, top .2s; }
+.skip-link:focus { top: 12px; opacity: 1; pointer-events: auto; }
+@media (max-width: 1024px) { :root { --page-margin: 6vw; --gutter: 3vw; } }
+@media (max-width: 600px) { :root { --page-margin: 8vw; --gutter: 4vw; --section-pad: 78px; } section { scroll-margin-top: 84px; } .desktop-break { display: none; } .eyebrow { font-size: 12px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
