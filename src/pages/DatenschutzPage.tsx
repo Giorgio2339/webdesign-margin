@@ -168,13 +168,13 @@ export function DatenschutzPage({ onNavigateHome, onNavigateInquiry, onNavigateR
 
               <section className="editorial-section-block">
                 <span className="editorial-num">05 //</span>
-                <h2>5. Kontaktformular über FormSubmit</h2>
+                <h2>5. Projektbrief und E-Mail-Anfrage</h2>
                 <div className="editorial-body">
                   <p>
-                    Für die technische Verarbeitung von Anfragen über das Kontaktformular setzen wir FormSubmit ein. Der Dienst wird von Devro LABS angeboten.
+                    Unser Projektformular hilft Ihnen, eine Anfrage zusammenzustellen. Ihre Eingaben werden währenddessen in Ihrem Browser verarbeitet. Sie werden beim Ausfüllen oder Prüfen des Projektbriefs nicht automatisch an uns übermittelt.
                   </p>
                   <p>
-                    Wenn Sie das Kontaktformular verwenden, werden die von Ihnen eingegebenen Informationen an FormSubmit übertragen verarbeitet und per E-Mail an uns weitergeleitet. Eine Verbindung zum Dienst wird erst beim Absenden des Formulars hergestellt.
+                    Über „E-Mail mit Projektbrief öffnen“ können Sie einen vorbereiteten Entwurf in Ihrem E-Mail-Programm öffnen. Erst wenn Sie die E-Mail dort absenden, erhalten wir Ihre Anfrage. Alternativ können Sie den Projektbrief kopieren und in Ihrem gewohnten E-Mail-Dienst versenden. Die E-Mail-Verarbeitung erfolgt dann über die jeweils verwendeten E-Mail-Anbieter.
                   </p>
                   <p>Je nach Formular können insbesondere folgende Daten verarbeitet werden:</p>
                   <ul className="editorial-bullet-list">
@@ -184,14 +184,9 @@ export function DatenschutzPage({ onNavigateHome, onNavigateInquiry, onNavigateR
                     <li>Unternehmen</li>
                     <li>Projektinformationen</li>
                     <li>Nachrichteninhalt</li>
-                    <li>technische Verbindungsdaten</li>
                   </ul>
                   <p>
                     Rechtsgrundlage für die Verarbeitung ist Art. 6 Abs. 1 lit. b DSGVO, wenn Ihre Anfrage der Anbahnung oder Durchführung eines Vertrags dient. Im Übrigen erfolgt die Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO aufgrund unseres berechtigten Interesses an einer zuverlässigen und sicheren Bearbeitung von Kontaktanfragen.
-                  </p>
-                  <p>
-                    FormSubmit speichert Formularübermittlungen nach eigenen Angaben für 30 Tage in einem Übermittlungsarchiv. Weitere Informationen zur Verarbeitung durch den Anbieter finden Sie in dessen Datenschutzhinweisen:{' '}
-                    <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener noreferrer">FormSubmit Datenschutz</a>.
                   </p>
                   <p>
                     Wir empfehlen, über das Kontaktformular keine besonders sensiblen oder für die jeweilige Anfrage nicht erforderlichen personenbezogenen Informationen zu übermitteln.

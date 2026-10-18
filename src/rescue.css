@@ -268,12 +268,22 @@
   [data-scroll-craft="true"] .craft-cta { margin-top: 16px; }
 }
 
-/* Submission never clears a visitor's project brief on a network failure. */
-.inquiry-fields { border: 0; padding: 0; margin: 0; min-width: 0; }
-.inquiry-fields:disabled { opacity: .65; }
-.inquiry-honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-.form-send-error { margin-top: 20px; padding: 18px; border: 1px solid var(--color-accent); }
-.form-send-error p { font-size: 14px; }
-.form-send-error .text-action { margin-right: 24px; font-size: 11px; }
-.form-send-status { min-height: 1.6em; font-size: 13px; margin-top: 12px; }
-.btn-next-action:disabled { cursor: wait; opacity: .65; }
+/* A calm review step before the visitor sends their own email. */
+.inquiry-review-kicker { margin-bottom: 24px; font-family: var(--font-mono, monospace); font-size: 10px; letter-spacing: .1em; color: var(--color-accent); }
+.inquiry-email-review .success-title:focus { outline: none; }
+.inquiry-email-review .success-card-recap { gap: 14px; }
+.inquiry-email-review .recap-row { gap: 20px; align-items: baseline; }
+.inquiry-email-review .recap-label { flex: 1; }
+.inquiry-email-review .recap-val { flex: 1; min-width: 0; text-align: right; overflow-wrap: anywhere; }
+.inquiry-email-review .success-btn { gap: 16px; min-height: 54px; text-decoration: none; text-align: left; }
+.inquiry-email-review .success-action-group { margin-bottom: 24px; }
+.inquiry-email-fallback { padding-top: 24px; border-top: 1px solid rgba(247,246,242,.12); }
+.inquiry-email-fallback p { margin-bottom: 10px; font-size: 13px; line-height: 1.7; color: rgba(247,246,242,.6); }
+.inquiry-email-fallback a { font-size: 14px; color: #F7F6F2; overflow-wrap: anywhere; text-underline-offset: 4px; }
+.inquiry-brief-details { margin-top: 24px; font-size: 13px; color: rgba(247,246,242,.7); }
+.inquiry-brief-details summary { cursor: pointer; padding-block: 8px; }
+.inquiry-brief-label { display: block; margin-top: 16px; font-size: 12px; }
+.inquiry-brief-details textarea { display: block; width: 100%; margin-top: 12px; padding: 16px; border: 1px solid rgba(247,246,242,.18); background: rgba(255,255,255,.025); color: #F7F6F2; font: inherit; line-height: 1.7; resize: vertical; }
+.inquiry-copy-status { min-height: 1.6em; margin-top: 12px; font-size: 12px; line-height: 1.6; color: rgba(247,246,242,.7); }
+.inquiry-edit-link { margin: 20px 0 28px; align-self: flex-start; font-size: 12px; }
+.inquiry-email-review .success-btn:focus-visible, .inquiry-brief-details summary:focus-visible, .inquiry-email-fallback a:focus-visible, .inquiry-edit-link:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 5px; }

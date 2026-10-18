@@ -1824,9 +1824,6 @@ dialog::backdrop { background: rgba(12,13,16,.75); backdrop-filter: blur(8px); -
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.35);
 }
-.success-booking-wrap {
-  margin-top: 4px;
-}
 .success-close-btn {
   margin-top: 10px;
   align-self: center;

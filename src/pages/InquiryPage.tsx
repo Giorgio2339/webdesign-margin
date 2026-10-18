@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import type { FormEvent } from 'react';
-import { CONTACT_EMAIL, CONTACT_PHONE_TEL } from '../data/media';
-import { sendInquiry } from '../lib/inquiry';
+import { INQUIRY_EMAIL, inquiryMailto } from '../lib/inquiryEmail';
 
 interface InquiryPageProps {
   onNavigateHome: () => void;
@@ -114,23 +113,21 @@ const priorityOptions = [
 ];
 
 const conversationOptions = [
-  '30-Min. Video-Call',
+  'Erstkontakt per E-Mail',
   'Telefonischer Rückruf',
-  'Erstkontakt per E-Mail'
+  'Videogespräch nach Absprache'
 ];
 
 export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute }: InquiryPageProps) {
   const [inquiry, setInquiry] = useState<InquiryData>(initialData);
   const [step, setStep] = useState(0);
-  const [submitted, setSubmitted] = useState(false);
-  const [sending, setSending] = useState(false);
-  const [sendError, setSendError] = useState('');
-  const [honey, setHoney] = useState('');
-  const requestRef = useRef<AbortController | null>(null);
-  useEffect(() => () => requestRef.current?.abort(), []);
+  const [reviewReady, setReviewReady] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [copyError, setCopyError] = useState('');
   const [validationMessage, setValidationMessage] = useState('');
   const nameInputRef = useRef<HTMLInputElement>(null);
+  const reviewHeadingRef = useRef<HTMLHeadingElement>(null);
+  const plainTextRef = useRef<HTMLTextAreaElement>(null);
   const scopeLabel = getScopeLabel(inquiry.scope);
   const duration = getDuration(inquiry.scope);
   const budgetLabel = inquiry.budget || 'Noch nicht festgelegt';
@@ -142,10 +139,16 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
   }, []);
 
   useEffect(() => {
-    if (step === 2 && !submitted) {
-      setTimeout(() => nameInputRef.current?.focus(), 150);
+    if (reviewReady) reviewHeadingRef.current?.focus({ preventScroll: true });
+    else if (step === 2) nameInputRef.current?.focus({ preventScroll: true });
+  }, [step, reviewReady]);
+
+  useEffect(() => {
+    if (copyError) {
+      plainTextRef.current?.focus();
+      plainTextRef.current?.select();
     }
-  }, [step, submitted]);
+  }, [copyError]);
 
   const update = <K extends keyof InquiryData>(key: K, value: InquiryData[K]) =>
     setInquiry((curr) => ({ ...curr, [key]: value }));
@@ -164,15 +167,17 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
   };
 
   const summaryText = [
-    `MARGIN PROJEKT-BRIEFING`,
-    `=============================`,
+    `Hallo MARGIN,`,
+    ``,
+    `ich möchte mein Vorhaben mit Ihnen besprechen. Hier sind die wichtigsten Angaben:`,
+    ``,
     `Projektart: ${scopeLabel}`,
     `Budgetrahmen: ${budgetLabel}`,
     `Gewünschter Start: ${timingLabel}`,
     ...(duration ? [`Voraussichtliche Umsetzung: ${duration.label}`, `Hinweis: ${durationNote}`] : []),
     `Bestehende Domain: ${inquiry.website.trim() || 'Keine angegeben'}`,
     `Schwerpunkte: ${inquiry.priorities.join(', ') || 'Keine ausgewählt'}`,
-    `Projekt-Vision: ${inquiry.goal.trim() || 'Keine zusätzliche Angabe'}`,
+    `Mein Vorhaben: ${inquiry.goal.trim() || 'Keine zusätzliche Angabe'}`,
     `Bevorzugter Erstkontakt: ${inquiry.conversation || 'Keine Angabe'}`,
     ``,
     `KONTAKTDATEN`,
@@ -180,8 +185,14 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
     `Name: ${inquiry.name.trim()}`,
     `Unternehmen: ${inquiry.company.trim() || 'Keine Angabe'}`,
     `E-Mail: ${inquiry.email.trim()}`,
-    `Telefon: ${inquiry.phone.trim() || 'Keine Angabe'}`
+    `Telefon: ${inquiry.phone.trim() || 'Keine Angabe'}`,
+    ``,
+    `Ich freue mich auf Ihre Rückmeldung.`,
+    `Viele Grüße`,
+    inquiry.name.trim()
   ].join('\n');
+
+  const mailto = inquiryMailto(`Projektanfrage · ${scopeLabel} · ${inquiry.name.trim()}`, summaryText);
 
   const canContinue = (targetStep: number) => {
     if (targetStep === 1) return Boolean(inquiry.scope);
@@ -195,7 +206,6 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
   };
 
   const goToStep = (targetStep: number) => {
-    if (requestRef.current) return;
     if (targetStep > step && !canContinue(targetStep)) {
       setValidationMessage(targetStep === 1
         ? 'Wählen Sie bitte zuerst die Art Ihres Vorhabens.'
@@ -207,9 +217,8 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
     scrollToStepTop();
   };
 
-  const handleNextOrSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleNextOrSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (requestRef.current) return;
 
     if (step < 2) {
       goToStep(step + 1);
@@ -221,58 +230,28 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
       return;
     }
 
-    if (honey) {
-      setValidationMessage('Bitte prüfen Sie Ihre Angaben.');
-      return;
-    }
-    const controller = new AbortController();
-    requestRef.current = controller;
-    setSending(true);
-    setSendError('');
-    const timer = window.setTimeout(() => controller.abort(), 20000);
-    try {
-      await sendInquiry({
-        name: inquiry.name.trim(),
-        email: inquiry.email.trim(),
-        subject: `MARGIN Projektanfrage: ${scopeLabel} (${inquiry.name.trim()})`,
-        message: summaryText,
-        honey
-      }, controller.signal);
-      setSubmitted(true);
-      scrollToStepTop();
-    } catch {
-      // A timeout can happen after acceptance: don't retry automatically or
-      // claim the message definitely wasn't sent. All input remains intact.
-      setSendError('Der Versand konnte nicht bestätigt werden. Ihre Angaben bleiben erhalten. Versuchen Sie es erneut oder senden Sie Ihren Projektbrief per E-Mail.');
-    } finally {
-      window.clearTimeout(timer);
-      requestRef.current = null;
-      setSending(false);
-    }
+    setValidationMessage('');
+    setReviewReady(true);
+    scrollToStepTop();
   };
 
   const copyDetails = async () => {
+    setCopyError('');
     try {
       await navigator.clipboard.writeText(summaryText);
       setCopied(true);
       setTimeout(() => setCopied(false), 3000);
     } catch {
       setCopied(false);
+      setCopyError(`Bitte kopieren Sie den markierten Projektbrief und senden Sie ihn an ${INQUIRY_EMAIL}.`);
     }
   };
 
-  const openMailDraft = () => {
-    const subject = encodeURIComponent(`MARGIN Projektanfrage: ${scopeLabel} (${inquiry.name})`);
-    const body = encodeURIComponent(summaryText);
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-  };
-
-  const openWhatsApp = () => {
-    const cleanPhone = CONTACT_PHONE_TEL.replace(/[^0-9]/g, '');
-    const waText = encodeURIComponent(
-      `Hallo MARGIN Studio, ich interessiere mich für ein Webprojekt (${scopeLabel}).\n\nName: ${inquiry.name}\nBudget: ${budgetLabel}\nGewünschter Start: ${timingLabel}${duration ? `\nVoraussichtliche Umsetzung: ${duration.label}` : ''}`
-    );
-    window.open(`https://wa.me/${cleanPhone}?text=${waText}`, '_blank', 'noopener,noreferrer');
+  const editDetails = () => {
+    setReviewReady(false);
+    setCopied(false);
+    setCopyError('');
+    scrollToStepTop();
   };
 
   return (
@@ -310,14 +289,14 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
                 {duration && <div><dt>Voraussichtliche Umsetzung</dt><dd>{duration.label}</dd></div>}
               </dl>
             </div>
-            <a className="brief-contact text-action" href={`mailto:${CONTACT_EMAIL}`}>Lieber direkt schreiben <span aria-hidden="true">↗</span></a>
+            <a className="brief-contact text-action" href={`mailto:${INQUIRY_EMAIL}`}>Lieber direkt schreiben <span aria-hidden="true">↗</span></a>
           </div>
         </aside>
 
         {/* Right Column: The Interactive Dialogue Funnel */}
         <main className="inquiry-form-side">
           <div className="inquiry-form-card">
-            {!submitted ? (
+            {!reviewReady ? (
               <>
                 {/* Stepper Header */}
                 <div className="inquiry-funnel-stepper">
@@ -390,12 +369,7 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
                 </div>
 
                 {/* The Step Form */}
-                <form className="inquiry-interactive-form" onSubmit={handleNextOrSubmit} aria-busy={sending}>
-                  <div className="inquiry-honeypot" aria-hidden="true">
-                    <label htmlFor="inquiry-website-confirm">Dieses Feld bitte leer lassen</label>
-                    <input id="inquiry-website-confirm" name="_honey" type="text" autoComplete="off" tabIndex={-1} value={honey} onChange={e => setHoney(e.target.value)} />
-                  </div>
-                  <fieldset className="inquiry-fields" disabled={sending}>
+                <form className="inquiry-interactive-form" onSubmit={handleNextOrSubmit}>
                   {/* STEP 0: PROJECT TYPE */}
                   {step === 0 && (
                     <div key={step} className="funnel-pane fade-in">
@@ -617,14 +591,12 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
                       <div className="privacy-trust-box">
                         <span className="privacy-icon" aria-hidden="true">↗</span>
                         <span>
-                          Ihre Angaben werden über FormSubmit an uns übermittelt und für die Bearbeitung Ihrer Anfrage verwendet.
+                          Im nächsten Schritt prüfen Sie Ihren Projektbrief und öffnen eine vorbereitete E-Mail. Ihre Anfrage senden Sie anschließend in Ihrem E-Mail-Programm ab.
                           <a className="brief-privacy-link" href="/datenschutz" target="_blank" rel="noopener noreferrer">Datenschutz lesen ↗</a>
                         </span>
                       </div>
                     </div>
                   )}
-
-                  </fieldset>
 
                   {/* Summary Bar */}
                   <div className="funnel-summary-bar">
@@ -638,22 +610,12 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
                     <p className="form-validation" role="status">{validationMessage}</p>
                   )}
 
-                  {sendError && (
-                    <div className="form-send-error" role="alert">
-                      <p>{sendError}</p>
-                      <button type="button" className="text-action" onClick={openMailDraft}>Projektbrief per E-Mail senden <span aria-hidden="true">↗</span></button>
-                      <button type="button" className="text-action" onClick={copyDetails}>{copied ? 'Angaben kopiert ✓' : 'Angaben kopieren'}</button>
-                    </div>
-                  )}
-                  <p className="form-send-status" role="status" aria-live="polite">{sending ? 'Ihre Anfrage wird übermittelt …' : ''}</p>
-
                   {/* Actions Row */}
                   <div className="funnel-footer-actions">
                     {step > 0 ? (
                       <button
                         type="button"
                         className="btn-back"
-                        disabled={sending}
                         onClick={() => goToStep(step - 1)}
                       >
                         ← Zurück
@@ -662,14 +624,14 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
                       <div />
                     )}
 
-                    <button type="submit" className="btn-next-action" disabled={sending}>
+                    <button type="submit" className="btn-next-action">
                       {step < 2 ? (
                         <>
                           {step === 0 ? 'Weiter zum Rahmen' : 'Weiter zum Kontakt'} <span>→</span>
                         </>
                       ) : (
                         <>
-                          {sending ? 'Wird gesendet …' : 'Anfrage absenden'} <span aria-hidden="true">↗</span>
+                          Projektbrief prüfen <span aria-hidden="true">→</span>
                         </>
                       )}
                     </button>
@@ -677,19 +639,15 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
                 </form>
               </>
             ) : (
-              /* Success View */
-              <div className="funnel-success-state fade-in">
-                <div className="success-badge-pill">
-                  <span className="badge-check">✓</span>
-                  <span>ANFRAGE ÜBERMITTELT</span>
-                </div>
+              <div className="funnel-success-state inquiry-email-review fade-in">
+                <span className="inquiry-review-kicker">MARGIN / IHR PROJEKTBRIEF</span>
 
-                <h2 className="success-title">
-                  Vielen Dank{inquiry.name.trim() ? `, ${inquiry.name.trim()}` : ''}!
+                <h2 className="success-title" ref={reviewHeadingRef} tabIndex={-1}>
+                  Ihr Projektbrief.<br /><em>Bereit zum Senden.</em>
                 </h2>
 
                 <p className="success-lead">
-                  Ihr Projektbrief wurde übermittelt. Wir melden uns persönlich bei Ihnen über die angegebenen Kontaktdaten.
+                  Ihr Projektbrief ist vorbereitet. Öffnen Sie die E-Mail, prüfen Sie den Text und senden Sie ihn ab. Erst dann erreicht uns Ihre Anfrage.
                 </p>
 
                 <div className="success-card-recap">
@@ -710,21 +668,39 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
                     <span className="recap-val">{duration.label}</span>
                   </div>}
                   <div className="recap-row">
-                    <span className="recap-label">Kontakt:</span>
+                    <span className="recap-label">Ihr Name:</span>
+                    <span className="recap-val">{inquiry.name}</span>
+                  </div>
+                  <div className="recap-row">
+                    <span className="recap-label">Ihre E-Mail:</span>
                     <span className="recap-val">{inquiry.email}</span>
                   </div>
                 </div>
 
                 <div className="success-action-group">
+                  <a className="success-btn primary" href={mailto}>
+                    <span>E-Mail mit Projektbrief öffnen</span>
+                    <span aria-hidden="true">↗</span>
+                  </a>
                   <button type="button" className="success-btn secondary" onClick={copyDetails}>
-                    <span>{copied ? 'Angaben kopiert ✓' : 'Briefing-Text kopieren'}</span>
-                    <span>📋</span>
-                  </button>
-                  <button type="button" className="success-btn secondary" onClick={openWhatsApp}>
-                    <span>Zusätzlich per WhatsApp Kontakt aufnehmen</span>
-                    <span>↗</span>
+                    <span>{copied ? 'Projektbrief kopiert ✓' : 'Projektbrief kopieren'}</span>
+                    <span aria-hidden="true">+</span>
                   </button>
                 </div>
+
+                <div className="inquiry-email-fallback">
+                  <p>Kein E-Mail-Programm eingerichtet? Kopieren Sie den Projektbrief und senden Sie ihn an:</p>
+                  <a href={`mailto:${INQUIRY_EMAIL}`}>{INQUIRY_EMAIL}</a>
+                </div>
+
+                <details className="inquiry-brief-details" open={copyError ? true : undefined}>
+                  <summary>Vollständigen Projektbrief ansehen</summary>
+                  <label className="inquiry-brief-label" htmlFor="project-brief-text">Projektbrief zum Kopieren</label>
+                  <textarea id="project-brief-text" ref={plainTextRef} readOnly value={summaryText} rows={16} />
+                </details>
+                <p className="inquiry-copy-status" role="status" aria-live="polite">{copyError || (copied ? 'Ihr Projektbrief wurde in die Zwischenablage kopiert.' : '')}</p>
+
+                <button type="button" className="inquiry-edit-link text-action" onClick={editDetails}>← Angaben bearbeiten</button>
 
                 <button type="button" className="success-home-link" onClick={onNavigateHome}>
                   ← Zurück zur Startseite

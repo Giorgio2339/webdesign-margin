@@ -68,7 +68,6 @@ const conversationOptions = [
   'Erstkontakt per E-Mail'
 ];
 
-const bookingUrl = import.meta.env.VITE_BOOKING_URL as string | undefined;
 
 export function InquiryDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [step, setStep] = useState(0);
@@ -590,19 +589,6 @@ export function InquiryDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: (
                 <span aria-hidden="true">☎</span>
               </a>
             </div>
-
-            {bookingUrl && /^https:\/\//.test(bookingUrl) && (
-              <div className="success-booking-wrap">
-                <a
-                  className="text-action"
-                  href={bookingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Oder direkt einen 30-Min. Termin im Kalender buchen <span aria-hidden="true">↗</span>
-                </a>
-              </div>
-            )}
 
             <button
               type="button"
