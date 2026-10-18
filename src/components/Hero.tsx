@@ -1,16 +1,71 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { imageAttributes } from '../data/images';
 import { HERO_FILM } from '../data/media';
 import type { FilmAsset } from '../data/media';
 
 export function HeroMedia({ asset }: { asset: FilmAsset }) {
-  const [reduceMotion, setReduceMotion] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  const [videoReady, setVideoReady] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   useEffect(() => {
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setReduceMotion(preference.matches);
-    preference.addEventListener('change', update);
-    return () => preference.removeEventListener('change', update);
+    const connection = (navigator as Navigator & {
+      connection?: { saveData?: boolean; effectiveType?: string };
+    }).connection;
+    let timer: number | undefined;
+    let idle: number | undefined;
+    const cancel = () => {
+      window.clearTimeout(timer);
+      if (idle !== undefined) window.cancelIdleCallback(idle);
+    };
+    const schedule = () => {
+      cancel();
+      if (preference.matches || connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType ?? '')) {
+        setVideoReady(false);
+        setPlaying(false);
+        return;
+      }
+      // Paint the poster and type first; video decoding must not compete with entry.
+      timer = window.setTimeout(() => {
+        if ('requestIdleCallback' in window) {
+          idle = window.requestIdleCallback(() => setVideoReady(true), { timeout: 2000 });
+        } else {
+          setVideoReady(true);
+        }
+      }, 1400);
+    };
+    if (document.readyState === 'complete') schedule();
+    else window.addEventListener('load', schedule, { once: true });
+    preference.addEventListener('change', schedule);
+    return () => {
+      cancel();
+      window.removeEventListener('load', schedule);
+      preference.removeEventListener('change', schedule);
+    };
   }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    let visible = false;
+    const update = () => {
+      if (visible && !document.hidden) void video.play().catch(() => setPlaying(false));
+      else video.pause();
+    };
+    const observer = new IntersectionObserver(entries => {
+      visible = Boolean(entries[0]?.isIntersecting);
+      update();
+    });
+    observer.observe(video);
+    document.addEventListener('visibilitychange', update);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', update);
+      video.pause();
+    };
+  }, [videoReady]);
+
   return (
     <div className="hero-media-shell" data-media-status={asset.temporary ? 'temporary' : 'final'}>
       <div className="hero-media-frame" data-transition-media="hero">
@@ -24,14 +79,17 @@ export function HeroMedia({ asset }: { asset: FilmAsset }) {
               {...imageAttributes(asset.poster, '(max-width: 600px) 100vw, 100vw')}
             />
           </picture>
-          {asset.desktopSource && !reduceMotion && (
+          {asset.desktopSource && videoReady && (
             <video
               poster={asset.poster}
-              autoPlay
+              ref={videoRef}
+              className={playing ? 'is-playing' : undefined}
+              onPlaying={() => setPlaying(true)}
+              onError={() => setPlaying(false)}
               muted
               playsInline
               loop={asset.loop}
-              preload="metadata"
+              preload="none"
               disablePictureInPicture
               aria-hidden="true"
             >
@@ -42,7 +100,7 @@ export function HeroMedia({ asset }: { asset: FilmAsset }) {
           <div className="hero-media-meta" aria-hidden="true">
             <span>{asset.eyebrow}</span>
             <span className="hero-media-status">
-              <i /> Film / 00:11
+              <i /> {playing ? 'Film / 00:11' : 'MARGIN Atelier'}
             </span>
           </div>
         </div>

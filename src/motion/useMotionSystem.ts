@@ -1,8 +1,6 @@
 import type { RefObject } from 'react';
-import Lenis from 'lenis';
-import 'lenis/dist/lenis.css';
 import { gsap, ScrollTrigger, SplitText, useGSAP, EASE } from './config';
-import { attachScrollEngine, scrollToElement } from './runtime';
+import { scrollToElement } from './runtime';
 
 export function useMotionSystem(scope: RefObject<HTMLDivElement | null>, isHome: boolean) {
   useGSAP(() => {
@@ -52,77 +50,29 @@ export function useMotionSystem(scope: RefObject<HTMLDivElement | null>, isHome:
       window.addEventListener('scroll', headerUpdate, { passive: true });
       cleanup.push(() => { ScrollTrigger.removeEventListener('refresh', refresh); window.removeEventListener('scroll', headerUpdate); });
       if (reduce) return () => { cleanup.reverse().forEach(fn => fn()); };
-      // One wheel engine, driven by the same ticker as GSAP. Touch remains native.
-      if (!reduce && !touch) {
-        const lenis = new Lenis({ lerp: .18, smoothWheel: true, syncTouch: false, autoRaf: false, prevent: el => Boolean(el.closest('dialog')) });
-        const tick = (time: number) => lenis.raf(time * 1000);
-        lenis.on('scroll', ScrollTrigger.update); gsap.ticker.add(tick); attachScrollEngine(lenis);
-        cleanup.push(() => { gsap.ticker.remove(tick); lenis.off('scroll', ScrollTrigger.update); attachScrollEngine(null); lenis.destroy(); });
-      }
       // Existing line geometry is retained; generous mask padding protects Newsreader descenders.
       root.classList.add('motion-enabled'); cleanup.push(() => root.classList.remove('motion-enabled'));
       if (window.scrollY < 80 && !window.location.pathname.startsWith('/work/')) {
         const entry = gsap.timeline({ defaults: { ease: 'power4.out' } });
         entry
-          .from('.hero-media-frame', { scale: 1.08, opacity: 0.85, duration: 1.4, ease: 'power3.out' }, 0)
-          .from('.site-header', { y: -16, opacity: 0, duration: 0.7, ease: 'power3.out' }, 0.12)
-          .from('.hero-top-bar', { opacity: 0, y: -10, duration: 0.6 }, 0.22)
+          .from('.site-header', { y: -8, duration: 0.4 }, 0)
+          .from('.hero-top-bar', { y: -6, duration: 0.4 }, 0)
           .from('.hero-title .split-line-inner', {
-            yPercent: 125,
-            skewY: 3.5,
-            opacity: 0,
-            duration: 1.1,
-            stagger: 0.09,
-            ease: 'power4.out'
-          }, 0.08)
+            y: 24,
+            duration: 0.65,
+            stagger: 0.06,
+            clearProps: 'transform'
+          }, 0)
           .from('.hero-statement-grid > *', {
-            y: 28,
-            skewY: 1.5,
+            y: 12,
             opacity: 0,
-            duration: 0.85,
+            duration: 0.5,
             stagger: 0.08,
             ease: 'power3.out'
-          }, 0.48);
+          }, 0.16);
       }
-      const hero = $('.hero')!;
-      const release = gsap.timeline({
-        scrollTrigger: {
-          trigger: hero,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 0.45,
-          invalidateOnRefresh: true
-        }
-      });
-      release
-        .to('.hero-media-inner', {
-          scale: desktop ? 1.08 : 1.04,
-          yPercent: desktop ? 7 : 3,
-          ease: 'none'
-        }, 0)
-        .to('.hero-title', {
-          y: desktop ? -120 : -50,
-          skewY: desktop ? -2.8 : -1.4,
-          opacity: desktop ? 0.08 : 0.2,
-          ease: 'none'
-        }, 0)
-        .to('.hero-statement-grid', {
-          y: desktop ? -70 : -30,
-          skewY: desktop ? -1.8 : -0.8,
-          opacity: 0,
-          ease: 'none'
-        }, 0)
-        .to('.hero-top-bar', { opacity: 0, y: -30, ease: 'none' }, 0)
-        .to('.hero-release-corner', { scaleX: 0, ease: 'none' }, 0);
-      const heroVideo = $<HTMLVideoElement>('.hero-media-inner video');
-      if (heroVideo) {
-        let visible = false;
-        const observer = new IntersectionObserver(entries => { visible = Boolean(entries[0]?.isIntersecting); if (visible && !document.hidden) void heroVideo.play().catch(() => {}); else heroVideo.pause(); });
-        observer.observe(heroVideo);
-        const visibility = () => { if (document.hidden) heroVideo.pause(); else if (visible) void heroVideo.play().catch(() => {}); };
-        document.addEventListener('visibilitychange', visibility);
-        cleanup.push(() => { observer.disconnect(); document.removeEventListener('visibilitychange', visibility); heroVideo.pause(); });
-      }
+      // Keep the full-screen media still: scaling a playing video during scroll
+      // adds a large compositing surface and competes with video decoding.
       // Only selected statements split into responsive line masks. AutoSplit rebuilds after fonts/width changes.
       $$('.studio-statement, #assembly-title, #process-title').forEach(el => {
         const split = SplitText.create(el, { type: 'lines', mask: 'lines', autoSplit: true, aria: 'auto', onSplit: self => {
@@ -432,6 +382,25 @@ export function useMotionSystem(scope: RefObject<HTMLDivElement | null>, isHome:
           .from('.dispatch-primary', { opacity: 0, y: 22, duration: .7 }, .58)
           .from('.dispatch-channel-card', { opacity: 0, y: 22, duration: .7, stagger: .12 }, .68);
       }
+      const loops = $$('.marquee-track, .hint-dot, .dispatch-status-dot');
+      const loopObserver = new IntersectionObserver(entries => {
+        for (const entry of entries) {
+          (entry.target as HTMLElement).style.animationPlayState = entry.isIntersecting && !document.hidden ? '' : 'paused';
+        }
+      });
+      loops.forEach(el => { el.style.animationPlayState = 'paused'; loopObserver.observe(el); });
+      const pauseLoops = () => {
+        loops.forEach(el => {
+          if (document.hidden) el.style.animationPlayState = 'paused';
+          else { loopObserver.unobserve(el); loopObserver.observe(el); }
+        });
+      };
+      document.addEventListener('visibilitychange', pauseLoops);
+      cleanup.push(() => {
+        loopObserver.disconnect();
+        document.removeEventListener('visibilitychange', pauseLoops);
+        loops.forEach(el => el.style.removeProperty('animation-play-state'));
+      });
       // Wordmark remains rock-solid and resting at the bottom. No jumping or popup scrub!
       const wordmark = $('.footer-wordmark svg');
       if (wordmark) {

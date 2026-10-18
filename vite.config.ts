@@ -13,7 +13,7 @@ export default defineConfig({
           if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
             return 'vendor-react';
           }
-          if (id.includes('node_modules/gsap') || id.includes('node_modules/lenis')) {
+          if (id.includes('node_modules/gsap')) {
             return 'vendor-animation';
           }
         }

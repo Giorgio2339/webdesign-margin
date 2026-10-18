@@ -267,3 +267,13 @@
   [data-scroll-craft="true"] .craft-row h3 { font-size: 24px; }
   [data-scroll-craft="true"] .craft-cta { margin-top: 16px; }
 }
+
+/* Submission never clears a visitor's project brief on a network failure. */
+.inquiry-fields { border: 0; padding: 0; margin: 0; min-width: 0; }
+.inquiry-fields:disabled { opacity: .65; }
+.inquiry-honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.form-send-error { margin-top: 20px; padding: 18px; border: 1px solid var(--color-accent); }
+.form-send-error p { font-size: 14px; }
+.form-send-error .text-action { margin-right: 24px; font-size: 11px; }
+.form-send-status { min-height: 1.6em; font-size: 13px; margin-top: 12px; }
+.btn-next-action:disabled { cursor: wait; opacity: .65; }

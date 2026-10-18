@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import type { FormEvent } from 'react';
 import { CONTACT_EMAIL, CONTACT_PHONE_TEL } from '../data/media';
+import { sendInquiry } from '../lib/inquiry';
 
 interface InquiryPageProps {
   onNavigateHome: () => void;
@@ -122,6 +123,11 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
   const [inquiry, setInquiry] = useState<InquiryData>(initialData);
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState('');
+  const [honey, setHoney] = useState('');
+  const requestRef = useRef<AbortController | null>(null);
+  useEffect(() => () => requestRef.current?.abort(), []);
   const [copied, setCopied] = useState(false);
   const [validationMessage, setValidationMessage] = useState('');
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -189,6 +195,7 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
   };
 
   const goToStep = (targetStep: number) => {
+    if (requestRef.current) return;
     if (targetStep > step && !canContinue(targetStep)) {
       setValidationMessage(targetStep === 1
         ? 'Wählen Sie bitte zuerst die Art Ihres Vorhabens.'
@@ -200,8 +207,9 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
     scrollToStepTop();
   };
 
-  const handleNextOrSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleNextOrSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (requestRef.current) return;
 
     if (step < 2) {
       goToStep(step + 1);
@@ -213,18 +221,34 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
       return;
     }
 
-    const subject = encodeURIComponent(`MARGIN Projektanfrage: ${scopeLabel} (${inquiry.name})`);
-    const body = encodeURIComponent(summaryText);
-    const mailtoUrl = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-
-    try {
-      window.location.href = mailtoUrl;
-    } catch {
-      // smooth fallback
+    if (honey) {
+      setValidationMessage('Bitte prüfen Sie Ihre Angaben.');
+      return;
     }
-
-    setSubmitted(true);
-    scrollToStepTop();
+    const controller = new AbortController();
+    requestRef.current = controller;
+    setSending(true);
+    setSendError('');
+    const timer = window.setTimeout(() => controller.abort(), 20000);
+    try {
+      await sendInquiry({
+        name: inquiry.name.trim(),
+        email: inquiry.email.trim(),
+        subject: `MARGIN Projektanfrage: ${scopeLabel} (${inquiry.name.trim()})`,
+        message: summaryText,
+        honey
+      }, controller.signal);
+      setSubmitted(true);
+      scrollToStepTop();
+    } catch {
+      // A timeout can happen after acceptance: don't retry automatically or
+      // claim the message definitely wasn't sent. All input remains intact.
+      setSendError('Der Versand konnte nicht bestätigt werden. Ihre Angaben bleiben erhalten. Versuchen Sie es erneut oder senden Sie Ihren Projektbrief per E-Mail.');
+    } finally {
+      window.clearTimeout(timer);
+      requestRef.current = null;
+      setSending(false);
+    }
   };
 
   const copyDetails = async () => {
@@ -366,7 +390,12 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
                 </div>
 
                 {/* The Step Form */}
-                <form className="inquiry-interactive-form" onSubmit={handleNextOrSubmit}>
+                <form className="inquiry-interactive-form" onSubmit={handleNextOrSubmit} aria-busy={sending}>
+                  <div className="inquiry-honeypot" aria-hidden="true">
+                    <label htmlFor="inquiry-website-confirm">Dieses Feld bitte leer lassen</label>
+                    <input id="inquiry-website-confirm" name="_honey" type="text" autoComplete="off" tabIndex={-1} value={honey} onChange={e => setHoney(e.target.value)} />
+                  </div>
+                  <fieldset className="inquiry-fields" disabled={sending}>
                   {/* STEP 0: PROJECT TYPE */}
                   {step === 0 && (
                     <div key={step} className="funnel-pane fade-in">
@@ -588,12 +617,14 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
                       <div className="privacy-trust-box">
                         <span className="privacy-icon" aria-hidden="true">↗</span>
                         <span>
-                          Ihre Angaben werden für die Bearbeitung Ihrer Anfrage verwendet.
+                          Ihre Angaben werden über FormSubmit an uns übermittelt und für die Bearbeitung Ihrer Anfrage verwendet.
                           <a className="brief-privacy-link" href="/datenschutz" target="_blank" rel="noopener noreferrer">Datenschutz lesen ↗</a>
                         </span>
                       </div>
                     </div>
                   )}
+
+                  </fieldset>
 
                   {/* Summary Bar */}
                   <div className="funnel-summary-bar">
@@ -607,12 +638,22 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
                     <p className="form-validation" role="status">{validationMessage}</p>
                   )}
 
+                  {sendError && (
+                    <div className="form-send-error" role="alert">
+                      <p>{sendError}</p>
+                      <button type="button" className="text-action" onClick={openMailDraft}>Projektbrief per E-Mail senden <span aria-hidden="true">↗</span></button>
+                      <button type="button" className="text-action" onClick={copyDetails}>{copied ? 'Angaben kopiert ✓' : 'Angaben kopieren'}</button>
+                    </div>
+                  )}
+                  <p className="form-send-status" role="status" aria-live="polite">{sending ? 'Ihre Anfrage wird übermittelt …' : ''}</p>
+
                   {/* Actions Row */}
                   <div className="funnel-footer-actions">
                     {step > 0 ? (
                       <button
                         type="button"
                         className="btn-back"
+                        disabled={sending}
                         onClick={() => goToStep(step - 1)}
                       >
                         ← Zurück
@@ -621,14 +662,14 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
                       <div />
                     )}
 
-                    <button type="submit" className="btn-next-action">
+                    <button type="submit" className="btn-next-action" disabled={sending}>
                       {step < 2 ? (
                         <>
                           {step === 0 ? 'Weiter zum Rahmen' : 'Weiter zum Kontakt'} <span>→</span>
                         </>
                       ) : (
                         <>
-                          E-Mail vorbereiten <span aria-hidden="true">↗</span>
+                          {sending ? 'Wird gesendet …' : 'Anfrage absenden'} <span aria-hidden="true">↗</span>
                         </>
                       )}
                     </button>
@@ -640,7 +681,7 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
               <div className="funnel-success-state fade-in">
                 <div className="success-badge-pill">
                   <span className="badge-check">✓</span>
-                  <span>PROJEKTBRIEF VORBEREITET</span>
+                  <span>ANFRAGE ÜBERMITTELT</span>
                 </div>
 
                 <h2 className="success-title">
@@ -648,7 +689,7 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
                 </h2>
 
                 <p className="success-lead">
-                  Ihr Projektbrief ist bereit. Senden Sie den geöffneten E-Mail-Entwurf ab, damit Ihre Anfrage bei uns ankommt.
+                  Ihr Projektbrief wurde übermittelt. Wir melden uns persönlich bei Ihnen über die angegebenen Kontaktdaten.
                 </p>
 
                 <div className="success-card-recap">
@@ -675,17 +716,13 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
                 </div>
 
                 <div className="success-action-group">
-                  <button type="button" className="success-btn primary" onClick={openMailDraft}>
-                    <span>E-Mail-Entwurf öffnen &amp; absenden</span>
-                    <span>↗</span>
-                  </button>
                   <button type="button" className="success-btn secondary" onClick={copyDetails}>
                     <span>{copied ? 'Angaben kopiert ✓' : 'Briefing-Text kopieren'}</span>
                     <span>📋</span>
                   </button>
                   <button type="button" className="success-btn secondary" onClick={openWhatsApp}>
-                    <span>Per WhatsApp senden</span>
-                    <span>💬</span>
+                    <span>Zusätzlich per WhatsApp Kontakt aufnehmen</span>
+                    <span>↗</span>
                   </button>
                 </div>
 

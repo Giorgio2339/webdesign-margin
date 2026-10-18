@@ -168,13 +168,13 @@ export function DatenschutzPage({ onNavigateHome, onNavigateInquiry, onNavigateR
 
               <section className="editorial-section-block">
                 <span className="editorial-num">05 //</span>
-                <h2>5. Kontaktformular über Web3Forms</h2>
+                <h2>5. Kontaktformular über FormSubmit</h2>
                 <div className="editorial-body">
                   <p>
-                    Für die technische Verarbeitung von Anfragen über das Kontaktformular setzen wir Web3Forms ein. Der Dienst wird von Web3Creative betrieben.
+                    Für die technische Verarbeitung von Anfragen über das Kontaktformular setzen wir FormSubmit ein. Der Dienst wird von Devro LABS angeboten.
                   </p>
                   <p>
-                    Wenn Sie das Kontaktformular verwenden, werden die von Ihnen eingegebenen Informationen an Web3Forms übertragen und dort in unserem Auftrag verarbeitet, damit die Anfrage an uns übermittelt werden kann.
+                    Wenn Sie das Kontaktformular verwenden, werden die von Ihnen eingegebenen Informationen an FormSubmit übertragen verarbeitet und per E-Mail an uns weitergeleitet. Eine Verbindung zum Dienst wird erst beim Absenden des Formulars hergestellt.
                   </p>
                   <p>Je nach Formular können insbesondere folgende Daten verarbeitet werden:</p>
                   <ul className="editorial-bullet-list">
@@ -190,7 +190,8 @@ export function DatenschutzPage({ onNavigateHome, onNavigateInquiry, onNavigateR
                     Rechtsgrundlage für die Verarbeitung ist Art. 6 Abs. 1 lit. b DSGVO, wenn Ihre Anfrage der Anbahnung oder Durchführung eines Vertrags dient. Im Übrigen erfolgt die Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO aufgrund unseres berechtigten Interesses an einer zuverlässigen und sicheren Bearbeitung von Kontaktanfragen.
                   </p>
                   <p>
-                    Web3Forms kann für die Bereitstellung seines Dienstes weitere Infrastruktur- und Unterauftragsverarbeiter einsetzen. Hierbei kann es auch zu einer Verarbeitung personenbezogener Daten außerhalb der Europäischen Union beziehungsweise des Europäischen Wirtschaftsraums kommen. Nach Angaben des Anbieters werden für entsprechende Übermittlungen geeignete datenschutzrechtliche Garantien, insbesondere Standardvertragsklauseln, eingesetzt.
+                    FormSubmit speichert Formularübermittlungen nach eigenen Angaben für 30 Tage in einem Übermittlungsarchiv. Weitere Informationen zur Verarbeitung durch den Anbieter finden Sie in dessen Datenschutzhinweisen:{' '}
+                    <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener noreferrer">FormSubmit Datenschutz</a>.
                   </p>
                   <p>
                     Wir empfehlen, über das Kontaktformular keine besonders sensiblen oder für die jeweilige Anfrage nicht erforderlichen personenbezogenen Informationen zu übermitteln.
