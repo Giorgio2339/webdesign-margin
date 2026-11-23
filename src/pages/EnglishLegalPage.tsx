@@ -16,6 +16,7 @@ export function EnglishLegalPage({ route, onNavigateHome, onNavigateInquiry, onN
         <p>Margin Webdesign<br />Zschopauer Str. 142<br />09126 Chemnitz<br />Germany</p>
         <p><a href={`tel:${CONTACT_PHONE_TEL}`}>{CONTACT_PHONE}</a><br /><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
       </div>}
+      {route === 'datenschutz' && <p className="english-legal-note">Your manual language choice is saved locally in your browser under ‘margin-language’ so it can be restored on your next visit.</p>}
       <p className="english-legal-note">The full {label.toLowerCase()} is currently available in German. Please consult the original document for the complete information.</p>
       <a className="english-legal-original" href={routePath(route, 'de')} lang="de">Read the German {label.toLowerCase()} <span aria-hidden="true">↗</span></a>
       <nav className="english-legal-links" aria-label="Legal pages">

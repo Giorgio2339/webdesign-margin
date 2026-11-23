@@ -217,6 +217,9 @@ export function DatenschutzPage({ onNavigateHome, onNavigateInquiry, onNavigateR
                     Wir setzen derzeit keine Analyse-, Werbe- oder Marketingcookies ein.
                   </p>
                   <p>
+                    Wenn Sie die Sprache manuell wechseln, speichern wir Ihre Wahl als „margin-language“ lokal in Ihrem Browser. So wird beim nächsten Besuch dieselbe Sprache angezeigt. Sie können diese Einstellung über die Browserdaten löschen oder durch eine erneute Sprachwahl ändern.
+                  </p>
+                  <p>
                     Soweit technisch notwendige Informationen auf dem Endgerät gespeichert oder von diesem abgerufen werden, erfolgt dies ausschließlich, soweit dies für die Bereitstellung einer ausdrücklich gewünschten Funktion oder für den sicheren technischen Betrieb erforderlich ist.
                   </p>
                   <p>
