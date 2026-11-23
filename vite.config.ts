@@ -11,14 +11,14 @@ export default defineConfig({
     rollupOptions: {
       input: {
         root: resolve('index.html'),
-        en: resolve('en/index.html'), de: resolve('de/index.html'),
-        enInquiry: resolve('en/inquiry/index.html'), deInquiry: resolve('de/anfrage/index.html'),
-        enImprint: resolve('en/imprint/index.html'), deImprint: resolve('de/impressum/index.html'),
-        enPrivacy: resolve('en/privacy/index.html'), dePrivacy: resolve('de/datenschutz/index.html'),
-        enTerms: resolve('en/terms/index.html'), deTerms: resolve('de/agb/index.html'),
-        enBloomvae: resolve('en/work/bloomvae/index.html'), deBloomvae: resolve('de/work/bloomvae/index.html'),
-        enMaharadscha: resolve('en/work/maharadscha/index.html'), deMaharadscha: resolve('de/work/maharadscha/index.html'),
-        enJT: resolve('en/work/jtsmash/index.html'), deJT: resolve('de/work/jtsmash/index.html')
+        en: resolve('en.html'), de: resolve('de.html'),
+        enInquiry: resolve('en/inquiry.html'), deInquiry: resolve('de/anfrage.html'),
+        enImprint: resolve('en/imprint.html'), deImprint: resolve('de/impressum.html'),
+        enPrivacy: resolve('en/privacy.html'), dePrivacy: resolve('de/datenschutz.html'),
+        enTerms: resolve('en/terms.html'), deTerms: resolve('de/agb.html'),
+        enBloomvae: resolve('en/work/bloomvae.html'), deBloomvae: resolve('de/work/bloomvae.html'),
+        enMaharadscha: resolve('en/work/maharadscha.html'), deMaharadscha: resolve('de/work/maharadscha.html'),
+        enJT: resolve('en/work/jtsmash.html'), deJT: resolve('de/work/jtsmash.html')
       },
       output: {
         manualChunks(id: string) {

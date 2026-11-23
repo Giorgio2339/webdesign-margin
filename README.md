@@ -17,7 +17,7 @@ npm run dev
 - `/en` and `/de` are direct landing routes. They never redirect based on browser language.
 - The language switch preserves the matching subpage or project study and saves the choice under `margin-language` in local storage.
 - Route slugs are in `src/i18n/routes.json`. Homepage copy is in `src/i18n/home.ts`. Page metadata is in `src/i18n/metadata.json`; project metadata is in `src/i18n/projectMetadata.json`.
-- `scripts/generate-entrypoints.mjs` creates localised HTML files and the sitemap before each build. Generated `en/` and `de/` folders are ignored by Git.
+- `scripts/generate-entrypoints.mjs` creates localised HTML files and the sitemap before each build. Generated `en.html`, `de.html`, `en/` and `de/` entrypoints are ignored by Git.
 
 ## Before public launch
 

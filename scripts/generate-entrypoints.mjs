@@ -46,7 +46,7 @@ for (const page of pages) {
   </head>
   <body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body>
 </html>`;
-    const output = join(process.cwd(), target.slice(1), 'index.html');
+    const output = join(process.cwd(), `${target.slice(1)}.html`);
     mkdirSync(dirname(output), { recursive: true });
     writeFileSync(output, html);
     entries.push(output);
