@@ -106,3 +106,55 @@ export const PROCESS_DATA: ProcessPhase[] = [
   { number: '03', title: 'Design & Code', description: 'Gleichzeitiges Gestalten und Entwickeln im Browser über alle Viewports hinweg.' },
   { number: '04', title: 'Feinschliff & Launch', description: 'Härtung, Performance-Optimierung, Barrierefreiheit und weltweiter Edge-Release.' }
 ];
+
+const EN_PROJECTS = [
+  {
+    descriptor: 'D2C wellbeing — digital concept study', discipline: 'D2C commerce / independent concept',
+    statement: 'A calm product story for a wellbeing brand, with clear information, refined typography and a focused path to the product.', status: 'Concept study',
+    caseStudy: {
+      client: 'Bloomvae · independent concept study', services: ['Brand architecture', 'D2C page concept', 'Product information', 'Design system'],
+      overview: 'An independent concept exploring a possible digital world for Bloomvae. Product information is organised through a calm, typographic interface.',
+      challenge: 'Wellbeing products need clear, accessible information. This concept explores how to combine that clarity with a distinctive direct-to-consumer experience.',
+      direction: 'Warm earth tones, botanical details and restrained product storytelling shape the visual direction.',
+      result: 'A clear information structure leads from the brand idea to product details and the next step.'
+    }
+  },
+  {
+    descriptor: 'Hospitality — digital concept study', discipline: 'Hospitality / independent concept',
+    statement: 'A digital presence that brings atmosphere, the menu and the path to a reservation into focus.', status: 'Concept study',
+    caseStudy: {
+      client: 'Maharadscha Palast · independent concept study', services: ['Visual direction', 'Reservation journey', 'Menu concept', 'Art direction'],
+      overview: 'An independent study of an atmospheric restaurant website for Maharadscha Palast, centred on the visit, the menu and reservations.',
+      challenge: 'A restaurant website should create a sense of place while answering practical questions quickly. This concept brings both together.',
+      direction: 'Deep, warm lighting and expressive serif typography create an inviting evening atmosphere.',
+      result: 'The study leads from first impression to the information needed to plan a visit.'
+    }
+  },
+  {
+    descriptor: 'Fast casual — digital concept study', discipline: 'Food & beverage / independent concept',
+    statement: 'A direct, mobile-focused concept for the menu, brand character and the path to ordering.', status: 'Concept study',
+    caseStudy: {
+      client: 'JT Smash Burger · independent concept study', services: ['Brand character', 'Ordering journey', 'Mobile interface', 'Micro-interactions'],
+      overview: 'An independent mobile-first study for JT Smash Burger. Clear navigation and confident visuals make the offer easy to explore.',
+      challenge: 'Fast casual menus must be easy to scan on a small screen. The concept prioritises the menu, orientation and contact.',
+      direction: 'Bold typography, high-contrast food imagery and a strong accent colour define the visual direction.',
+      result: 'The study shows how brand character and quick mobile navigation can work together.'
+    }
+  }
+] as const;
+
+const EN_CAPABILITIES = [
+  { title: 'Digital art direction', summary: 'A distinctive visual system tailored to your business and brand identity.', imageAlt: 'Art direction — portrait and light study' },
+  { title: 'Responsive design', summary: 'Carefully composed for desktop, tablet and mobile, with clarity at every size.', imageAlt: 'Responsive design across several screens' },
+  { title: 'Interaction & conversion', summary: 'Purposeful motion and subtle interactions guide attention towards action.', imageAlt: 'Interaction design study' },
+  { title: 'Creative development', summary: 'Design translated into clear, maintainable code with performance and accessibility in mind.', imageAlt: 'Creative development and code' }
+] as const;
+
+export function getProjects(locale: import('../i18n/locale').Locale): Project[] {
+  if (locale === 'de') return PROJECTS_DATA;
+  return PROJECTS_DATA.map((project, index) => ({ ...project, ...EN_PROJECTS[index], caseStudy: { ...EN_PROJECTS[index].caseStudy, services: [...EN_PROJECTS[index].caseStudy.services] } }));
+}
+export function getCapabilities(locale: import('../i18n/locale').Locale): Capability[] {
+  if (locale === 'de') return CAPABILITIES_DATA;
+  return CAPABILITIES_DATA.map((capability, index) => ({ ...capability, ...EN_CAPABILITIES[index] }));
+}

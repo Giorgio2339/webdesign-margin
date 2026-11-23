@@ -375,14 +375,13 @@ export function useMotionSystem(scope: RefObject<HTMLDivElement | null>, isHome:
       // The closing section: quiet confidence, live atelier dispatch, and direct contact
       if ($('.closing')) {
         gsap.timeline({ defaults: { ease: EASE.editorial }, scrollTrigger: { trigger: '.closing', start: desktop ? 'top 65%' : 'top 72%', once: true } })
-          .from('.closing-badge-row', { opacity: 0, y: 12, duration: .6 }, 0)
+          .from('.closing-eyebrow', { opacity: 0, y: 12, duration: .6 }, 0)
           .from('.closing-line-1 .closing-line-inner', { yPercent: 112, duration: .95 }, .08)
           .from('.closing-line-2 .closing-line-inner', { yPercent: 112, duration: .95 }, .24)
           .from('.closing-narrative', { opacity: 0, y: 16, duration: .7 }, .42)
-          .from('.dispatch-primary', { opacity: 0, y: 22, duration: .7 }, .58)
-          .from('.dispatch-channel-card', { opacity: 0, y: 22, duration: .7, stagger: .12 }, .68);
+          .from('.contact-option', { opacity: 0, y: 18, duration: .65, stagger: .1 }, .56);
       }
-      const loops = $$('.marquee-track, .hint-dot, .dispatch-status-dot');
+      const loops = $$('.hint-dot');
       const loopObserver = new IntersectionObserver(entries => {
         for (const entry of entries) {
           (entry.target as HTMLElement).style.animationPlayState = entry.isIntersecting && !document.hidden ? '' : 'paused';

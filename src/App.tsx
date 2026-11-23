@@ -20,7 +20,13 @@ import { useMotionSystem } from './motion/useMotionSystem';
 import './motion/motion.css';
 import './App.css';
 import './rescue.css';
+import './polish.css';
+import { routePath } from './i18n/locale';
+import { useLocale } from './i18n/useLocale';
+import { updateSeo, updateProjectSeo } from './i18n/seo';
 
+const EnglishInquiryPage = lazy(() => import('./pages/EnglishInquiryPage').then(m => ({ default: m.EnglishInquiryPage })));
+const EnglishLegalPage = lazy(() => import('./pages/EnglishLegalPage').then(m => ({ default: m.EnglishLegalPage })));
 const InquiryPage = lazy(() => import('./pages/InquiryPage').then(m => ({ default: m.InquiryPage })));
 const ImpressumPage = lazy(() => import('./pages/ImpressumPage').then(m => ({ default: m.ImpressumPage })));
 const DatenschutzPage = lazy(() => import('./pages/DatenschutzPage').then(m => ({ default: m.DatenschutzPage })));
@@ -28,6 +34,7 @@ const AgbPage = lazy(() => import('./pages/AgbPage').then(m => ({ default: m.Agb
 
 export function App() {
   const { route, navigate } = useRouter();
+  const locale = useLocale();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const scope = useRef<HTMLDivElement>(null);
@@ -51,25 +58,30 @@ export function App() {
     else if (tab === 'agb') navigate('/agb');
   }, [isCaseOpen, closeCase, navigate]);
 
-  // Handle default title when returning to homepage
   useEffect(() => {
-    if (route === 'home') {
-      document.title = 'MARGIN — Webdesign & digitale Art Direction';
-    }
-  }, [route]);
+    if (route === 'home' && isCaseOpen && cases.project) updateProjectSeo(cases.project.id, locale);
+    else updateSeo(route, locale);
+  }, [route, locale, isCaseOpen, cases.project]);
 
   // Dedicated Route: Dedicated Inquiry Page
+  if (route === 'inquiry' && locale === 'en') {
+    return <div className="margin-experience"><Suspense fallback={<div className="route-loading-fallback" />}><EnglishInquiryPage onNavigateHome={() => navigate(routePath('home', locale))} onNavigateRoute={navigate} /></Suspense></div>;
+  }
   if (route === 'inquiry') {
     return (
       <div className="margin-experience">
         <Suspense fallback={<div className="route-loading-fallback" />}>
           <InquiryPage
-            onNavigateHome={() => navigate('/')}
+            onNavigateHome={() => navigate(routePath('home', locale))}
             onNavigateRoute={navigate}
           />
         </Suspense>
       </div>
     );
+  }
+
+  if (locale === 'en' && (route === 'impressum' || route === 'datenschutz' || route === 'agb')) {
+    return <div className="margin-experience"><Suspense fallback={<div className="route-loading-fallback" />}><EnglishLegalPage route={route} onNavigateHome={() => navigate(routePath('home', locale))} onNavigateInquiry={openInquiry} onNavigateRoute={navigate} /></Suspense></div>;
   }
 
   // Dedicated Route: Impressum
@@ -78,7 +90,7 @@ export function App() {
       <div className="margin-experience">
         <Suspense fallback={<div className="route-loading-fallback" />}>
           <ImpressumPage
-            onNavigateHome={() => navigate('/')}
+            onNavigateHome={() => navigate(routePath('home', locale))}
             onNavigateInquiry={openInquiry}
             onNavigateRoute={navigate}
           />
@@ -93,7 +105,7 @@ export function App() {
       <div className="margin-experience">
         <Suspense fallback={<div className="route-loading-fallback" />}>
           <DatenschutzPage
-            onNavigateHome={() => navigate('/')}
+            onNavigateHome={() => navigate(routePath('home', locale))}
             onNavigateInquiry={openInquiry}
             onNavigateRoute={navigate}
           />
@@ -108,7 +120,7 @@ export function App() {
       <div className="margin-experience">
         <Suspense fallback={<div className="route-loading-fallback" />}>
           <AgbPage
-            onNavigateHome={() => navigate('/')}
+            onNavigateHome={() => navigate(routePath('home', locale))}
             onNavigateInquiry={openInquiry}
             onNavigateRoute={navigate}
           />
@@ -120,7 +132,7 @@ export function App() {
   // Default Route: Homepage
   return (
     <div ref={scope} className="margin-experience" data-motion-phase="static">
-      <a className="skip-link" href="#main-content">Zum Inhalt springen</a>
+      <a className="skip-link" href="#main-content">{locale === 'de' ? 'Zum Inhalt springen' : 'Skip to content'}</a>
       <Header onOpenInquiry={openInquiry} onOpenMenu={() => setIsMenuOpen(true)} isMenuOpen={isMenuOpen} />
       <main id="main-content" tabIndex={-1}>
         <Hero onOpenInquiry={openInquiry} />

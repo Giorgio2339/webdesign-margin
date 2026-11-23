@@ -1,6 +1,8 @@
 import { imageAttributes } from '../data/images';
 import { useDialog } from '../hooks/useDialog';
-import { PROJECTS_DATA } from '../data/projects';
+import { getProjects } from '../data/projects';
+import { useLocale } from '../i18n/useLocale';
+import { HOME } from '../i18n/home';
 import type { Project } from '../types';
 
 interface CaseStudyModalProps {
@@ -20,8 +22,12 @@ export function CaseStudyModal({
   onSelectProject,
   onOpenInquiry
 }: CaseStudyModalProps) {
+  const locale = useLocale();
+  const projects = getProjects(locale);
+  const t = HOME[locale].work;
+  const en = locale === 'en';
   const ref = useDialog(isOpen, onClose, project?.id, onClosed);
-  const next = PROJECTS_DATA[(PROJECTS_DATA.findIndex((p) => p.id === project?.id) + 1) % PROJECTS_DATA.length];
+  const next = projects[(projects.findIndex((p) => p.id === project?.id) + 1) % projects.length];
 
   return (
     <dialog ref={ref} className="case-study-modal" aria-labelledby="case-title" data-project-id={project?.id}>
@@ -29,12 +35,12 @@ export function CaseStudyModal({
         <>
           {/* Top Sticky Bar */}
           <div className="dialog-toolbar">
-            <button className="case-brand" type="button" onClick={onClose} aria-label="MARGIN — Zurück zu den Arbeiten">
+            <button className="case-brand" type="button" onClick={onClose} aria-label={locale === 'de' ? 'MARGIN — Zurück zu den Arbeiten' : 'MARGIN — Back to work'}>
               <img src="/assets/margin_logo_light.png" alt="MARGIN" width="134" height="31" />
             </button>
             <span className="eyebrow case-toolbar-meta">{project.shortName} / {project.index}</span>
-            <button className="text-action" onClick={onClose} aria-label="Konzeptstudie schließen">
-              Schließen <span aria-hidden="true">×</span>
+            <button className="text-action" onClick={onClose} aria-label={locale === 'de' ? 'Konzeptstudie schließen' : 'Close concept study'}>
+              {en ? 'Close' : 'Schließen'} <span aria-hidden="true">×</span>
             </button>
           </div>
 
@@ -49,11 +55,11 @@ export function CaseStudyModal({
             {/* Agency Project Metadata Specs */}
             <div className="case-specs-matrix">
               <div className="case-spec-item">
-                <span className="spec-label">Marke &amp; Kontext</span>
+                <span className="spec-label">{en ? 'Brand & context' : 'Marke & Kontext'}</span>
                 <span className="spec-val">{project.caseStudy.client}</span>
               </div>
               <div className="case-spec-item">
-                <span className="spec-label">Konzeptbausteine</span>
+                <span className="spec-label">{en ? 'Scope of study' : 'Konzeptbausteine'}</span>
                 <div className="spec-tags">
                   {project.caseStudy.services.map((s) => (
                     <span key={s} className="spec-tag">{s}</span>
@@ -71,7 +77,7 @@ export function CaseStudyModal({
             >
               <img
                 src={project.image}
-                alt={`${project.name} Interface Design Studie`}
+                alt={`${project.name} — ${en ? 'interface concept study' : 'Interface-Design-Studie'}`}
                 {...imageAttributes(project.image, '(max-width: 600px) 90vw, 84vw')}
               />
             </div>
@@ -79,8 +85,8 @@ export function CaseStudyModal({
             {/* Strategic Challenge Narrative */}
             <div className="case-story-block">
               <div className="story-label-col">
-                <span className="eyebrow story-tag">01 // STRATEGIE</span>
-                <h3>Die Herausforderung</h3>
+                <span className="eyebrow story-tag">{en ? '01 / STRATEGY' : '01 / STRATEGIE'}</span>
+                <h3>{en ? 'The challenge' : 'Die Herausforderung'}</h3>
               </div>
               <div className="story-text-col">
                 <p>{project.caseStudy.challenge}</p>
@@ -90,8 +96,8 @@ export function CaseStudyModal({
             {/* Visual & Kinetic Direction Narrative */}
             <div className="case-story-block">
               <div className="story-label-col">
-                <span className="eyebrow story-tag">02 // GESTALTUNG</span>
-                <h3>Visuelle &amp; Kinetische Direktion</h3>
+                <span className="eyebrow story-tag">{en ? '02 / DESIGN' : '02 / GESTALTUNG'}</span>
+                <h3>{en ? 'Visual direction' : 'Visuelle Richtung'}</h3>
               </div>
               <div className="story-text-col">
                 <p>{project.caseStudy.direction}</p>
@@ -100,7 +106,7 @@ export function CaseStudyModal({
 
             {/* Design intent of the independent concept study. */}
             <div className="case-metrics-banner">
-              <div className="metrics-eyebrow">Leitidee der Konzeptstudie</div>
+              <div className="metrics-eyebrow">{en ? 'The idea behind the concept' : 'Leitidee der Konzeptstudie'}</div>
               <p className="case-result-statement">{project.caseStudy.result}</p>
             </div>
 
@@ -109,7 +115,7 @@ export function CaseStudyModal({
               <div className="case-cover">
                 <img
                   src={project.coverImage}
-                  alt={`${project.descriptor} Detailaufnahme`}
+                  alt={`${project.descriptor} — ${en ? 'detail' : 'Detailaufnahme'}`}
                   {...imageAttributes(project.coverImage, '(max-width: 600px) 90vw, 84vw')}
                   loading="lazy"
                 />
@@ -118,10 +124,10 @@ export function CaseStudyModal({
 
             {/* Redesigned Next Study Card (Fixing the bug from Bild 1!) */}
             <div className="case-next-section">
-              <span className="eyebrow next-lead-label">Nächste Konzeptstudie</span>
+              <span className="eyebrow next-lead-label">{en ? 'Next concept study' : 'Nächste Konzeptstudie'}</span>
               <a
                 className="case-next-card"
-                href={`/work/${next.id}`}
+                href={`/${locale}/work/${next.id}`}
                 onClick={(event) => {
                   if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button) return;
                   event.preventDefault();
@@ -138,7 +144,7 @@ export function CaseStudyModal({
                   <p className="next-card-desc">{next.statement}</p>
                 </div>
                 <div className="next-card-action">
-                  <span>Projekt ansehen</span>
+                  <span>{t.view}</span>
                   <span className="next-arrow" aria-hidden="true">↗</span>
                 </div>
               </a>
@@ -147,11 +153,11 @@ export function CaseStudyModal({
             {/* Case Footer CTA */}
             <div className="case-footer">
               <div className="footer-cta-copy">
-                <span className="eyebrow">Ihr Vorhaben</span>
-                <p>Wie könnte das nächste Kapitel Ihrer Marke aussehen?</p>
+                <span className="eyebrow">{en ? 'Your project' : 'Ihr Vorhaben'}</span>
+                <p>{en ? 'What could the next chapter of your brand look like?' : 'Wie könnte das nächste Kapitel Ihrer Marke aussehen?'}</p>
               </div>
               <button className="text-action case-inquiry-btn" onClick={onOpenInquiry}>
-                Projekt initiieren <span aria-hidden="true">↗</span>
+                {en ? 'Start a project' : 'Projekt initiieren'} <span aria-hidden="true">↗</span>
               </button>
             </div>
           </div>

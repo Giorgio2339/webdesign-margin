@@ -10,7 +10,6 @@ interface ImpressumPageProps {
 
 export function ImpressumPage({ onNavigateHome, onNavigateInquiry, onNavigateRoute }: ImpressumPageProps) {
   useEffect(() => {
-    document.title = 'Impressum — MARGIN Webdesign';
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 

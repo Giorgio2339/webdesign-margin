@@ -1,0 +1,22 @@
+{
+  "home": {
+    "en": { "title": "MARGIN — Bespoke Web Design & Digital Art Direction", "description": "MARGIN creates distinctive websites and digital experiences for ambitious brands. Independent art direction, considered interaction and precise development." },
+    "de": { "title": "MARGIN — Individuelles Webdesign & digitale Art Direction", "description": "MARGIN gestaltet eigenständige Websites und digitale Erlebnisse für anspruchsvolle Marken. Individuelle Art Direction, durchdachte Interaktion und präzise Entwicklung." }
+  },
+  "inquiry": {
+    "en": { "title": "Start a Project — MARGIN", "description": "Tell MARGIN about your website or digital brand project. Share your goals and receive a considered response." },
+    "de": { "title": "Projekt anfragen — MARGIN", "description": "Erzählen Sie MARGIN von Ihrem Website- oder Markenprojekt. Teilen Sie Ihre Ziele und erhalten Sie eine persönliche Rückmeldung." }
+  },
+  "impressum": {
+    "en": { "title": "Imprint — MARGIN", "description": "Company and contact details for MARGIN Webdesign." },
+    "de": { "title": "Impressum — MARGIN", "description": "Anbieterkennzeichnung und Kontaktdaten von MARGIN Webdesign." }
+  },
+  "datenschutz": {
+    "en": { "title": "Privacy — MARGIN", "description": "Information about privacy and data processing on the MARGIN website." },
+    "de": { "title": "Datenschutz — MARGIN", "description": "Informationen zum Datenschutz und zur Datenverarbeitung auf der MARGIN Website." }
+  },
+  "agb": {
+    "en": { "title": "Terms — MARGIN", "description": "Terms and conditions for MARGIN Webdesign projects." },
+    "de": { "title": "AGB — MARGIN", "description": "Allgemeine Geschäftsbedingungen für Projekte von MARGIN Webdesign." }
+  }
+}

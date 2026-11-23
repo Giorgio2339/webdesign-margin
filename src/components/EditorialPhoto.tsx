@@ -1,10 +1,13 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { useLocale } from '../i18n/useLocale';
 
 // EditorialPhoto: Architectural light study with interactive precision detail loupe.
 // Replaces the rigid scroll-jacked zoom with a frictionless editorial spread
 // and an agency-grade magnetic 2.4x optical loupe that lets the visitor
 // inspect the texture of raw concrete and natural light aperture.
 export function EditorialPhoto() {
+  const locale = useLocale();
+  const en = locale === 'en';
   const visualRef = useRef<HTMLDivElement>(null);
   const loupeRef = useRef<HTMLDivElement>(null);
   const lensRef = useRef<HTMLDivElement>(null);
@@ -169,19 +172,19 @@ export function EditorialPhoto() {
           
           {/* Editorial copy with line masks for split-text entrance */}
           <div className="photo-copy">
-            <p className="eyebrow section-label">Zur Gestaltung</p>
+            <p className="eyebrow section-label">{en ? 'On design' : 'Zur Gestaltung'}</p>
             <div className="photo-statement">
               <h2 id="photo-title">
-                <span className="photo-title-line"><span>Die Details</span></span>
-                <span className="photo-title-line"><span>sind die</span></span>
-                <span className="photo-title-line"><span><em>Richtung.</em></span></span>
+                <span className="photo-title-line"><span>{en ? 'The details' : 'Die Details'}</span></span>
+                <span className="photo-title-line"><span>{en ? 'make the' : 'sind die'}</span></span>
+                <span className="photo-title-line"><span><em>{en ? 'difference.' : 'Richtung.'}</em></span></span>
               </h2>
-              <p>Komposition, Kontrast und Zurückhaltung machen eine Präsenz unverwechselbar.</p>
+              <p>{en ? 'Composition, contrast and restraint make a digital presence unmistakable.' : 'Komposition, Kontrast und Zurückhaltung machen eine Präsenz unverwechselbar.'}</p>
             </div>
             <div className="photo-caption-meta">
-              <span className="caption-tag">ATELIER-PRINZIP</span>
+              <span className="caption-tag">{en ? 'STUDIO PRINCIPLE' : 'ATELIER-PRINZIP'}</span>
               <span className="caption-sep">/</span>
-              <span className="caption-desc">Substanz vor Spektakel</span>
+              <span className="caption-desc">{en ? 'Substance over spectacle' : 'Substanz vor Spektakel'}</span>
             </div>
           </div>
 
@@ -240,7 +243,7 @@ export function EditorialPhoto() {
                 <div className="loupe-hud">
                   <span className="loupe-mag">2.4X</span>
                   <span ref={coordsRef} className="loupe-coords">X: 50.0% · Y: 50.0%</span>
-                  <span className="loupe-sub">TYPOGRAFIE &amp; DETAIL</span>
+                  <span className="loupe-sub">{en ? 'TYPE & DETAIL' : 'TYPOGRAFIE & DETAIL'}</span>
                 </div>
               </div>
 
@@ -248,7 +251,7 @@ export function EditorialPhoto() {
               {!showLoupe && (
                 <div className="photo-hint" aria-hidden="true">
                   <span className="hint-dot" />
-                  <span className="hint-text">Detail inspizieren</span>
+                  <span className="hint-text">{en ? 'Explore details' : 'Detail inspizieren'}</span>
                   <span className="hint-ratio">2.4X</span>
                 </div>
               )}
@@ -260,7 +263,7 @@ export function EditorialPhoto() {
             </div>
 
             <p className="photo-credit">
-              Abb. 01 — Typografische Satzspiegel-Studie / Editorial Layout
+              {en ? 'Fig. 01 — Typographic composition / Editorial layout' : 'Abb. 01 — Typografische Satzspiegel-Studie / Editorial Layout'}
             </p>
           </div>
 

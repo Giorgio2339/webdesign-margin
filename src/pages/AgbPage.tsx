@@ -10,7 +10,6 @@ interface AgbPageProps {
 
 export function AgbPage({ onNavigateHome, onNavigateInquiry, onNavigateRoute }: AgbPageProps) {
   useEffect(() => {
-    document.title = 'AGB — MARGIN Webdesign & digitale Art Direction';
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 

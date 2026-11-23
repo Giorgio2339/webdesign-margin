@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import type { FormEvent } from 'react';
 import { INQUIRY_EMAIL, inquiryMailto } from '../lib/inquiryEmail';
+import { LocaleSwitcher } from '../components/LocaleSwitcher';
 
 interface InquiryPageProps {
   onNavigateHome: () => void;
@@ -134,7 +135,6 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
   const timingLabel = inquiry.timing || 'Noch nicht angegeben';
 
   useEffect(() => {
-    document.title = 'Projekt anfragen — MARGIN Studio';
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
@@ -262,7 +262,7 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
           <img src="/assets/margin_logo_light.png" alt="MARGIN" width="134" height="31" />
         </button>
         <div className="inquiry-topbar-right">
-          <span className="inquiry-topbar-meta">PROJEKT-DIALOG</span>
+          <LocaleSwitcher className="inquiry-locale-switch" />
           <button type="button" className="inquiry-close-btn" onClick={onNavigateHome}>
             Schließen <span>✕</span>
           </button>
@@ -592,7 +592,7 @@ export function InquiryPage({ onNavigateHome, onNavigateRoute: _onNavigateRoute 
                         <span className="privacy-icon" aria-hidden="true">↗</span>
                         <span>
                           Im nächsten Schritt prüfen Sie Ihren Projektbrief und öffnen eine vorbereitete E-Mail. Ihre Anfrage senden Sie anschließend in Ihrem E-Mail-Programm ab.
-                          <a className="brief-privacy-link" href="/datenschutz" target="_blank" rel="noopener noreferrer">Datenschutz lesen ↗</a>
+                          <a className="brief-privacy-link" href="/de/datenschutz" target="_blank" rel="noopener noreferrer">Datenschutz lesen ↗</a>
                         </span>
                       </div>
                     </div>

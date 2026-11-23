@@ -1,8 +1,13 @@
 import { useState } from 'react';
 import { imageAttributes } from '../data/images';
-import { CAPABILITIES_DATA } from '../data/projects';
+import { getCapabilities } from '../data/projects';
+import { HOME } from '../i18n/home';
+import { useLocale } from '../i18n/useLocale';
 
 export function Capabilities() {
+  const locale = useLocale();
+  const t = HOME[locale].capabilities;
+  const capabilities = getCapabilities(locale);
   const [activeFragment, setActiveFragment] = useState(0);
 
   return (
@@ -10,11 +15,11 @@ export function Capabilities() {
       <div className="surface-takeover" aria-hidden="true" />
       <div className="page-container capabilities-layout">
         <div className="capabilities-intro">
-          <p className="eyebrow section-label">Unsere Kompetenzen</p>
+          <p className="eyebrow section-label">{t.label}</p>
           <h2 id="capabilities-title">
-            Architektur,<br />
-            Ästhetik<br />
-            &amp; Code
+            {t.lines[0]}<br />
+            {t.lines[1]}<br />
+            {t.lines[2]}
           </h2>
           <div
             className="capability-fragment-slot"
@@ -22,7 +27,7 @@ export function Capabilities() {
             data-fragment={activeFragment}
             aria-hidden="true"
           >
-            {CAPABILITIES_DATA.map((cap, i) => (
+            {capabilities.map((cap, i) => (
               <img
                 className={`fragment-${i}`}
                 key={cap.index}
@@ -33,12 +38,12 @@ export function Capabilities() {
               />
             ))}
             <div className="capability-slot-caption">
-              <span>{CAPABILITIES_DATA[activeFragment]?.index} · {CAPABILITIES_DATA[activeFragment]?.title}</span>
+              <span>{capabilities[activeFragment]?.index} · {capabilities[activeFragment]?.title}</span>
             </div>
           </div>
         </div>
         <div className="capabilities-list">
-          {CAPABILITIES_DATA.map((cap, i) => {
+          {capabilities.map((cap, i) => {
             const isActive = activeFragment === i;
             return (
               <article

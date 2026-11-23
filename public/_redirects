@@ -1,1 +1,8 @@
-/work/* /index.html 200
+/anfrage /de/anfrage 301
+/projekt-starten /de/anfrage 301
+/kontakt /de/anfrage 301
+/impressum /de/impressum 301
+/datenschutz /de/datenschutz 301
+/agb /de/agb 301
+/konditionen /de/agb 301
+/work/* /de/work/:splat 301

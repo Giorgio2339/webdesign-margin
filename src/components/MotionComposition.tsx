@@ -1,15 +1,12 @@
 import { imageAttributes } from '../data/images';
+import { HOME } from '../i18n/home';
+import { useLocale } from '../i18n/useLocale';
 
 // Ein Interface erwacht vor den Augen des Besuchers: Struktur → Typografie → Bild → Kinetik.
-const PHASES = [
-  { label: 'Struktur', note: 'Raster — 12 Spalten / 2.2vw Steg' },
-  { label: 'Typografie', note: 'Newsreader 400 — Spationierung −4.5%' },
-  { label: 'Bild', note: 'Ausschnitt — sechs Spalten, dann rahmenlos' },
-  { label: 'Kinetik', note: 'Beschleunigung — cubic-bezier(.76, 0, .24, 1)' }
-];
 const IMAGE = '/assets/motion_night_facade.png';
 
 export function MotionComposition() {
+  const t = HOME[useLocale()].motion;
   return (
     <section id="motion" className="motion-study" data-theme="dark" aria-labelledby="motion-title">
       <div className="motion-track">
@@ -18,7 +15,7 @@ export function MotionComposition() {
             <figure className="motion-image">
               <img
                 src={IMAGE}
-                alt="Langzeitbelichtung einer beleuchteten Glasfassade bei Nacht mit kinetischen Lichtspuren"
+                alt={t.alt}
                 loading="lazy"
                 decoding="async"
                 {...imageAttributes(IMAGE, '100vw')}
@@ -30,18 +27,18 @@ export function MotionComposition() {
               ))}
             </div>
             <h2 id="motion-title" className="motion-title">
-              <span className="motion-line"><span>Gestaltet,</span></span>
-              <span className="motion-line motion-line-move"><span>um zu <em>bewegen.</em></span></span>
+              <span className="motion-line"><span>{t.lineA}</span></span>
+              <span className="motion-line motion-line-move"><span><em>{t.lineB}</em></span></span>
             </h2>
 
           </div>
           <div className="motion-index">
-            <p className="eyebrow">Wie ein Interface erwacht</p>
-            <ol aria-label="Entwurfsphasen">
-              {PHASES.map((phase, i) => (
-                <li key={phase.label} data-step={i}>
+            <p className="eyebrow">{t.intro}</p>
+            <ol aria-label={t.phaseLabel}>
+              {t.phases.map((phase, i) => (
+                <li key={phase} data-step={i}>
                   <span>0{i + 1}</span>
-                  {phase.label}
+                  {phase}
                 </li>
               ))}
             </ol>
