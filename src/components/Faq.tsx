@@ -1,47 +1,27 @@
 import { useState } from 'react';
-
-const questions = [
-  {
-    question: 'Welche Art von Projekten setzt MARGIN um?',
-    answer: 'Wir konzipieren und entwickeln maßgeschneiderte Websites, Flagship-E-Commerce-Erlebnisse und digitale Markenauftritte. Der Ausgangspunkt ist stets Ihr Geschäftsmodell, Ihre Zielgruppe und der strategische Anspruch der Marke.'
-  },
-  {
-    question: 'Können Sie mit einer bestehenden Markenidentität arbeiten?',
-    answer: 'Ja. Wir übersetzen gewachsene Identitäten in ein hochgradig präzises digitales Erlebnis oder schärfen die visuelle Richtung, Typografie und Kinetik für den digitalen Raum.'
-  },
-  {
-    question: 'Wie läuft der Start eines gemeinsamen Projekts ab?',
-    answer: 'Im ersten Schritt teilen Sie Ihre Ziele und Herausforderungen mit uns. Wir analysieren das Briefing, schärfen gemeinsam den Umfang und definieren eine klare These, bevor die parallele Gestaltungs- und Code-Arbeit beginnt.'
-  },
-  {
-    question: 'Wie gestalten sich Zeitrahmen und Investition?',
-    answer: 'Beides richtet sich nach Umfang, Funktionalität und technischer Komplexität. Im Erstgespräch klären wir den realistischen Zeitrahmen und besprechen die Investition transparent.'
-  },
-  {
-    question: 'Wie wird die mobile Nutzererfahrung gewährleistet?',
-    answer: 'Mobile wird von Beginn an gleichwertig gedacht. Lesbarkeit, Touch-Bedienung, Bildausschnitte und Ladeverhalten prüfen wir über unterschiedliche Bildschirmgrößen hinweg.'
-  }
-];
+import { HOME } from '../i18n/home';
+import { useLocale } from '../i18n/useLocale';
 
 export function Faq({ onOpenInquiry }: { onOpenInquiry: () => void }) {
+  const t = HOME[useLocale()].faq;
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <section id="faq" className="faq section-pad" data-theme="light" aria-labelledby="faq-title">
       <div className="page-container faq-layout">
         <div className="faq-intro">
-          <p className="eyebrow section-label">Vor dem Start</p>
+          <p className="eyebrow section-label">{t.label}</p>
           <h2 id="faq-title">
-            <span className="faq-title-line"><span>Gute Fragen.</span></span>
-            <span className="faq-title-line"><span><em>Klare Antworten.</em></span></span>
+            <span className="faq-title-line"><span>{t.titleA}</span></span>
+            <span className="faq-title-line"><span><em>{t.titleB}</em></span></span>
           </h2>
-          <p className="faq-intro-text">Haben Sie ein konkretes Vorhaben oder offene Fragen?</p>
+          <p className="faq-intro-text">{t.intro}</p>
           <button className="text-action faq-intro-cta" onClick={onOpenInquiry}>
-            Sprechen Sie mit uns <span aria-hidden="true">↗</span>
+            {t.cta} <span aria-hidden="true">↗</span>
           </button>
         </div>
         <div className="faq-list">
-          {questions.map((item, index) => {
+          {t.questions.map((item, index) => {
             const isOpen = openIndex === index;
             return (
               <div className="faq-item" key={item.question} data-faq-open={isOpen ? 'true' : 'false'}>

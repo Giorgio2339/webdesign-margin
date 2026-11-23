@@ -1,9 +1,14 @@
 import { imageAttributes } from '../data/images';
-import { PROJECTS_DATA } from '../data/projects';
+import { getProjects } from '../data/projects';
+import { HOME } from '../i18n/home';
+import { useLocale } from '../i18n/useLocale';
 import type { Project } from '../types';
 import type { MouseEvent } from 'react';
 
 export function SelectedWork({ onSelectProject }: { onSelectProject: (project: Project, source?: HTMLElement | null) => void }) {
+  const locale = useLocale();
+  const t = HOME[locale].work;
+  const projects = getProjects(locale);
   const visit = (event: MouseEvent<HTMLAnchorElement>, project: Project) => {
     if (event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
@@ -15,11 +20,11 @@ export function SelectedWork({ onSelectProject }: { onSelectProject: (project: P
       <div className="surface-takeover" aria-hidden="true" />
       <div className="page-container">
         <div className="work-heading">
-          <h2 id="work-title">Ausgewählte Arbeiten</h2>
-          <p className="eyebrow">Drei unabhängige Konzeptstudien</p>
+          <h2 id="work-title">{t.title}</h2>
+          <p className="eyebrow">{t.subtitle}</p>
         </div>
         <div className="projects-sequence">
-          {PROJECTS_DATA.map((project) => (
+          {projects.map((project) => (
             <article
               className={`project-canvas-item project-${project.alignment}`}
               key={project.id}
@@ -27,11 +32,11 @@ export function SelectedWork({ onSelectProject }: { onSelectProject: (project: P
               data-project-id={project.id}
             >
               <a
-                href={`/work/${project.id}`}
+                href={`/${locale}/work/${project.id}`}
                 className="project-media"
                 style={project.aspectRatio ? { aspectRatio: project.aspectRatio } : undefined}
                 onClick={(event) => visit(event, project)}
-                aria-label={`${project.name} ansehen`}
+                aria-label={`${t.view}: ${project.name}`}
                 data-project-id={project.id}
                 data-transition-media={project.id}
               >
@@ -57,7 +62,7 @@ export function SelectedWork({ onSelectProject }: { onSelectProject: (project: P
                 <span className="cover-layer">
                   <img
                     src={project.coverImage ?? project.image}
-                    alt={`${project.name} — ${project.descriptor.toLowerCase()} Visual Study`}
+                    alt={`${project.name} — ${t.alt}`}
                     loading="lazy"
                     decoding="async"
                     {...imageAttributes(
@@ -69,7 +74,7 @@ export function SelectedWork({ onSelectProject }: { onSelectProject: (project: P
                   />
                 </span>
                 <span className="interaction-overlay" aria-hidden="true">
-                  <span>Projekt ansehen</span>
+                  <span>{t.view}</span>
                   <span>↗</span>
                 </span>
               </a>
@@ -83,11 +88,11 @@ export function SelectedWork({ onSelectProject }: { onSelectProject: (project: P
                   <p className="project-discipline">{project.discipline}</p>
                   <p>{project.statement}</p>
                   <a
-                    href={`/work/${project.id}`}
+                    href={`/${locale}/work/${project.id}`}
                     className="text-action"
                     onClick={(event) => visit(event, project)}
                   >
-                    Projekt ansehen <span aria-hidden="true">↗</span>
+                    {t.view} <span aria-hidden="true">↗</span>
                   </a>
                 </div>
               </div>

@@ -10,7 +10,6 @@ interface DatenschutzPageProps {
 
 export function DatenschutzPage({ onNavigateHome, onNavigateInquiry, onNavigateRoute }: DatenschutzPageProps) {
   useEffect(() => {
-    document.title = 'Datenschutzerklärung — MARGIN Webdesign & digitale Art Direction';
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 

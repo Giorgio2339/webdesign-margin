@@ -1,15 +1,11 @@
 import { MarginWordmark } from './MarginWordmark';
 import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_TEL } from '../data/media';
+import { LocaleSwitcher } from './LocaleSwitcher';
+import { HOME } from '../i18n/home';
+import { routePath } from '../i18n/locale';
+import { useLocale } from '../i18n/useLocale';
 
 const copyrightYear = new Date().getFullYear();
-
-const NAV_LINKS = [
-  { href: '#work', label: 'Arbeiten' },
-  { href: '#studio', label: 'Studio' },
-  { href: '#capabilities', label: 'Kompetenzen' },
-  { href: '#approach', label: 'Methodik' },
-  { href: '#faq', label: 'FAQ' }
-];
 
 interface FooterProps {
   onOpenLegal?: (tab: 'impressum' | 'datenschutz' | 'agb' | 'cookies') => void;
@@ -17,8 +13,12 @@ interface FooterProps {
 }
 
 export function Footer({ onOpenLegal, onOpenInquiry }: FooterProps) {
+  const locale = useLocale();
+  const t = HOME[locale].footer;
+  const nav = HOME[locale].nav;
+  const navLinks = [{ href: '#work', label: nav.work }, { href: '#studio', label: nav.studio }, { href: '#capabilities', label: nav.capabilities }, { href: '#approach', label: nav.approach }, { href: '#faq', label: 'FAQ' }];
   return (
-    <footer className="site-footer" data-theme="dark" aria-label="Seitenfuß">
+    <footer className="site-footer" data-theme="dark" aria-label={locale === 'de' ? 'Seitenfuß' : 'Footer'}>
       <div className="page-container">
         {/* Upper Grid: Editorial Studio Architecture */}
         <div className="footer-columns-grid">
@@ -26,20 +26,19 @@ export function Footer({ onOpenLegal, onOpenInquiry }: FooterProps) {
           <div className="footer-col footer-col-brand">
             <span className="eyebrow footer-col-eyebrow">MARGIN / ATELIER</span>
             <p className="footer-brand-statement">
-              Digitale Präsenz.
-              Mit Haltung.
+              {t.statement}
             </p>
 
           </div>
 
           {/* Column 2: Navigation */}
           <div className="footer-col">
-            <span className="eyebrow footer-col-eyebrow">Bereiche</span>
-            <nav aria-label="Hauptnavigation im Footer">
+            <span className="eyebrow footer-col-eyebrow">{t.sections}</span>
+            <nav aria-label={locale === 'de' ? 'Hauptnavigation im Footer' : 'Footer navigation'}>
               <ul className="footer-menu-list">
-                {NAV_LINKS.map((link) => (
+                {navLinks.map((link) => (
                   <li key={link.href}>
-                    <a href={window.location.pathname === '/' ? link.href : `/${link.href}`} className="footer-menu-link">
+                    <a href={window.location.pathname === routePath('home', locale) ? link.href : `${routePath('home', locale)}${link.href}`} className="footer-menu-link">
                       {link.label}
                     </a>
                   </li>
@@ -47,14 +46,14 @@ export function Footer({ onOpenLegal, onOpenInquiry }: FooterProps) {
                 {onOpenInquiry && (
                   <li>
                     <a
-                      href="/anfrage"
+                      href={routePath('inquiry', locale)}
                       className="footer-menu-link footer-menu-action"
                       onClick={(e) => {
                         e.preventDefault();
                         onOpenInquiry();
                       }}
                     >
-                      Projekt anfragen ↗
+                      {nav.project} ↗
                     </a>
                   </li>
                 )}
@@ -64,11 +63,11 @@ export function Footer({ onOpenLegal, onOpenInquiry }: FooterProps) {
 
           {/* Column 3: Legal & Compliance */}
           <div className="footer-col">
-            <span className="eyebrow footer-col-eyebrow">Rechtliches</span>
+            <span className="eyebrow footer-col-eyebrow">{t.legal}</span>
             <ul className="footer-menu-list">
               <li>
                 <a
-                  href="/impressum"
+                  href={routePath('impressum', locale)}
                   className="footer-menu-link"
                   onClick={(e) => {
                     e.preventDefault();
@@ -80,7 +79,7 @@ export function Footer({ onOpenLegal, onOpenInquiry }: FooterProps) {
               </li>
               <li>
                 <a
-                  href="/datenschutz"
+                  href={routePath('datenschutz', locale)}
                   className="footer-menu-link"
                   onClick={(e) => {
                     e.preventDefault();
@@ -92,14 +91,14 @@ export function Footer({ onOpenLegal, onOpenInquiry }: FooterProps) {
               </li>
               <li>
                 <a
-                  href="/agb"
+                  href={routePath('agb', locale)}
                   className="footer-menu-link"
                   onClick={(e) => {
                     e.preventDefault();
                     onOpenLegal?.('agb');
                   }}
                 >
-                  AGB & Konditionen
+                  {nav.terms}
                 </a>
               </li>
 
@@ -108,19 +107,19 @@ export function Footer({ onOpenLegal, onOpenInquiry }: FooterProps) {
 
           {/* Column 4: Direct Dispatch & Contact */}
           <div className="footer-col footer-col-contact">
-            <span className="eyebrow footer-col-eyebrow">Kontakt</span>
+            <span className="eyebrow footer-col-eyebrow">{t.contact}</span>
             <div className="footer-direct-contact">
-              <a href={`tel:${CONTACT_PHONE_TEL}`} className="footer-contact-link" title="Direkt anrufen">
+              <a href={`tel:${CONTACT_PHONE_TEL}`} className="footer-contact-link" title={locale === 'de' ? 'Direkt anrufen' : 'Call us'}>
                 <span className="contact-prefix">T.</span>
                 <span className="contact-value">{CONTACT_PHONE}</span>
               </a>
-              <a href={`mailto:${CONTACT_EMAIL}`} className="footer-contact-link" title="E-Mail senden">
+              <a href={`mailto:${CONTACT_EMAIL}`} className="footer-contact-link" title={locale === 'de' ? 'E-Mail senden' : 'Email us'}>
                 <span className="contact-prefix">M.</span>
                 <span className="contact-value">{CONTACT_EMAIL}</span>
               </a>
             </div>
             <p className="footer-timing-note">
-              Design & Entwicklung aus einer Hand.
+              {t.note}
             </p>
           </div>
         </div>
@@ -128,8 +127,9 @@ export function Footer({ onOpenLegal, onOpenInquiry }: FooterProps) {
         {/* Lower Row: Copyright Statement */}
         <div className="footer-sub-bar">
           <p className="footer-copy">
-            © {copyrightYear} MARGIN. Alle Rechte vorbehalten.
+            © {copyrightYear} MARGIN. {t.rights}
           </p>
+          <LocaleSwitcher />
         </div>
       </div>
 

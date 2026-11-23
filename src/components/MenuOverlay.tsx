@@ -1,6 +1,10 @@
 import { useDialog } from '../hooks/useDialog';
 import { CONTACT_EMAIL } from '../data/media';
 import type { LegalTab } from './LegalModal';
+import { HOME } from '../i18n/home';
+import { routePath } from '../i18n/locale';
+import { useLocale } from '../i18n/useLocale';
+import { LocaleSwitcher } from './LocaleSwitcher';
 
 interface MenuOverlayProps {
   isOpen: boolean;
@@ -10,24 +14,26 @@ interface MenuOverlayProps {
 }
 
 export function MenuOverlay({ isOpen, onClose, onOpenInquiry, onOpenLegal }: MenuOverlayProps) {
+  const locale = useLocale();
+  const nav = HOME[locale].nav;
   const ref = useDialog(isOpen, onClose);
 
   return (
-    <dialog ref={ref} id="navigation-menu" className="menu-overlay" aria-label="Hauptnavigation">
+    <dialog ref={ref} id="navigation-menu" className="menu-overlay" aria-label={locale === 'de' ? 'Hauptnavigation' : 'Main navigation'}>
       <div className="menu-header">
-        <a href="#hero" onClick={onClose} aria-label="MARGIN — Startseite">
+        <a href={routePath('home', locale)} onClick={onClose} aria-label={`MARGIN — ${nav.home}`}>
           <img src="/assets/margin_logo_light.png" alt="MARGIN" width="200" height="46" />
         </a>
         <button className="text-action" onClick={onClose} autoFocus>
-          Schließen <span aria-hidden="true">×</span>
+          {nav.close} <span aria-hidden="true">×</span>
         </button>
       </div>
-      <nav className="menu-links" aria-label="Mobile Navigation">
+      <nav className="menu-links" aria-label={locale === 'de' ? 'Mobile Navigation' : 'Mobile navigation'}>
         {[
-          ['Arbeiten', '#work'],
-          ['Studio', '#studio'],
-          ['Kompetenzen', '#capabilities'],
-          ['Methodik', '#approach'],
+          [nav.work, '#work'],
+          [nav.studio, '#studio'],
+          [nav.capabilities, '#capabilities'],
+          [nav.approach, '#approach'],
           ['FAQ', '#faq']
         ].map(([label, target], i) => (
           <a className="menu-line" href={target} onClick={onClose} key={target}>
@@ -42,7 +48,7 @@ export function MenuOverlay({ isOpen, onClose, onOpenInquiry, onOpenLegal }: Men
             onOpenInquiry();
           }}
         >
-          Projekt starten <span aria-hidden="true">↗</span>
+          {nav.project} <span aria-hidden="true">↗</span>
         </button>
       </nav>
       <div className="menu-bottom-row">
@@ -85,6 +91,7 @@ export function MenuOverlay({ isOpen, onClose, onOpenInquiry, onOpenLegal }: Men
             </button>
           </div>
         )}
+        <LocaleSwitcher />
       </div>
     </dialog>
   );

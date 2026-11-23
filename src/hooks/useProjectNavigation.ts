@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { PROJECTS_DATA } from '../data/projects';
+import { getProjects } from '../data/projects';
+import { localeFromPath, routePath } from '../i18n/locale';
 import type { Project } from '../types';
 import { captureMedia, restoreScroll } from '../motion/runtime';
-const resolveProject = () => PROJECTS_DATA.find(p => window.location.pathname === `/work/${p.id}` || window.location.pathname === `/work/${p.id}/`) ?? null;
+const resolveProject = () => getProjects(localeFromPath()).find(p => window.location.pathname === `/${localeFromPath()}/work/${p.id}` || window.location.pathname === `/${localeFromPath()}/work/${p.id}/`) ?? null;
 interface CaseHistory { marginCase?: boolean; home?: string; depth?: number; scroll?: number }
 export function useProjectNavigation() {
   const initial = resolveProject();
@@ -29,7 +30,7 @@ export function useProjectNavigation() {
       depth: currentCase ? (previous?.depth ?? 0) + 1 : 1,
       scroll: currentCase ? previous?.scroll : savedScroll.current
     };
-    window.history.pushState(state, '', `/work/${next.id}`);
+    window.history.pushState(state, '', `/${localeFromPath()}/work/${next.id}`);
     leaving.current = false; setProject(next); setIsOpen(true);
   }, []);
   const close = useCallback(() => {
@@ -38,7 +39,7 @@ export function useProjectNavigation() {
     const state = window.history.state as CaseHistory | null;
     savedScroll.current = state?.scroll ?? savedScroll.current;
     if (state?.marginCase && state.home && state.depth) window.history.go(-state.depth);
-    else { window.history.replaceState(null, '', '/'); setIsOpen(false); }
+    else { window.history.replaceState(null, '', routePath('home', localeFromPath())); setIsOpen(false); }
   }, []);
   const closed = useCallback(() => { setProject(null); leaving.current = false; restoreScroll(savedScroll.current); }, []);
   return { project, isOpen, open, close, closed };

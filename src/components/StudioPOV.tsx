@@ -1,4 +1,6 @@
 import type { ReactNode } from 'react';
+import { HOME } from '../i18n/home';
+import { useLocale } from '../i18n/useLocale';
 
 interface Principle {
   glyph: ReactNode;
@@ -51,23 +53,24 @@ const PRINCIPLES: Principle[] = [
 ];
 
 export function StudioPOV() {
+  const t = HOME[useLocale()].studio;
   return (
     <section id="studio" className="studio section-pad" data-theme="light" aria-labelledby="studio-title">
       <div className="page-container">
-        <p className="eyebrow section-label">Die MARGIN Haltung</p>
+        <p className="eyebrow section-label">{t.label}</p>
         <h2 id="studio-title" className="studio-statement">
-          Die meisten Websites entstehen<br className="desktop-break" /> aus Templates.<br />
-          <span>MARGIN baut<br className="desktop-break" /> digitale Monumente.</span>
+          {t.first}<br />
+          <span>{t.second}</span>
         </h2>
         <div className="principles-row">
-          {PRINCIPLES.map((p) => (
+          {PRINCIPLES.map((p, index) => (
             <div key={p.tag} className="principle-item">
               <div className="principle-tag">
                 <span className="principle-glyph">{p.glyph}</span>
-                <span className="principle-keyword">{p.tag}</span>
+                <span className="principle-keyword">{t.principles[index].tag}</span>
               </div>
-              <h3 className="principle-title">{p.title}</h3>
-              <p className="principle-desc">{p.description}</p>
+              <h3 className="principle-title">{t.principles[index].title}</h3>
+              <p className="principle-desc">{t.principles[index].description}</p>
             </div>
           ))}
         </div>

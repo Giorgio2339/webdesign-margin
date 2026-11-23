@@ -11,9 +11,6 @@
 .hero-media-frame, .hero-media-inner { transform-origin: center center; }
 .hero-media-inner::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(12,13,16,.18) 0%, rgba(12,13,16,.05) 42%, rgba(12,13,16,.26) 100%); }
 .hero-media-inner::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; box-shadow: inset 0 0 0 1px rgba(247,246,242,.14); }
-.hero-media-meta { position: absolute; z-index: 2; inset: auto 24px 18px; display: flex; justify-content: space-between; align-items: center; gap: 24px; color: #fff; font-size: 11px; line-height: 1.4; letter-spacing: .09em; text-transform: uppercase; }
-.hero-media-status { display: inline-flex; align-items: center; gap: 9px; }
-.hero-media-status i { display: block; width: 6px; height: 6px; background: var(--color-accent); border-radius: 50%; }
 .hero-release-corner { display: none; position: absolute; z-index: 3; top: 18px; width: 22px; height: 12px; color: rgba(247,246,242,.72); border-top: 1px solid; pointer-events: none; }
 .motion-enabled .hero-release-corner { display: block; }
 .hero-release-left { left: 18px; border-left: 1px solid; transform-origin: left; }
@@ -46,7 +43,6 @@
 .reel-media::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; box-shadow: inset 0 0 0 1px rgba(247,246,242,.12); background: linear-gradient(180deg, rgba(12,13,16,.08), transparent 25%, transparent 70%, rgba(12,13,16,.34)); }
 .reel-media > video { transform-origin: center center; }
 .reel-toggle { z-index: 2; }
-.reel-film-label { position: absolute; z-index: 3; inset: auto 24px 20px; display: flex; justify-content: space-between; gap: 24px; color: #fff; font-size: 11px; line-height: 1.4; letter-spacing: .09em; text-transform: uppercase; pointer-events: none; }
 .reel-silent { margin-left: auto; color: var(--ink-inverted-secondary); }
 .process-chapters { display: none; }
 .process-enhanced .process-stage { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
@@ -124,6 +120,5 @@
   .case-next { gap: 18px; margin-top: 38px; }
   .case-next > img { width: 100px; }
   .case-next > span { font-size: 32px; }
-  .hero-media-meta { inset-inline: 20px; bottom: 14px; font-size: 10px; }
   .surface-takeover { height: 25px; top: -24px; }
 }

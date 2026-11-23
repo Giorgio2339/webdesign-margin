@@ -1,4 +1,6 @@
 import { imageAttributes } from '../data/images';
+import { HOME } from '../i18n/home';
+import { useLocale } from '../i18n/useLocale';
 
 const ASSEMBLY_ITEMS = [
   {
@@ -28,15 +30,16 @@ const ASSEMBLY_ITEMS = [
 ];
 
 export function EditorialAssembly() {
+  const t = HOME[useLocale()].assembly;
   return (
     <section className="editorial-assembly" data-theme="light" aria-labelledby="assembly-title">
       <div className="page-container assembly-intro">
-        <p className="eyebrow section-label">Eine Haltung</p>
+        <p className="eyebrow section-label">{t.label}</p>
         <h2 id="assembly-title">
-          Verschiedene Welten.<br />
-          <em>Ein Anspruch.</em>
+          {t.titleA}<br />
+          <em>{t.titleB}</em>
         </h2>
-        <p>Handel, Architektur und komplexe Systeme – gestaltet mit derselben Hingabe an Charakter und Nutzen.</p>
+        <p>{t.intro}</p>
       </div>
       <div className="assembly-stage" data-motion-stage="assembly">
         <span className="assembly-wordmark" aria-hidden="true">MARGIN</span>
@@ -59,14 +62,14 @@ export function EditorialAssembly() {
                     index === 0 ? '(max-width: 600px) 88vw, 49vw' : '(max-width: 600px) 68vw, 28vw'
                   )}
                 />
-                <span className="assembly-ui-badge">Interface</span>
+                <span className="assembly-ui-badge">{t.interface}</span>
               </div>
 
               {/* Cover Photographic Artwork (wipes away on hover) */}
               <div className="assembly-cover-layer">
                 <img
                   src={item.coverImage}
-                  alt={`${item.shortName} Visual Studie`}
+                  alt={`${item.shortName} — ${t.alt}`}
                   loading="lazy"
                   decoding="async"
                   {...imageAttributes(
@@ -78,7 +81,7 @@ export function EditorialAssembly() {
 
               {/* Minimalist Hover Cue */}
               <div className="assembly-hover-hint" aria-hidden="true">
-                <span>Interface entdecken</span>
+                <span>{t.visual}</span>
                 <span className="hint-arrow">↗</span>
               </div>
             </div>

@@ -1,15 +1,14 @@
 import { useRef, useState } from 'react';
 import { gsap, ScrollTrigger, useGSAP } from '../motion/config';
 import { restoreScroll } from '../motion/runtime';
+import { HOME } from '../i18n/home';
+import { useLocale } from '../i18n/useLocale';
 
-const STANDARDS = [
-  { title: 'Raum & Typografie', note: 'Ein Raster, das ordnet. Eine Schrift, die Charakter gibt. Abstände, die den Blick führen.', caption: 'Proportion / Rhythmus / Kontrast', specimen: 'Aa', name: 'Satzspiegel' },
-  { title: 'Code & Bewegung', note: 'Klare Struktur und gezielte Bewegung. Ein Interface, das sich unmittelbar und selbstverständlich anfühlt.', caption: 'Struktur / Reaktion / Übergang', specimen: '</>', name: 'Interaktion' },
-  { title: 'Direkter Austausch', note: 'Kurze Wege zwischen Idee, Entwurf und Umsetzung. Entscheidungen werden am konkreten Design getroffen.', caption: 'Idee / Entwurf / Umsetzung', specimen: '↗', name: 'Verbindung' },
-  { title: 'Sorgfalt bis zum Launch', note: 'Typografie, Bedienung und Darstellung werden auf kleinen und großen Bildschirmen geprüft.', caption: 'Ansicht / Bedienung / Prüfung', specimen: '01—04', name: 'Endkontrolle' }
-];
+const SPECIMENS = ['Aa', '</>', '↗', '01—04'];
 
 export function Process({ onOpenInquiry }: { onOpenInquiry?: () => void }) {
+  const t = HOME[useLocale()].process;
+  const standards = t.standards;
   const [active, setActive] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const scrollRef = useRef<ScrollTrigger | null>(null);
@@ -18,7 +17,7 @@ export function Process({ onOpenInquiry }: { onOpenInquiry?: () => void }) {
     const section = sectionRef.current;
     if (!section) return;
     const media = gsap.matchMedia();
-    media.add('(prefers-reduced-motion: no-preference)', () => {
+    media.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
       const track = section.querySelector<HTMLElement>('.craft-scroll-track')!;
       const stage = section.querySelector<HTMLElement>('.craft-layout')!;
       const scenes = [...section.querySelectorAll<HTMLElement>('.craft-scene')];
@@ -66,25 +65,25 @@ export function Process({ onOpenInquiry }: { onOpenInquiry?: () => void }) {
     <section ref={sectionRef} id="approach" className="margin-standard section-pad" data-theme="light" aria-labelledby="standard-title">
       <div className="page-container">
         <header className="craft-intro">
-          <p className="eyebrow">Der MARGIN Maßstab</p>
-          <h2 id="standard-title">Qualität wird nicht behauptet.<br /><em>Sie zeigt sich im Detail.</em></h2>
+          <p className="eyebrow">{t.label}</p>
+          <h2 id="standard-title">{t.titleA}<br /><em>{t.titleB}</em></h2>
         </header>
         <div className="craft-scroll-track">
         <div className="craft-layout">
           <div className="craft-plate" data-study={active} aria-hidden="true">
-            {STANDARDS.map((standard, index) => (
+            {standards.map((standard, index) => (
               <div className={`craft-scene ${active === index ? 'is-active' : ''}`} data-study={index} key={standard.title}>
-                <div className="craft-plate-label"><span>Studie / 0{index + 1}</span><span>{standard.name}</span></div>
+                <div className="craft-plate-label"><span>{t.study} / 0{index + 1}</span><span>{standard.name}</span></div>
                 <div className="craft-grid"><i /><i /><i /><i /><i /><i /></div>
-                <div className="craft-specimen">{standard.specimen}<span className="craft-period">.</span></div>
+                <div className="craft-specimen">{SPECIMENS[index]}<span className="craft-period">.</span></div>
                 <div className="craft-baseline" />
                 <div className="craft-plate-foot"><span>MARGIN</span><span>{standard.caption}</span></div>
               </div>
             ))}
           </div>
-          <div className="craft-index" aria-label="Unsere Standards">
-            <div className="craft-scroll-cue" aria-hidden="true"><span>Scrollen zum Entdecken</span><span>0{active + 1} / 04</span></div>
-            {STANDARDS.map((standard, index) => (
+          <div className="craft-index" aria-label={t.aria}>
+            <div className="craft-scroll-cue" aria-hidden="true"><span>{t.scroll}</span><span>0{active + 1} / 04</span></div>
+            {standards.map((standard, index) => (
               <div className={`craft-row ${index === active ? 'is-active' : ''}`} key={standard.title}>
                 <h3>
                   <button type="button" onClick={() => select(index)} aria-expanded={active === index} aria-controls={`craft-note-${index}`}>
@@ -96,7 +95,7 @@ export function Process({ onOpenInquiry }: { onOpenInquiry?: () => void }) {
                 <div className="craft-note" id={`craft-note-${index}`} aria-hidden={active !== index}><div><p>{standard.note}</p></div></div>
               </div>
             ))}
-            {onOpenInquiry && <button className="text-action craft-cta" type="button" onClick={onOpenInquiry}>Projekt besprechen <span aria-hidden="true">↗</span></button>}
+            {onOpenInquiry && <button className="text-action craft-cta" type="button" onClick={onOpenInquiry}>{t.cta} <span aria-hidden="true">↗</span></button>}
           </div>
         </div>
         </div>

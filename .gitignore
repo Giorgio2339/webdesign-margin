@@ -25,3 +25,7 @@ dist-ssr
 
 .vite/
 qa/
+
+# Generated language entrypoints
+/en/
+/de/
