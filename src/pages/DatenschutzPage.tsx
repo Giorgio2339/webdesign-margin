@@ -74,8 +74,8 @@ export function DatenschutzPage({ onNavigateHome, onNavigateInquiry, onNavigateR
                   <p>
                     Telefon: 015679 681426<br />
                     E-Mail:{' '}
-                    <a href="mailto:info@marginwebdesign.online" className="editorial-link">
-                      info@marginwebdesign.online
+                    <a href="mailto:hello@marginwebdesign.online" className="editorial-link">
+                      hello@marginwebdesign.online
                     </a>
                   </p>
                 </div>

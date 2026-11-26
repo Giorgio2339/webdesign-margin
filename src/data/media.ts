@@ -22,6 +22,6 @@ export const HERO_MEDIA: HeroAsset = {
   temporary: false
 };
 
-export const CONTACT_EMAIL = 'info@marginwebdesign.online';
+export const CONTACT_EMAIL = 'hello@marginwebdesign.online';
 export const CONTACT_PHONE = '015679 681426';
 export const CONTACT_PHONE_TEL = '+4915679681426';

@@ -59,7 +59,7 @@ export function ImpressumPage({ onNavigateHome, onNavigateInquiry, onNavigateRou
               <h2>Kontakt</h2>
               <p>
                 Telefon: <a href="tel:015679681426" className="legal-text-link">015679 681426</a><br />
-                E-Mail: <a href="mailto:info@marginwebdesign.online" className="legal-text-link">info@marginwebdesign.online</a><br />
+                E-Mail: <a href="mailto:hello@marginwebdesign.online" className="legal-text-link">hello@marginwebdesign.online</a><br />
                 Webseite: <a href="https://marginwebdesign.online" target="_blank" rel="noopener noreferrer" className="legal-text-link">marginwebdesign.online</a>
               </p>
             </section>
